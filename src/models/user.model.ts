@@ -25,6 +25,8 @@ const UserSchema = new Schema<IUser>({
     notesId: { type: Array<String>() , default: [] },
     
     notesCount: { type: Number, default: 0 }
+},{
+    timestamps: true
 })
 
 

@@ -6,5 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config({ path: '.env' });
+const db_connection_1 = require("./dbconnection/db.connection");
 const app = (0, express_1.default)();
+(0, db_connection_1.dbConnection)();
 app.listen(process.env.PORT, () => console.log(`Server is running on port ${process.env.PORT}`));

@@ -41,5 +41,7 @@ const UserSchema = new mongoose_1.Schema({
     profilePictureUrl: { type: String, default: "" },
     notesId: { type: Array(), default: [] },
     notesCount: { type: Number, default: 0 }
+}, {
+    timestamps: true
 });
 exports.default = mongoose_1.default.model("User", UserSchema);

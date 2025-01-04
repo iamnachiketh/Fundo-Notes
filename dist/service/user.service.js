@@ -12,10 +12,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.registerUser = void 0;
+exports.loginUser = exports.registerUser = void 0;
 const user_model_1 = __importDefault(require("../models/user.model"));
 const http_status_codes_1 = __importDefault(require("http-status-codes"));
 const user_validation_1 = require("../schemaValidation/user.validation");
+const bcrypt_1 = __importDefault(require("bcrypt"));
 const registerUser = function (userData) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -40,3 +41,23 @@ const registerUser = function (userData) {
     });
 };
 exports.registerUser = registerUser;
+const loginUser = function (data) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const user = yield user_model_1.default.findOne({ email: data.email }, { _id: 0, __v: 0 });
+            if (!user) {
+                return { status: http_status_codes_1.default.NOT_FOUND, message: "User not found" };
+            }
+            const isPasswordMatch = yield bcrypt_1.default.compare(data.password, user.password);
+            if (!isPasswordMatch) {
+                return { status: http_status_codes_1.default.UNAUTHORIZED, message: "Invalid Email / Password" };
+            }
+            console.log(user);
+            return { status: http_status_codes_1.default.OK, UserDetails: user };
+        }
+        catch (error) {
+            return { status: http_status_codes_1.default.INTERNAL_SERVER_ERROR, message: error.message };
+        }
+    });
+};
+exports.loginUser = loginUser;

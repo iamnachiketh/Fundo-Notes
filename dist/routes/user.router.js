@@ -38,7 +38,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const UserController = __importStar(require("../controller/user.controller"));
+const AuthMiddleware = __importStar(require("../middleware/auth.middleware"));
 const router = express_1.default.Router();
-router.post("/register", UserController.handleRegisterUser);
-router.post("/login", UserController.handleLoginUser);
+router.post("/register", AuthMiddleware.createJWToken, UserController.handleRegisterUser);
+router.post("/login", AuthMiddleware.createJWToken, UserController.handleLoginUser);
 exports.default = router;

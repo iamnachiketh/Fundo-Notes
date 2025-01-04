@@ -41,6 +41,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __rest = (this && this.__rest) || function (s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -51,12 +62,12 @@ const bcrypt_1 = __importDefault(require("bcrypt"));
 const http_status_codes_1 = __importDefault(require("http-status-codes"));
 const handleRegisterUser = function (req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        let data = req.body;
+        let _a = req.body, { token } = _a, data = __rest(_a, ["token"]);
         try {
             const hash = yield bcrypt_1.default.hash(data.password, 10);
             data.password = hash;
             const response = yield UserService.registerUser(data);
-            res.status(response.status).json({ status: response.status, message: response.message, data: null });
+            res.status(response.status).json({ status: response.status, message: response.message, data: null, accessToken: token });
         }
         catch (error) {
             res.status(http_status_codes_1.default.INTERNAL_SERVER_ERROR).json({ status: http_status_codes_1.default.INTERNAL_SERVER_ERROR, message: error.message, data: null });
@@ -80,11 +91,11 @@ const handleRegisterUser = function (req, res) {
 exports.handleRegisterUser = handleRegisterUser;
 const handleLoginUser = function (req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        let data = req.body;
+        let _a = req.body, { token } = _a, data = __rest(_a, ["token"]);
         try {
             const response = yield UserService.loginUser(data);
             if (response.message === undefined)
-                res.status(response.status).json({ status: response.status, messsage: "User logged in successfully", data: response.UserDetails });
+                res.status(response.status).json({ status: response.status, messsage: "User logged in successfully", data: response.UserDetails, accessToken: token });
             else
                 res.status(response.status).json({ status: response.status, messsage: response.message, data: null });
         }

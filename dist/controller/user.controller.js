@@ -45,7 +45,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.handleRegisterUser = void 0;
+exports.handleLoginUser = exports.handleRegisterUser = void 0;
 const UserService = __importStar(require("../service/user.service"));
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const http_status_codes_1 = __importDefault(require("http-status-codes"));
@@ -67,3 +67,17 @@ const handleRegisterUser = function (req, res) {
     });
 };
 exports.handleRegisterUser = handleRegisterUser;
+const handleLoginUser = function (req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        let data = req.body;
+        UserService
+            .loginUser(data)
+            .then((response) => {
+            if (response.message === undefined)
+                res.status(response.status).json(response.UserDetails);
+            else
+                res.status(response.status).json(response.message);
+        });
+    });
+};
+exports.handleLoginUser = handleLoginUser;

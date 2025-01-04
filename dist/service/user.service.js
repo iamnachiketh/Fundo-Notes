@@ -20,6 +20,13 @@ const bcrypt_1 = __importDefault(require("bcrypt"));
 const registerUser = function (userData) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
+            const isUserPresent = yield user_model_1.default
+                .findOne()
+                .where("email")
+                .equals(userData.email);
+            if (isUserPresent) {
+                return { status: http_status_codes_1.default.CONFLICT, message: "User already exists" };
+            }
             const { error } = yield user_validation_1.userSchemaValidation.validateAsync(userData);
             if (error) {
                 return { status: http_status_codes_1.default.BAD_REQUEST, message: error.message };
@@ -28,9 +35,7 @@ const registerUser = function (userData) {
                 name: userData.name,
                 email: userData.email,
                 password: userData.password,
-                profilePictureUrl: userData.profilePictureUrl,
-                notesId: userData.notesId,
-                notesCount: userData.notesCount
+                profilePictureUrl: userData.profilePictureUrl
             });
             yield user.save();
             return { status: http_status_codes_1.default.CREATED, message: "User registered successfully" };

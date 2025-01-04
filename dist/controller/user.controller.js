@@ -52,32 +52,54 @@ const http_status_codes_1 = __importDefault(require("http-status-codes"));
 const handleRegisterUser = function (req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         let data = req.body;
-        bcrypt_1.default.hash(data.password, 10)
-            .then((hash) => {
+        try {
+            const hash = yield bcrypt_1.default.hash(data.password, 10);
             data.password = hash;
-            return UserService.registerUser(data);
-        })
-            .then((response) => {
-            res.status(response.status).json(response.message);
-        })
-            .catch((error) => {
-            res.status(http_status_codes_1.default.INTERNAL_SERVER_ERROR).json(error.message);
+            const response = yield UserService.registerUser(data);
+            res.status(response.status).json({ status: response.status, message: response.message, data: null });
+        }
+        catch (error) {
+            res.status(http_status_codes_1.default.INTERNAL_SERVER_ERROR).json({ status: http_status_codes_1.default.INTERNAL_SERVER_ERROR, message: error.message, data: null });
             return;
-        });
+        }
+        // This is another way of doing it
+        // bcrypt.hash(data.password, 10)
+        //     .then((hash) => {
+        //         data.password = hash;
+        //         return UserService.registerUser(data);
+        //     })
+        //     .then((response) => {
+        //         res.status(response.status).json({ status: response.status, message: response.message, data: null });
+        //     })
+        //     .catch((error) => {
+        //         res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ status: httpStatus.INTERNAL_SERVER_ERROR, message: error.message, data: null });
+        //         return;
+        //     })
     });
 };
 exports.handleRegisterUser = handleRegisterUser;
 const handleLoginUser = function (req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         let data = req.body;
-        UserService
-            .loginUser(data)
-            .then((response) => {
+        try {
+            const response = yield UserService.loginUser(data);
             if (response.message === undefined)
-                res.status(response.status).json(response.UserDetails);
+                res.status(response.status).json({ status: response.status, messsage: "User logged in successfully", data: response.UserDetails });
             else
-                res.status(response.status).json(response.message);
-        });
+                res.status(response.status).json({ status: response.status, messsage: response.message, data: null });
+        }
+        catch (error) {
+            res.status(http_status_codes_1.default.INTERNAL_SERVER_ERROR).json({ status: http_status_codes_1.default.INTERNAL_SERVER_ERROR, message: error.message, data: null });
+        }
+        // This is another way of doing it 
+        // UserService
+        //     .loginUser(data)
+        //     .then((response) => {
+        //         if (response.message === undefined)
+        //             res.status(response.status).json({ status: response.status, messsage: "User logged in successfully", data: response.UserDetails });
+        //         else
+        //             res.status(response.status).json({ status: response.status, messsage: response.message, data: null });
+        //     })
     });
 };
 exports.handleLoginUser = handleLoginUser;

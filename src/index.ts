@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 dotenv.config({ path: '.env' });
 import { dbConnection } from "./dbconnection/db.connection";
 import userRouter from "./routes/user.router";
+import noteRouter from "./routes/note.router";
 
 const app = express();
 
@@ -12,6 +13,6 @@ app.use(express.json())
 
 app.use("/api/v1/users",userRouter);
 
-app.use("/api/v1/notes");
+app.use("/api/v1/notes",noteRouter);
 
 app.listen(process.env.PORT, () => console.log(`Server is running on port http://localhost:${process.env.PORT}`));

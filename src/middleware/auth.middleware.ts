@@ -1,4 +1,4 @@
-import jwt from "jsonwebtoken";
+import jwt, { JwtPayload } from "jsonwebtoken";
 import { Request, Response, NextFunction } from "express";
 import httpStatus from "http-status-codes";
 
@@ -34,7 +34,7 @@ export const verifyToken = function (req: Request, res: Response, next: NextFunc
         res.status(httpStatus.UNAUTHORIZED).json({ status: httpStatus.UNAUTHORIZED, message: "Invalid token", data: null });
         return;
     }
-
+    
     req.body.payload = payload;
     next();
 }

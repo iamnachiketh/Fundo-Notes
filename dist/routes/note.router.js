@@ -42,4 +42,6 @@ const AuthMiddleware = __importStar(require("../middleware/auth.middleware"));
 const express_validator_1 = require("express-validator");
 const router = express_1.default.Router();
 router.post("/create-note", (0, express_validator_1.body)('noteId').notEmpty().isString(), (0, express_validator_1.body)('userEmail').notEmpty().isString(), (0, express_validator_1.body)('title').notEmpty().isString(), (0, express_validator_1.body)('desc').notEmpty().isString(), AuthMiddleware.verifyToken, NoteController.handleCreateNote);
+router.get("/:id", AuthMiddleware.verifyToken, NoteController.handleGetNoteById);
+router.get("/list/all-notes", AuthMiddleware.verifyToken, NoteController.handleGetAllNotesOfAUser);
 exports.default = router;

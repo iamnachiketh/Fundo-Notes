@@ -17,9 +17,8 @@ router.post("/create-note",
 );
 
 
+router.get("/:id",AuthMiddleware.verifyToken,NoteController.handleGetNoteById);
 
-
-
-
+router.get("/list/all-notes",AuthMiddleware.verifyToken,NoteController.handleGetAllNotesOfAUser);
 
 export default router;

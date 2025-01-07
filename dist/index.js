@@ -12,4 +12,5 @@ const app = (0, express_1.default)();
 (0, db_connection_1.dbConnection)();
 app.use(express_1.default.json());
 app.use("/api/v1/users", user_router_1.default);
+app.use("/api/v1/notes");
 app.listen(process.env.PORT, () => console.log(`Server is running on port http://localhost:${process.env.PORT}`));

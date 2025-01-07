@@ -12,4 +12,6 @@ app.use(express.json())
 
 app.use("/api/v1/users",userRouter);
 
+app.use("/api/v1/notes");
+
 app.listen(process.env.PORT, () => console.log(`Server is running on port http://localhost:${process.env.PORT}`));

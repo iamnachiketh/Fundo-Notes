@@ -76,7 +76,7 @@ export const checkNoteId = async function (noteId: String, email: string): Promi
 export const getAllNotes = async function (email: string): Promise<{ status: number, message?: string, data?: any }> {
     try {
 
-        const result = await Note.find({ userEmail: email, isTrash: false }, { _id: 0, __v: 0 });
+        const result = await Note.find({ userEmail: email, isTrash: false, isArchive: false }, { _id: 0, __v: 0 });
 
         // This is another way of getting the list of notes
 

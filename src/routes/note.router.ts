@@ -21,4 +21,8 @@ router.get("/:id",AuthMiddleware.verifyToken,NoteController.handleGetNoteById);
 
 router.get("/list/all-notes",AuthMiddleware.verifyToken,NoteController.handleGetAllNotesOfAUser);
 
+router.delete("/delete/notes-by-id/:id",AuthMiddleware.verifyToken,NoteController.handleDeleteById);
+
+router.delete("/delete/trash/notes-by-id/:id",AuthMiddleware.verifyToken,NoteController.handleDeleteNotesFromTrash);
+
 export default router;

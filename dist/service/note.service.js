@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAllNotes = exports.checkNoteId = exports.getNoteById = exports.createNote = void 0;
+exports.deleteNotesFromTrash = exports.deleteNotesById = exports.getAllNotes = exports.checkNoteId = exports.getNoteById = exports.createNote = void 0;
 const note_model_1 = __importDefault(require("../models/note.model"));
 const http_status_codes_1 = __importDefault(require("http-status-codes"));
 const user_model_1 = __importDefault(require("../models/user.model"));
@@ -64,16 +64,16 @@ const checkNoteId = function (noteId, email) {
     return __awaiter(this, void 0, void 0, function* () {
         let user = yield user_model_1.default.findOne({ email: email });
         if (user === null || user === void 0 ? void 0 : user.notesId.includes(noteId)) {
-            return true;
+            return { value: true };
         }
-        return false;
+        return { value: false };
     });
 };
 exports.checkNoteId = checkNoteId;
 const getAllNotes = function (email) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const result = yield note_model_1.default.find({ userEmail: email }, { _id: 0, __v: 0 });
+            const result = yield note_model_1.default.find({ userEmail: email, isTrash: false }, { _id: 0, __v: 0 });
             // This is another way of getting the list of notes
             // let result: Array<any> = [];
             // let totalNumberOfNotes = user?.notesId.length === undefined ? 0 : user?.notesId.length;
@@ -90,5 +90,39 @@ const getAllNotes = function (email) {
     });
 };
 exports.getAllNotes = getAllNotes;
-// export const deleteNotesById = async function(noteId:string):Promise<{ status: number, message: string }>{
-// }
+const deleteNotesById = function (noteId, userEmail) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            yield note_model_1.default.findOneAndUpdate({ noteId: noteId }, {
+                $set: {
+                    isTrash: true
+                }
+            });
+            yield user_model_1.default.findOneAndUpdate({ email: userEmail }, {
+                $pull: {
+                    notesId: noteId
+                },
+                $inc: {
+                    notesCount: -1
+                }
+            });
+            return { status: http_status_codes_1.default.OK, message: "Notes has been deleted" };
+        }
+        catch (error) {
+            return { status: http_status_codes_1.default.INTERNAL_SERVER_ERROR, message: error.message };
+        }
+    });
+};
+exports.deleteNotesById = deleteNotesById;
+const deleteNotesFromTrash = function (noteId) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            yield note_model_1.default.findOneAndDelete({ noteId: noteId, isTrash: true });
+            return { status: http_status_codes_1.default.GONE, message: "Note has been deleted from trash" };
+        }
+        catch (error) {
+            return { status: http_status_codes_1.default.INTERNAL_SERVER_ERROR, message: error.message };
+        }
+    });
+};
+exports.deleteNotesFromTrash = deleteNotesFromTrash;

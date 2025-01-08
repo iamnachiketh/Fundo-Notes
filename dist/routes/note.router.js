@@ -44,4 +44,6 @@ const router = express_1.default.Router();
 router.post("/create-note", (0, express_validator_1.body)('noteId').notEmpty().isString(), (0, express_validator_1.body)('userEmail').notEmpty().isString(), (0, express_validator_1.body)('title').notEmpty().isString(), (0, express_validator_1.body)('desc').notEmpty().isString(), AuthMiddleware.verifyToken, NoteController.handleCreateNote);
 router.get("/:id", AuthMiddleware.verifyToken, NoteController.handleGetNoteById);
 router.get("/list/all-notes", AuthMiddleware.verifyToken, NoteController.handleGetAllNotesOfAUser);
+router.delete("/delete/notes-by-id/:id", AuthMiddleware.verifyToken, NoteController.handleDeleteById);
+router.delete("/delete/trash/notes-by-id/:id", AuthMiddleware.verifyToken, NoteController.handleDeleteNotesFromTrash);
 exports.default = router;

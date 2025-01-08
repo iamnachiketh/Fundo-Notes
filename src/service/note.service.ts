@@ -7,8 +7,8 @@ export const createNote = async function (notes: {
     userEmail: string,
     title: string,
     desc: string,
-    isArchive?:boolean,
-    color?:string
+    isArchive?: boolean,
+    color?: string
 }): Promise<{ status: number, message: string }> {
 
     try {
@@ -34,8 +34,8 @@ export const createNote = async function (notes: {
             userEmail: notes.userEmail,
             title: notes.title,
             desc: notes.desc,
-            isArchive:notes?.isArchive,
-            color:notes?.color
+            isArchive: notes?.isArchive,
+            color: notes?.color
         })
 
         await note.save();
@@ -62,21 +62,21 @@ export const getNoteById = async function (noteId: string): Promise<{ status: nu
 }
 
 
-export const checkNoteId = async function (noteId: String, email: string) {
+export const checkNoteId = async function (noteId: String, email: string): Promise<{ value: boolean }> {
     let user = await User.findOne({ email: email });
 
     if (user?.notesId.includes(noteId)) {
-        return true;
+        return { value: true };
     }
 
-    return false;
+    return { value: false };
 }
 
 
 export const getAllNotes = async function (email: string): Promise<{ status: number, message?: string, data?: any }> {
     try {
 
-        const result = await Note.find({ userEmail: email }, { _id: 0, __v: 0 });
+        const result = await Note.find({ userEmail: email, isTrash: false }, { _id: 0, __v: 0 });
 
         // This is another way of getting the list of notes
 
@@ -99,10 +99,44 @@ export const getAllNotes = async function (email: string): Promise<{ status: num
 }
 
 
-// export const deleteNotesById = async function(noteId:string):Promise<{ status: number, message: string }>{
+export const deleteNotesById = async function (noteId: string, userEmail: string): Promise<{ status: number, message: string }> {
 
-    
+    try {
+        await Note.findOneAndUpdate({ noteId: noteId }, {
+            $set: {
+                isTrash: true
+            }
+        });
 
-// }
+        await User.findOneAndUpdate({ email: userEmail }, {
+            $pull: {
+                notesId: noteId
+            },
+            $inc: {
+                notesCount: -1
+            }
+        })
+
+        return { status: httpStatus.OK, message: "Notes has been deleted" };
+    } catch (error: any) {
+
+        return { status: httpStatus.INTERNAL_SERVER_ERROR, message: error.message };
+
+    }
+
+}
+
+
+export const deleteNotesFromTrash = async function (noteId: string): Promise<{ status: number, message: string }> {
+
+    try {
+        await Note.findOneAndDelete({ noteId: noteId, isTrash: true });
+
+        return { status: httpStatus.GONE, message: "Note has been deleted from trash" };
+    } catch (error: any) {
+        return { status: httpStatus.INTERNAL_SERVER_ERROR, message: error.message };
+    }
+
+}
 
 

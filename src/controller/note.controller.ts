@@ -105,9 +105,54 @@ export const handleDeleteNotesFromTrash = async function (req: Request, res: Res
 
         const response = await NoteService.deleteNotesFromTrash(noteId);
 
-        res.status(response.status).json({status:response.status,message:response.message,data:null});
+        res.status(response.status).json({ status: response.status, message: response.message, data: null });
 
     } catch (error: any) {
         res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ status: httpStatus.INSUFFICIENT_SPACE_ON_RESOURCE, message: error.message, data: null });
+    }
+}
+
+
+export const handleUpdateNotes = async function (req: Request, res: Response) {
+    try {
+        const { payload, ...data } = req.body;
+
+        const noteId = req.body.noteId;
+
+        if (data.userEmail !== payload.email || !(await NoteService.checkNoteId(noteId, data.userEmail as string)).value) {
+            res.status(httpStatus.NOT_FOUND).json({ status: httpStatus.NOT_FOUND, message: "Invalid User/Note dosent exists", data: null });
+            return;
+        }
+
+        const response = await NoteService.updateNotes(noteId);
+
+        res.status(response.status).json({ status: response.status, message: response.message, data: null });
+
+    } catch (error: any) {
+
+        res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ status: httpStatus.INTERNAL_SERVER_ERROR, message: error.message, data: null });
+
+    }
+}
+
+
+export const handleAddToArchive = async function (req: Request, res: Response) {
+
+    try {
+        const { payload, ...data } = req.body;
+
+        const noteId = req.body.noteId;
+
+        if (data.userEmail !== payload.email || !(await NoteService.checkNoteId(noteId, data.userEmail as string)).value) {
+            res.status(httpStatus.NOT_FOUND).json({ status: httpStatus.NOT_FOUND, message: "Invalid User/Note dosent exists", data: null });
+            return;
+        }
+
+        const response = await NoteService.addToArchive(noteId);
+
+        res.status(response.status).json({status:response.status, message:response.message, data:null});
+
+    } catch (error: any) {
+        res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ status: httpStatus.INTERNAL_SERVER_ERROR, message: error.message, data: null });
     }
 }

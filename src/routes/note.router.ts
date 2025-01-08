@@ -7,7 +7,7 @@ import { body } from "express-validator";
 
 const router = express.Router();
 
-router.post("/create-note",
+router.post("/",
     body('noteId').notEmpty().isString(),
     body('userEmail').notEmpty().isString(),
     body('title').notEmpty().isString(),
@@ -17,12 +17,17 @@ router.post("/create-note",
 );
 
 
-router.get("/:id",AuthMiddleware.verifyToken,NoteController.handleGetNoteById);
+router.get("/:id", AuthMiddleware.verifyToken, NoteController.handleGetNoteById);
 
-router.get("/list/all-notes",AuthMiddleware.verifyToken,NoteController.handleGetAllNotesOfAUser);
+router.get("/", AuthMiddleware.verifyToken, NoteController.handleGetAllNotesOfAUser);
 
-router.delete("/delete/notes-by-id/:id",AuthMiddleware.verifyToken,NoteController.handleDeleteById);
+router.put("/:id", AuthMiddleware.verifyToken, NoteController.handleUpdateNotes);
 
-router.delete("/delete/trash/notes-by-id/:id",AuthMiddleware.verifyToken,NoteController.handleDeleteNotesFromTrash);
+router.put("/:id/delete", AuthMiddleware.verifyToken, NoteController.handleDeleteById);
+
+router.put('/:noteId/archive', AuthMiddleware.verifyToken, NoteController.handleAddToArchive);
+
+router.delete("/:id/trash", AuthMiddleware.verifyToken, NoteController.handleDeleteNotesFromTrash);
+
 
 export default router;

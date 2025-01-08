@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteNotesFromTrash = exports.deleteNotesById = exports.getAllNotes = exports.checkNoteId = exports.getNoteById = exports.createNote = void 0;
+exports.addToArchive = exports.updateNotes = exports.deleteNotesFromTrash = exports.deleteNotesById = exports.getAllNotes = exports.checkNoteId = exports.getNoteById = exports.createNote = void 0;
 const note_model_1 = __importDefault(require("../models/note.model"));
 const http_status_codes_1 = __importDefault(require("http-status-codes"));
 const user_model_1 = __importDefault(require("../models/user.model"));
@@ -126,3 +126,36 @@ const deleteNotesFromTrash = function (noteId) {
     });
 };
 exports.deleteNotesFromTrash = deleteNotesFromTrash;
+const updateNotes = function (data) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            yield note_model_1.default.findOneAndUpdate({ noteId: data.noteId }, {
+                $set: {
+                    title: data === null || data === void 0 ? void 0 : data.title,
+                    desc: data === null || data === void 0 ? void 0 : data.desc
+                }
+            });
+            return { status: http_status_codes_1.default.OK, message: "Note has been updated" };
+        }
+        catch (error) {
+            return { status: http_status_codes_1.default.INTERNAL_SERVER_ERROR, message: error.message };
+        }
+    });
+};
+exports.updateNotes = updateNotes;
+const addToArchive = function (noteId) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            yield note_model_1.default.findOneAndUpdate({ noteId: noteId, isArchive: false }, {
+                $set: {
+                    isArchive: true
+                }
+            });
+            return { status: http_status_codes_1.default.OK, message: "Note has been Archived" };
+        }
+        catch (error) {
+            return { status: http_status_codes_1.default.INTERNAL_SERVER_ERROR, message: error.message };
+        }
+    });
+};
+exports.addToArchive = addToArchive;

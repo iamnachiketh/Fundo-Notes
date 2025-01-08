@@ -140,3 +140,42 @@ export const deleteNotesFromTrash = async function (noteId: string): Promise<{ s
 }
 
 
+export const updateNotes = async function (data: {
+    noteId: string,
+    title?: string,
+    desc?: string
+}): Promise<{ status: number, message: string }> {
+    try {
+        await Note.findOneAndUpdate({ noteId: data.noteId }, {
+            $set: {
+                title: data?.title,
+                desc: data?.desc
+            }
+        })
+        return { status: httpStatus.OK, message: "Note has been updated" };
+
+    } catch (error: any) {
+
+        return { status: httpStatus.INTERNAL_SERVER_ERROR, message: error.message };
+
+    }
+}
+
+
+export const addToArchive = async function (noteId: string): Promise<{ status: number, message: string }> {
+
+    try {
+        await Note.findOneAndUpdate({ noteId: noteId, isArchive: false }, {
+            $set: {
+                isArchive: true
+            }
+        });
+
+        return { status: httpStatus.OK, message: "Note has been Archived" };
+
+    } catch (error: any) {
+        return { status: httpStatus.INTERNAL_SERVER_ERROR, message: error.message };
+    }
+}
+
+

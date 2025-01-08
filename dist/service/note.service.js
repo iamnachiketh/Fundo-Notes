@@ -73,7 +73,7 @@ exports.checkNoteId = checkNoteId;
 const getAllNotes = function (email) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const result = yield note_model_1.default.find({ userEmail: email, isTrash: false }, { _id: 0, __v: 0 });
+            const result = yield note_model_1.default.find({ userEmail: email, isTrash: false, isArchive: false }, { _id: 0, __v: 0 });
             // This is another way of getting the list of notes
             // let result: Array<any> = [];
             // let totalNumberOfNotes = user?.notesId.length === undefined ? 0 : user?.notesId.length;

@@ -113,7 +113,7 @@ export const getRefreshToken = async function (userEmail: string): Promise<{
             return { status: httpStatus.NOT_FOUND, message: "Token not found" };
         }
 
-        if (!process.env.JWT_SECRET) {
+        if (!process.env.JWT_SECERT) {
             return { status: httpStatus.BAD_REQUEST, message: 'JWT_SECRET is not defined in .env file' };
         }
 
@@ -125,7 +125,7 @@ export const getRefreshToken = async function (userEmail: string): Promise<{
 
         const { email } = payload;
 
-        const newToken = jwt.sign({ email: email }, process.env.JWT_SECRET as string, { expiresIn: "3d" });
+        const newToken = jwt.sign({ email: email }, process.env.JWT_SECERT as string, { expiresIn: "3d" });
 
         return {status:httpStatus.CREATED, message:"New Token has been created", token: newToken};
 

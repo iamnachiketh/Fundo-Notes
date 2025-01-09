@@ -40,7 +40,8 @@ const UserSchema = new mongoose_1.Schema({
     password: { type: String, required: true },
     profilePictureUrl: { type: String, default: "" },
     notesId: { type: Array(), default: [] },
-    notesCount: { type: Number, default: 0 }
+    notesCount: { type: Number, default: 0 },
+    refreshToken: { type: String, default: null }
 }, {
     timestamps: true
 });

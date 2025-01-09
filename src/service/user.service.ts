@@ -2,6 +2,9 @@ import User from "../models/user.model";
 import httpStatus from "http-status-codes";
 import { userSchemaValidation } from "../schemaValidation/user.validation";
 import bcrypt from "bcrypt";
+import * as AuthMiddleware from "../middleware/auth.middleware";
+import jwt from "jsonwebtoken";
+
 
 
 export const registerUser = async function (userData: {
@@ -34,7 +37,7 @@ export const registerUser = async function (userData: {
             name: userData.name,
             email: userData.email,
             password: userData.password,
-            profilePictureUrl: userData.profilePictureUrl
+            profilePictureUrl: userData.profilePictureUrl,
         });
 
         await user.save();
@@ -53,7 +56,15 @@ export const registerUser = async function (userData: {
 export const loginUser = async function (data: {
     email: string,
     password: string
-}): Promise<{ status: number, message?: string, UserDetails?: any }> {
+}): Promise<{
+    status: number,
+    message?: string,
+    UserDetails?: any,
+    token?: {
+        accessToken: string,
+        refreshToken: string
+    }
+}> {
 
     try {
         const user = await User.findOne({ email: data.email }, { _id: 0, __v: 0 })
@@ -68,7 +79,18 @@ export const loginUser = async function (data: {
             return { status: httpStatus.UNAUTHORIZED, message: "Invalid Email / Password" }
         }
 
-        return { status: httpStatus.OK, UserDetails: user };
+        const { token } = AuthMiddleware.createJWToken(data.email);
+
+        if (!token)
+            return { status: httpStatus.NOT_IMPLEMENTED, message: "Token has not been created" };
+
+        await User.findOneAndUpdate({ email: data.email }, {
+            $set: {
+                refreshToken: token.refreshToken
+            }
+        });
+
+        return { status: httpStatus.OK, UserDetails: user, token: token };
 
     } catch (error: any) {
 
@@ -76,3 +98,39 @@ export const loginUser = async function (data: {
 
     }
 }
+
+export const getRefreshToken = async function (userEmail: string): Promise<{ 
+    status: number, 
+    message: string, 
+    token?: string 
+}> {
+    try {
+        const user = await User.findOne({ email: userEmail });
+
+        const refreshToken = user?.refreshToken;
+
+        if (!refreshToken) {
+            return { status: httpStatus.NOT_FOUND, message: "Token not found" };
+        }
+
+        if (!process.env.JWT_SECRET) {
+            return { status: httpStatus.BAD_REQUEST, message: 'JWT_SECRET is not defined in .env file' };
+        }
+
+        const payload: any = jwt.verify(refreshToken, process.env.JWT_SECERT as string);
+
+        if (!payload) {
+            return { status: httpStatus.UNAUTHORIZED, message: "Token is not valid" }
+        }
+
+        const { email } = payload;
+
+        const newToken = jwt.sign({ email: email }, process.env.JWT_SECRET as string, { expiresIn: "3d" });
+
+        return {status:httpStatus.CREATED, message:"New Token has been created", token: newToken};
+
+    } catch (error: any) {
+        return { status: httpStatus.INTERNAL_SERVER_ERROR, message: error.message }
+    }
+}
+

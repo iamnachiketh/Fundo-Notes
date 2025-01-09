@@ -1,4 +1,4 @@
-import mongoose,{ Schema } from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 
 interface IUser {
@@ -9,6 +9,7 @@ interface IUser {
     profilePictureUrl: string;
     notesId: Array<String>;
     notesCount: number;
+    refreshToken: string;
 
 }
 
@@ -22,10 +23,12 @@ const UserSchema = new Schema<IUser>({
 
     profilePictureUrl: { type: String, default: "" },
 
-    notesId: { type: Array<String>() , default: [] },
+    notesId: { type: Array<String>(), default: [] },
 
-    notesCount: { type: Number, default: 0 }
-},{
+    notesCount: { type: Number, default: 0 },
+
+    refreshToken: { type: String, default: null }
+}, {
     timestamps: true
 })
 

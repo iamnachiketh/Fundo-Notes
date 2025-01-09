@@ -5,7 +5,7 @@ import httpStatus from "http-status-codes";
 
 export const handleRegisterUser = async function (req: Request, res: Response) {
 
-    let { token, ...data } = req.body;
+    const data = req.body;
 
     try {
         const hash = await bcrypt.hash(data.password, 10);
@@ -14,7 +14,7 @@ export const handleRegisterUser = async function (req: Request, res: Response) {
 
         const response = await UserService.registerUser(data);
 
-        res.status(response.status).json({ status: response.status, message: response.message, data: null, accessToken: token });
+        res.status(response.status).json({ status: response.status, message: response.message, data: null });
 
     } catch (error: any) {
         res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ status: httpStatus.INTERNAL_SERVER_ERROR, message: error.message, data: null });
@@ -42,26 +42,55 @@ export const handleRegisterUser = async function (req: Request, res: Response) {
 
 export const handleLoginUser = async function (req: Request, res: Response) {
 
-    let {token,...data} = req.body;
+    const data = req.body;
 
     try {
         const response = await UserService.loginUser(data);
         if (response.message === undefined)
-            res.status(response.status).json({ status: response.status, messsage: "User logged in successfully", data: response.UserDetails, accessToken: token });
+            res.status(response.status).json({
+                status: response.status,
+                messsage: "User logged in successfully",
+                data: response.UserDetails,
+                accessToken: response.token?.accessToken,
+                refreshToken: response.token?.refreshToken
+            });
         else
             res.status(response.status).json({ status: response.status, messsage: response.message, data: null });
     } catch (error: any) {
-        res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ status: httpStatus.INTERNAL_SERVER_ERROR, message: error.message, data: null });
+
+        res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+            status: httpStatus.INTERNAL_SERVER_ERROR,
+            message: error.message,
+            data: null
+        });
+
     }
+}
 
-    // This is another way of doing it
 
-    // UserService
-    //     .loginUser(data)
-    //     .then((response) => {
-    //         if (response.message === undefined)
-    //             res.status(response.status).json({ status: response.status, messsage: "User logged in successfully", data: response.UserDetails });
-    //         else
-    //             res.status(response.status).json({ status: response.status, messsage: response.message, data: null });
-    //     })
+export const handleGetRefreshToken = async function (req: Request, res: Response) {
+    try {
+
+        const { payload, ...data } = req.body;
+        if (data.email !== payload.email) {
+            res.status(httpStatus.UNAUTHORIZED).json({ status: httpStatus.UNAUTHORIZED, message: "Invalid User", data: null });
+            return;
+        }
+
+        const response = await UserService.getRefreshToken(data.email);
+
+        res.status(response.status).json({
+            status: response.status,
+            message: response.message,
+            token: response.token
+        });
+
+    } catch (error: any) {
+        res.status(httpStatus.INTERNAL_SERVER_ERROR)
+            .json({
+                status: httpStatus.INTERNAL_SERVER_ERROR,
+                message: error.message,
+                data: null
+            });
+    }
 }

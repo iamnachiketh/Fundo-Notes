@@ -6,3 +6,4 @@
 {"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/notes?page=1&limit=3\",\"status\":\"200\",\"responseTime\":\"66.064\"}","timestamp":"2025-01-09T11:12:21.499Z"}
 {"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/notes?page=2&limit=3\",\"status\":\"200\",\"responseTime\":\"19.135\"}","timestamp":"2025-01-09T11:12:32.842Z"}
 {"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/notes?page=1&limit=3\",\"status\":\"200\",\"responseTime\":\"7.782\"}","timestamp":"2025-01-09T11:12:59.917Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/users/login\",\"status\":\"200\",\"responseTime\":\"770.942\"}","timestamp":"2025-01-09T13:57:11.905Z"}

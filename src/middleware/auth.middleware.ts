@@ -1,17 +1,22 @@
-import jwt, { JwtPayload } from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import { Request, Response, NextFunction } from "express";
 import httpStatus from "http-status-codes";
 
-export const createJWToken = function (req: Request, res: Response, next: NextFunction) {
+export const createJWToken = function (email: string): { token: { accessToken: string, refreshToken: string } | null } {
 
-    const token = jwt.sign({ email: req.body.email }, process.env.JWT_SECERT as string, { expiresIn: "3d" });
+    const accessToken = jwt.sign({ email: email }, process.env.JWT_SECERT as string, { expiresIn: "3d" });
 
-    if (!token) {
-        res.status(httpStatus.NOT_IMPLEMENTED).json({ status: httpStatus.NOT_IMPLEMENTED, message: "Token not generated", data: null });
-    } else {
-        req.body.token = token;
-        next();
-    }
+    const refreshToken = jwt.sign({ email: email }, process.env.JWT_SECERT as string, { expiresIn: "30d" })
+
+    if (!accessToken || !refreshToken)
+        return { token: null };
+    else
+        return {
+            token: {
+                accessToken: accessToken,
+                refreshToken: refreshToken
+            }
+        }
 }
 
 

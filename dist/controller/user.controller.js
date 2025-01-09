@@ -56,18 +56,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.handleLoginUser = exports.handleRegisterUser = void 0;
+exports.handleGetRefreshToken = exports.handleLoginUser = exports.handleRegisterUser = void 0;
 const UserService = __importStar(require("../service/user.service"));
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const http_status_codes_1 = __importDefault(require("http-status-codes"));
 const handleRegisterUser = function (req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        let _a = req.body, { token } = _a, data = __rest(_a, ["token"]);
+        const data = req.body;
         try {
             const hash = yield bcrypt_1.default.hash(data.password, 10);
             data.password = hash;
             const response = yield UserService.registerUser(data);
-            res.status(response.status).json({ status: response.status, message: response.message, data: null, accessToken: token });
+            res.status(response.status).json({ status: response.status, message: response.message, data: null });
         }
         catch (error) {
             res.status(http_status_codes_1.default.INTERNAL_SERVER_ERROR).json({ status: http_status_codes_1.default.INTERNAL_SERVER_ERROR, message: error.message, data: null });
@@ -91,26 +91,54 @@ const handleRegisterUser = function (req, res) {
 exports.handleRegisterUser = handleRegisterUser;
 const handleLoginUser = function (req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        let _a = req.body, { token } = _a, data = __rest(_a, ["token"]);
+        var _a, _b;
+        const data = req.body;
         try {
             const response = yield UserService.loginUser(data);
             if (response.message === undefined)
-                res.status(response.status).json({ status: response.status, messsage: "User logged in successfully", data: response.UserDetails, accessToken: token });
+                res.status(response.status).json({
+                    status: response.status,
+                    messsage: "User logged in successfully",
+                    data: response.UserDetails,
+                    accessToken: (_a = response.token) === null || _a === void 0 ? void 0 : _a.accessToken,
+                    refreshToken: (_b = response.token) === null || _b === void 0 ? void 0 : _b.refreshToken
+                });
             else
                 res.status(response.status).json({ status: response.status, messsage: response.message, data: null });
         }
         catch (error) {
-            res.status(http_status_codes_1.default.INTERNAL_SERVER_ERROR).json({ status: http_status_codes_1.default.INTERNAL_SERVER_ERROR, message: error.message, data: null });
+            res.status(http_status_codes_1.default.INTERNAL_SERVER_ERROR).json({
+                status: http_status_codes_1.default.INTERNAL_SERVER_ERROR,
+                message: error.message,
+                data: null
+            });
         }
-        // This is another way of doing it
-        // UserService
-        //     .loginUser(data)
-        //     .then((response) => {
-        //         if (response.message === undefined)
-        //             res.status(response.status).json({ status: response.status, messsage: "User logged in successfully", data: response.UserDetails });
-        //         else
-        //             res.status(response.status).json({ status: response.status, messsage: response.message, data: null });
-        //     })
     });
 };
 exports.handleLoginUser = handleLoginUser;
+const handleGetRefreshToken = function (req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const _a = req.body, { payload } = _a, data = __rest(_a, ["payload"]);
+            if (data.email !== payload.email) {
+                res.status(http_status_codes_1.default.UNAUTHORIZED).json({ status: http_status_codes_1.default.UNAUTHORIZED, message: "Invalid User", data: null });
+                return;
+            }
+            const response = yield UserService.getRefreshToken(data.email);
+            res.status(response.status).json({
+                status: response.status,
+                message: response.message,
+                token: response.token
+            });
+        }
+        catch (error) {
+            res.status(http_status_codes_1.default.INTERNAL_SERVER_ERROR)
+                .json({
+                status: http_status_codes_1.default.INTERNAL_SERVER_ERROR,
+                message: error.message,
+                data: null
+            });
+        }
+    });
+};
+exports.handleGetRefreshToken = handleGetRefreshToken;

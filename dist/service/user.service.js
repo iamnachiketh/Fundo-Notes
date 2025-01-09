@@ -116,7 +116,7 @@ const getRefreshToken = function (userEmail) {
             if (!refreshToken) {
                 return { status: http_status_codes_1.default.NOT_FOUND, message: "Token not found" };
             }
-            if (!process.env.JWT_SECRET) {
+            if (!process.env.JWT_SECERT) {
                 return { status: http_status_codes_1.default.BAD_REQUEST, message: 'JWT_SECRET is not defined in .env file' };
             }
             const payload = jsonwebtoken_1.default.verify(refreshToken, process.env.JWT_SECERT);
@@ -124,7 +124,7 @@ const getRefreshToken = function (userEmail) {
                 return { status: http_status_codes_1.default.UNAUTHORIZED, message: "Token is not valid" };
             }
             const { email } = payload;
-            const newToken = jsonwebtoken_1.default.sign({ email: email }, process.env.JWT_SECRET, { expiresIn: "3d" });
+            const newToken = jsonwebtoken_1.default.sign({ email: email }, process.env.JWT_SECERT, { expiresIn: "3d" });
             return { status: http_status_codes_1.default.CREATED, message: "New Token has been created", token: newToken };
         }
         catch (error) {

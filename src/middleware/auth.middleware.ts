@@ -4,7 +4,7 @@ import httpStatus from "http-status-codes";
 
 export const createJWToken = function (req: Request, res: Response, next: NextFunction) {
 
-    const token = jwt.sign({ email: req.body.email }, process.env.JWT_SECERT as string, { expiresIn: '3d' });
+    const token = jwt.sign({ email: req.body.email }, process.env.JWT_SECERT as string, { expiresIn: "3d" });
 
     if (!token) {
         res.status(httpStatus.NOT_IMPLEMENTED).json({ status: httpStatus.NOT_IMPLEMENTED, message: "Token not generated", data: null });
@@ -34,7 +34,7 @@ export const verifyToken = function (req: Request, res: Response, next: NextFunc
         res.status(httpStatus.UNAUTHORIZED).json({ status: httpStatus.UNAUTHORIZED, message: "Invalid token", data: null });
         return;
     }
-    
+
     req.body.payload = payload;
     next();
 }

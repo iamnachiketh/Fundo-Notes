@@ -7,7 +7,7 @@ exports.verifyToken = exports.createJWToken = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const http_status_codes_1 = __importDefault(require("http-status-codes"));
 const createJWToken = function (req, res, next) {
-    const token = jsonwebtoken_1.default.sign({ email: req.body.email }, process.env.JWT_SECERT, { expiresIn: '3d' });
+    const token = jsonwebtoken_1.default.sign({ email: req.body.email }, process.env.JWT_SECERT, { expiresIn: "3d" });
     if (!token) {
         res.status(http_status_codes_1.default.NOT_IMPLEMENTED).json({ status: http_status_codes_1.default.NOT_IMPLEMENTED, message: "Token not generated", data: null });
     }

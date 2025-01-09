@@ -1,6 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
-dotenv.config({ path: '.env' });
+dotenv.config({ path: ".env" });
 import { dbConnection } from "./dbconnection/db.connection";
 import userRouter from "./routes/user.router";
 import noteRouter from "./routes/note.router";

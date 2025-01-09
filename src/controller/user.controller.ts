@@ -54,7 +54,7 @@ export const handleLoginUser = async function (req: Request, res: Response) {
         res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ status: httpStatus.INTERNAL_SERVER_ERROR, message: error.message, data: null });
     }
 
-    // This is another way of doing it 
+    // This is another way of doing it
 
     // UserService
     //     .loginUser(data)

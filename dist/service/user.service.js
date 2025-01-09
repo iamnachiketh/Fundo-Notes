@@ -57,7 +57,6 @@ const loginUser = function (data) {
             if (!isPasswordMatch) {
                 return { status: http_status_codes_1.default.UNAUTHORIZED, message: "Invalid Email / Password" };
             }
-            console.log(user);
             return { status: http_status_codes_1.default.OK, UserDetails: user };
         }
         catch (error) {

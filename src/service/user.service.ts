@@ -17,7 +17,7 @@ export const registerUser = async function (userData: {
             .findOne()
             .where("email")
             .equals(userData.email);
-        
+
         if (isUserPresent) {
             return { status: httpStatus.CONFLICT, message: "User already exists" }
         }
@@ -67,7 +67,7 @@ export const loginUser = async function (data: {
         if (!isPasswordMatch) {
             return { status: httpStatus.UNAUTHORIZED, message: "Invalid Email / Password" }
         }
-        console.log(user);
+
         return { status: httpStatus.OK, UserDetails: user };
 
     } catch (error: any) {

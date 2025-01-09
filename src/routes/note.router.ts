@@ -16,7 +16,7 @@ router.put("/:id", AuthMiddleware.verifyToken, NoteController.handleUpdateNotes)
 
 router.put("/:id/delete", AuthMiddleware.verifyToken, NoteController.handleDeleteById);
 
-router.put('/:noteId/archive', AuthMiddleware.verifyToken, NoteController.handleAddToArchive);
+router.put("/:noteId/archive", AuthMiddleware.verifyToken, NoteController.handleAddToArchive);
 
 router.delete("/:id/trash", AuthMiddleware.verifyToken, NoteController.handleDeleteNotesFromTrash);
 

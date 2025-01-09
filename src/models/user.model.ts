@@ -17,13 +17,13 @@ const UserSchema = new Schema<IUser>({
     name: { type: String, required: true },
 
     email: { type: String, required: true, unique: true },
-    
+
     password: { type: String, required: true },
-    
+
     profilePictureUrl: { type: String, default: "" },
-    
+
     notesId: { type: Array<String>() , default: [] },
-    
+
     notesCount: { type: Number, default: 0 }
 },{
     timestamps: true

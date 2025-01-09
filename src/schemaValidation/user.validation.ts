@@ -1,4 +1,4 @@
-import Joi from 'joi';
+import Joi from "joi";
 
 export const userSchemaValidation = Joi.object({
     name: Joi.string().required(),

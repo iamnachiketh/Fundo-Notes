@@ -102,7 +102,7 @@ const handleLoginUser = function (req, res) {
         catch (error) {
             res.status(http_status_codes_1.default.INTERNAL_SERVER_ERROR).json({ status: http_status_codes_1.default.INTERNAL_SERVER_ERROR, message: error.message, data: null });
         }
-        // This is another way of doing it 
+        // This is another way of doing it
         // UserService
         //     .loginUser(data)
         //     .then((response) => {

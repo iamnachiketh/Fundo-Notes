@@ -105,9 +105,25 @@ const handleGetAllNotesOfAUser = function (req, res) {
                 res.status(http_status_codes_1.default.FORBIDDEN).json({ status: http_status_codes_1.default.FORBIDDEN, message: "Invalid User", data: null });
                 return;
             }
-            const response = yield NoteService.getAllNotes(data.userEmail);
+            const page = Number(req.query.page) || 1;
+            const limit = Number(req.query.limit) || 5;
+            if (page <= 0 || limit <= 0) {
+                res.status(http_status_codes_1.default.BAD_REQUEST).json({ status: http_status_codes_1.default.BAD_REQUEST, message: 'Page and limit must be positive integer', data: null });
+                return;
+            }
+            const skip = (page - 1) * limit;
+            const response = yield NoteService.getAllNotes(data.userEmail, skip, limit);
+            const docCount = response.totalDocument === undefined ? 0 : response.totalDocument;
+            const totalPages = Math.ceil(docCount / limit);
             if (response.message === undefined)
-                res.status(response.status).json({ status: http_status_codes_1.default.OK, message: "List of Notes", data: response.data });
+                res.status(response.status).json({
+                    status: http_status_codes_1.default.OK, message: "List of Notes", data: response.data, meta: {
+                        page,
+                        limit,
+                        docCount,
+                        totalPages
+                    }
+                });
             else
                 res.status(response.status).json({ status: http_status_codes_1.default.OK, message: response.message, data: null });
         }

@@ -73,10 +73,15 @@ export const checkNoteId = async function (noteId: String, email: string): Promi
 }
 
 
-export const getAllNotes = async function (email: string): Promise<{ status: number, message?: string, data?: any }> {
+export const getAllNotes = async function (email: string, skip: number, limit: number): Promise<{ status: number, message?: string, data?: any, totalDocument?: number }> {
     try {
 
-        const result = await Note.find({ userEmail: email, isTrash: false, isArchive: false }, { _id: 0, __v: 0 });
+        const result = await Note
+            .find({ userEmail: email, isTrash: false, isArchive: false }, { _id: 0, __v: 0 })
+            .skip(skip)
+            .limit(limit);
+
+        const totalDocument = await Note.countDocuments({ userEmail: email });
 
         // This is another way of getting the list of notes
 
@@ -91,7 +96,7 @@ export const getAllNotes = async function (email: string): Promise<{ status: num
 
         // if (result.length === 0) return { status: httpStatus.OK, message: "No Note is created yet" };
 
-        return { status: httpStatus.OK, data: result };
+        return { status: httpStatus.OK, data: result, totalDocument: totalDocument };
 
     } catch (error: any) {
         return { status: httpStatus.INTERNAL_SERVER_ERROR, message: error.message }

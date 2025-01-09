@@ -70,10 +70,14 @@ const checkNoteId = function (noteId, email) {
     });
 };
 exports.checkNoteId = checkNoteId;
-const getAllNotes = function (email) {
+const getAllNotes = function (email, skip, limit) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const result = yield note_model_1.default.find({ userEmail: email, isTrash: false, isArchive: false }, { _id: 0, __v: 0 });
+            const result = yield note_model_1.default
+                .find({ userEmail: email, isTrash: false, isArchive: false }, { _id: 0, __v: 0 })
+                .skip(skip)
+                .limit(limit);
+            const totalDocument = yield note_model_1.default.countDocuments({ userEmail: email });
             // This is another way of getting the list of notes
             // let result: Array<any> = [];
             // let totalNumberOfNotes = user?.notesId.length === undefined ? 0 : user?.notesId.length;
@@ -82,7 +86,7 @@ const getAllNotes = function (email) {
             //     result.push(response);
             // }
             // if (result.length === 0) return { status: httpStatus.OK, message: "No Note is created yet" };
-            return { status: http_status_codes_1.default.OK, data: result };
+            return { status: http_status_codes_1.default.OK, data: result, totalDocument: totalDocument };
         }
         catch (error) {
             return { status: http_status_codes_1.default.INTERNAL_SERVER_ERROR, message: error.message };

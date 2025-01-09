@@ -20,7 +20,7 @@ export default [
     rules: {
       "no-unused-vars": "warn",
       "no-console": "warn",
-      "no-unused-vars": "off", // Use TypeScript's rule instead
+      "no-unused-vars": "off",
       "@typescript-eslint/explicit-module-boundary-types": "off",
       "@typescript-eslint/no-empty-function": "warn",
       "indent": [

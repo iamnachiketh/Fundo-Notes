@@ -56,7 +56,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.handleGetRefreshToken = exports.handleLoginUser = exports.handleRegisterUser = void 0;
+exports.handleResetPassword = exports.handleGetForgetPassword = exports.handleOtp = exports.handleGetRefreshToken = exports.handleLoginUser = exports.handleRegisterUser = void 0;
 const UserService = __importStar(require("../service/user.service"));
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const http_status_codes_1 = __importDefault(require("http-status-codes"));
@@ -142,3 +142,76 @@ const handleGetRefreshToken = function (req, res) {
     });
 };
 exports.handleGetRefreshToken = handleGetRefreshToken;
+const otpGetterSetter = function () {
+    let _oneTimePassword;
+    return {
+        setOneTimePassword: function (otp) {
+            _oneTimePassword = otp;
+        },
+        getOneTimePassword: function () {
+            return _oneTimePassword;
+        }
+    };
+};
+const handleGetForgetPassword = function (req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const email = req.body.email;
+            if (!email) {
+                res.status(http_status_codes_1.default.BAD_REQUEST).json({
+                    status: http_status_codes_1.default.BAD_REQUEST,
+                    message: "Please Enter the email",
+                    data: null
+                });
+            }
+            const response = yield UserService.getForgetPassword(email);
+            if (!response.oneTimePassword) {
+                res.status(response.status).json({
+                    status: response.status,
+                    message: response.message,
+                    data: null
+                });
+                return;
+            }
+            const oneTimePassword = response.oneTimePassword;
+            exports.handleOtp = otpGetterSetter();
+            exports.handleOtp.setOneTimePassword(oneTimePassword);
+            res.status(response.status).json({
+                status: response.status,
+                message: response.message,
+                otp: exports.handleOtp.getOneTimePassword(),
+                data: null
+            });
+        }
+        catch (error) {
+            res.status(http_status_codes_1.default.INTERNAL_SERVER_ERROR).json({
+                status: http_status_codes_1.default.INTERNAL_SERVER_ERROR,
+                message: error.message,
+                data: null
+            });
+        }
+    });
+};
+exports.handleGetForgetPassword = handleGetForgetPassword;
+const handleResetPassword = function (req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const data = req.body;
+            data.password = yield bcrypt_1.default.hash(data.password, 10);
+            const response = yield UserService.resetPassword(data);
+            res.status(response.status).json({
+                status: response.status,
+                message: response.message,
+                data: null
+            });
+        }
+        catch (error) {
+            res.status(http_status_codes_1.default.INTERNAL_SERVER_ERROR).json({
+                status: http_status_codes_1.default.INTERNAL_SERVER_ERROR,
+                message: error.message,
+                data: null
+            });
+        }
+    });
+};
+exports.handleResetPassword = handleResetPassword;

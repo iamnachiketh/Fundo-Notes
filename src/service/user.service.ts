@@ -4,6 +4,9 @@ import { userSchemaValidation } from "../schemaValidation/user.validation";
 import bcrypt from "bcrypt";
 import * as AuthMiddleware from "../middleware/auth.middleware";
 import jwt from "jsonwebtoken";
+import otp from "otp-generator";
+import { sendEmail } from "../util/nodeMailer.util";
+
 
 
 
@@ -99,10 +102,10 @@ export const loginUser = async function (data: {
     }
 }
 
-export const getRefreshToken = async function (userEmail: string): Promise<{ 
-    status: number, 
-    message: string, 
-    token?: string 
+export const getRefreshToken = async function (userEmail: string): Promise<{
+    status: number,
+    message: string,
+    token?: string
 }> {
     try {
         const user = await User.findOne({ email: userEmail });
@@ -127,10 +130,62 @@ export const getRefreshToken = async function (userEmail: string): Promise<{
 
         const newToken = jwt.sign({ email: email }, process.env.JWT_SECERT as string, { expiresIn: "3d" });
 
-        return {status:httpStatus.CREATED, message:"New Token has been created", token: newToken};
+        return { status: httpStatus.CREATED, message: "New Token has been created", token: newToken };
 
     } catch (error: any) {
         return { status: httpStatus.INTERNAL_SERVER_ERROR, message: error.message }
     }
 }
+
+
+export const getForgetPassword = async function (email: string): Promise<{
+    status: number,
+    message: string,
+    oneTimePassword?: string
+}> {
+    try {
+        const data = await User.findOne({ email: email });
+
+        if (!data)
+            return { status: httpStatus.NOT_FOUND, message: "User Not Found" };
+
+        const oneTimePassword = otp.generate(5, { upperCaseAlphabets: false, specialChars: false });
+
+        const subject = 'Password Reset with otp';
+        const message = `Your password reset otp is: ${oneTimePassword}`;
+
+        await sendEmail({
+            recipients: email,
+            subject: subject,
+            message: message,
+        });
+
+        return { status: httpStatus.CREATED, message: "OTP has been sent to your email", oneTimePassword }
+
+    } catch (error: any) {
+
+        return { status: httpStatus.INTERNAL_SERVER_ERROR, message: error.message };
+
+    }
+}
+
+
+export const resetPassword = async function (data: { email: string, password: string }): Promise<{
+    status:number, 
+    message:string
+}>{
+    try {
+        await User.findOneAndUpdate({ email: data.email }, {
+            $set: {
+                password: data.password
+            }
+        });
+
+        return { status: httpStatus.ACCEPTED, message: "Password has been updated please login" }
+
+    } catch (error: any) {
+        return { status: httpStatus.INTERNAL_SERVER_ERROR, message: error.message };
+    }
+}
+
 

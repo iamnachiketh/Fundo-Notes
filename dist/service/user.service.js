@@ -45,13 +45,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getRefreshToken = exports.loginUser = exports.registerUser = void 0;
+exports.resetPassword = exports.getForgetPassword = exports.getRefreshToken = exports.loginUser = exports.registerUser = void 0;
 const user_model_1 = __importDefault(require("../models/user.model"));
 const http_status_codes_1 = __importDefault(require("http-status-codes"));
 const user_validation_1 = require("../schemaValidation/user.validation");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const AuthMiddleware = __importStar(require("../middleware/auth.middleware"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const otp_generator_1 = __importDefault(require("otp-generator"));
+const nodeMailer_util_1 = require("../util/nodeMailer.util");
 const registerUser = function (userData) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -133,3 +135,41 @@ const getRefreshToken = function (userEmail) {
     });
 };
 exports.getRefreshToken = getRefreshToken;
+const getForgetPassword = function (email) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const data = yield user_model_1.default.findOne({ email: email });
+            if (!data)
+                return { status: http_status_codes_1.default.NOT_FOUND, message: "User Not Found" };
+            const oneTimePassword = otp_generator_1.default.generate(5, { upperCaseAlphabets: false, specialChars: false });
+            const subject = 'Password Reset with otp';
+            const message = `Your password reset otp is: ${oneTimePassword}`;
+            yield (0, nodeMailer_util_1.sendEmail)({
+                recipients: email,
+                subject: subject,
+                message: message,
+            });
+            return { status: http_status_codes_1.default.CREATED, message: "OTP has been sent to your email", oneTimePassword };
+        }
+        catch (error) {
+            return { status: http_status_codes_1.default.INTERNAL_SERVER_ERROR, message: error.message };
+        }
+    });
+};
+exports.getForgetPassword = getForgetPassword;
+const resetPassword = function (data) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            yield user_model_1.default.findOneAndUpdate({ email: data.email }, {
+                $set: {
+                    password: data.password
+                }
+            });
+            return { status: http_status_codes_1.default.ACCEPTED, message: "Password has been updated please login" };
+        }
+        catch (error) {
+            return { status: http_status_codes_1.default.INTERNAL_SERVER_ERROR, message: error.message };
+        }
+    });
+};
+exports.resetPassword = resetPassword;

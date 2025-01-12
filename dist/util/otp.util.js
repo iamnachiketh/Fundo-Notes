@@ -8,8 +8,6 @@ const http_status_codes_1 = __importDefault(require("http-status-codes"));
 const user_controller_1 = require("../controller/user.controller");
 const checkOtp = function (req, res) {
     const otp = req.body.oneTimePassword;
-    console.log(otp);
-    console.log(user_controller_1.handleOtp.getOneTimePassword());
     if (otp !== user_controller_1.handleOtp.getOneTimePassword()) {
         res.status(http_status_codes_1.default.UNAUTHORIZED).json({
             status: http_status_codes_1.default.UNAUTHORIZED,

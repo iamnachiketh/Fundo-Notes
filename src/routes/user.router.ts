@@ -5,7 +5,9 @@ import * as Util from "../util/otp.util";
 
 const router = express.Router();
 
+
 router.post("/register", UserController.handleRegisterUser);
+
 
 router.post("/login", UserController.handleLoginUser);
 

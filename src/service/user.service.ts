@@ -117,7 +117,7 @@ export const getRefreshToken = async function (userEmail: string): Promise<{
         }
 
         if (!process.env.JWT_SECERT) {
-            return { status: httpStatus.BAD_REQUEST, message: 'JWT_SECRET is not defined in .env file' };
+            return { status: httpStatus.BAD_REQUEST, message: "JWT_SECRET is not defined in .env file" };
         }
 
         const payload: any = jwt.verify(refreshToken, process.env.JWT_SECERT as string);
@@ -151,7 +151,7 @@ export const getForgetPassword = async function (email: string): Promise<{
 
         const oneTimePassword = otp.generate(5, { upperCaseAlphabets: false, specialChars: false });
 
-        const subject = 'Password Reset with otp';
+        const subject = "Password Reset with otp";
         const message = `Your password reset otp is: ${oneTimePassword}`;
 
         await sendEmail({
@@ -171,7 +171,7 @@ export const getForgetPassword = async function (email: string): Promise<{
 
 
 export const resetPassword = async function (data: { email: string, password: string }): Promise<{
-    status:number, 
+    status:number,
     message:string
 }>{
     try {

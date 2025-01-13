@@ -98,7 +98,7 @@ const handleLoginUser = function (req, res) {
             if (response.message === undefined)
                 res.status(response.status).json({
                     status: response.status,
-                    messsage: "User logged in successfully",
+                    message: "User logged in successfully",
                     data: response.UserDetails,
                     accessToken: (_a = response.token) === null || _a === void 0 ? void 0 : _a.accessToken,
                     refreshToken: (_b = response.token) === null || _b === void 0 ? void 0 : _b.refreshToken

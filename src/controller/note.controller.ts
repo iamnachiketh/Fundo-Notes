@@ -60,7 +60,7 @@ export const handleGetAllNotesOfAUser = async function (req: Request, res: Respo
         const limit = Number(req.query.limit as string) || 5;
 
         if (page <= 0 || limit <= 0) {
-            res.status(httpStatus.BAD_REQUEST).json({ status: httpStatus.BAD_REQUEST, message: 'Page and limit must be positive integer', data: null });
+            res.status(httpStatus.BAD_REQUEST).json({ status: httpStatus.BAD_REQUEST, message: "Page and limit must be positive integer", data: null });
             return;
         }
 
@@ -74,8 +74,11 @@ export const handleGetAllNotesOfAUser = async function (req: Request, res: Respo
 
         if (response.message === undefined)
             res.status(response.status).json({
-                status: httpStatus.OK, message: "List of Notes", data: response.data, meta: {
-                    page, 
+                status: httpStatus.OK,
+                message: "List of Notes",
+                data: response.data,
+                meta: {
+                    page,
                     limit,
                     docCount,
                     totalPages
@@ -90,7 +93,7 @@ export const handleGetAllNotesOfAUser = async function (req: Request, res: Respo
 }
 
 
-export const handleDeleteById = async function (req: Request, res: Response) {
+export const handleTrashById = async function (req: Request, res: Response) {
 
     try {
         const { payload, ...data } = req.body;
@@ -102,7 +105,7 @@ export const handleDeleteById = async function (req: Request, res: Response) {
             return;
         }
 
-        let response = await NoteService.deleteNotesById(noteId, data.userEmail);
+        let response = await NoteService.trashNotesById(noteId, data.userEmail);
 
         res.status(response.status).json({ status: response.status, message: response.message, data: null });
 

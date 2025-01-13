@@ -49,7 +49,7 @@ export const handleLoginUser = async function (req: Request, res: Response) {
         if (response.message === undefined)
             res.status(response.status).json({
                 status: response.status,
-                messsage: "User logged in successfully",
+                message: "User logged in successfully",
                 data: response.UserDetails,
                 accessToken: response.token?.accessToken,
                 refreshToken: response.token?.refreshToken

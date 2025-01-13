@@ -14,11 +14,11 @@ router.get("/", AuthMiddleware.verifyToken, NoteController.handleGetAllNotesOfAU
 
 router.put("/:id", AuthMiddleware.verifyToken, NoteController.handleUpdateNotes);
 
-router.put("/:id/delete", AuthMiddleware.verifyToken, NoteController.handleDeleteById);
+router.put("/:id/trash", AuthMiddleware.verifyToken, NoteController.handleTrashById);
 
 router.put("/:noteId/archive", AuthMiddleware.verifyToken, NoteController.handleAddToArchive);
 
-router.delete("/:id/trash", AuthMiddleware.verifyToken, NoteController.handleDeleteNotesFromTrash);
+router.delete("/:id/delete", AuthMiddleware.verifyToken, NoteController.handleDeleteNotesFromTrash);
 
 
 export default router;

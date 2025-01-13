@@ -119,7 +119,7 @@ const getRefreshToken = function (userEmail) {
                 return { status: http_status_codes_1.default.NOT_FOUND, message: "Token not found" };
             }
             if (!process.env.JWT_SECERT) {
-                return { status: http_status_codes_1.default.BAD_REQUEST, message: 'JWT_SECRET is not defined in .env file' };
+                return { status: http_status_codes_1.default.BAD_REQUEST, message: "JWT_SECRET is not defined in .env file" };
             }
             const payload = jsonwebtoken_1.default.verify(refreshToken, process.env.JWT_SECERT);
             if (!payload) {
@@ -142,7 +142,7 @@ const getForgetPassword = function (email) {
             if (!data)
                 return { status: http_status_codes_1.default.NOT_FOUND, message: "User Not Found" };
             const oneTimePassword = otp_generator_1.default.generate(5, { upperCaseAlphabets: false, specialChars: false });
-            const subject = 'Password Reset with otp';
+            const subject = "Password Reset with otp";
             const message = `Your password reset otp is: ${oneTimePassword}`;
             yield (0, nodeMailer_util_1.sendEmail)({
                 recipients: email,

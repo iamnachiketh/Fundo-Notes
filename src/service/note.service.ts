@@ -104,7 +104,7 @@ export const getAllNotes = async function (email: string, skip: number, limit: n
 }
 
 
-export const deleteNotesById = async function (noteId: string, userEmail: string): Promise<{ status: number, message: string }> {
+export const trashNotesById = async function (noteId: string, userEmail: string): Promise<{ status: number, message: string }> {
 
     try {
         await Note.findOneAndUpdate({ noteId: noteId }, {
@@ -122,7 +122,7 @@ export const deleteNotesById = async function (noteId: string, userEmail: string
             }
         })
 
-        return { status: httpStatus.OK, message: "Notes has been deleted" };
+        return { status: httpStatus.OK, message: "Notes has been trashed" };
     } catch (error: any) {
 
         return { status: httpStatus.INTERNAL_SERVER_ERROR, message: error.message };

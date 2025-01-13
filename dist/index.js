@@ -62,3 +62,4 @@ app.use((0, morgan_1.default)(morganFormat, {
 }));
 app.use("/api/v1", router.handleRouter());
 app.listen(process.env.PORT, () => console.log(`Server is running on port http://localhost:${process.env.PORT}`));
+exports.default = app;

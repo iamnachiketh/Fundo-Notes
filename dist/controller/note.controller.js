@@ -56,7 +56,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.handleAddToArchive = exports.handleUpdateNotes = exports.handleDeleteNotesFromTrash = exports.handleDeleteById = exports.handleGetAllNotesOfAUser = exports.handleGetNoteById = exports.handleCreateNote = void 0;
+exports.handleAddToArchive = exports.handleUpdateNotes = exports.handleDeleteNotesFromTrash = exports.handleTrashById = exports.handleGetAllNotesOfAUser = exports.handleGetNoteById = exports.handleCreateNote = void 0;
 const NoteService = __importStar(require("../service/note.service"));
 const http_status_codes_1 = __importDefault(require("http-status-codes"));
 const handleCreateNote = function (req, res) {
@@ -108,7 +108,7 @@ const handleGetAllNotesOfAUser = function (req, res) {
             const page = Number(req.query.page) || 1;
             const limit = Number(req.query.limit) || 5;
             if (page <= 0 || limit <= 0) {
-                res.status(http_status_codes_1.default.BAD_REQUEST).json({ status: http_status_codes_1.default.BAD_REQUEST, message: 'Page and limit must be positive integer', data: null });
+                res.status(http_status_codes_1.default.BAD_REQUEST).json({ status: http_status_codes_1.default.BAD_REQUEST, message: "Page and limit must be positive integer", data: null });
                 return;
             }
             const skip = (page - 1) * limit;
@@ -117,7 +117,10 @@ const handleGetAllNotesOfAUser = function (req, res) {
             const totalPages = Math.ceil(docCount / limit);
             if (response.message === undefined)
                 res.status(response.status).json({
-                    status: http_status_codes_1.default.OK, message: "List of Notes", data: response.data, meta: {
+                    status: http_status_codes_1.default.OK,
+                    message: "List of Notes",
+                    data: response.data,
+                    meta: {
                         page,
                         limit,
                         docCount,
@@ -133,7 +136,7 @@ const handleGetAllNotesOfAUser = function (req, res) {
     });
 };
 exports.handleGetAllNotesOfAUser = handleGetAllNotesOfAUser;
-const handleDeleteById = function (req, res) {
+const handleTrashById = function (req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const _a = req.body, { payload } = _a, data = __rest(_a, ["payload"]);
@@ -142,7 +145,7 @@ const handleDeleteById = function (req, res) {
                 res.status(http_status_codes_1.default.NOT_FOUND).json({ status: http_status_codes_1.default.NOT_FOUND, message: "Invalid User/Note dosent exists", data: null });
                 return;
             }
-            let response = yield NoteService.deleteNotesById(noteId, data.userEmail);
+            let response = yield NoteService.trashNotesById(noteId, data.userEmail);
             res.status(response.status).json({ status: response.status, message: response.message, data: null });
         }
         catch (error) {
@@ -150,7 +153,7 @@ const handleDeleteById = function (req, res) {
         }
     });
 };
-exports.handleDeleteById = handleDeleteById;
+exports.handleTrashById = handleTrashById;
 const handleDeleteNotesFromTrash = function (req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {

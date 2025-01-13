@@ -32,11 +32,11 @@ export const sendEmail = async function ({ recipients, subject, message }: email
     try {
 
         await transporter.sendMail(mailOptions);
-    
+
     } catch (error) {
-    
+
         throw new Error(`Error sending email: ${(error as Error).message}`);
-    
+
     }
 
 }

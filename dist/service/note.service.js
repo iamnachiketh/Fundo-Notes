@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.addToArchive = exports.updateNotes = exports.deleteNotesFromTrash = exports.deleteNotesById = exports.getAllNotes = exports.checkNoteId = exports.getNoteById = exports.createNote = void 0;
+exports.addToArchive = exports.updateNotes = exports.deleteNotesFromTrash = exports.trashNotesById = exports.getAllNotes = exports.checkNoteId = exports.getNoteById = exports.createNote = void 0;
 const note_model_1 = __importDefault(require("../models/note.model"));
 const http_status_codes_1 = __importDefault(require("http-status-codes"));
 const user_model_1 = __importDefault(require("../models/user.model"));
@@ -94,7 +94,7 @@ const getAllNotes = function (email, skip, limit) {
     });
 };
 exports.getAllNotes = getAllNotes;
-const deleteNotesById = function (noteId, userEmail) {
+const trashNotesById = function (noteId, userEmail) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             yield note_model_1.default.findOneAndUpdate({ noteId: noteId }, {
@@ -110,14 +110,14 @@ const deleteNotesById = function (noteId, userEmail) {
                     notesCount: -1
                 }
             });
-            return { status: http_status_codes_1.default.OK, message: "Notes has been deleted" };
+            return { status: http_status_codes_1.default.OK, message: "Notes has been trashed" };
         }
         catch (error) {
             return { status: http_status_codes_1.default.INTERNAL_SERVER_ERROR, message: error.message };
         }
     });
 };
-exports.deleteNotesById = deleteNotesById;
+exports.trashNotesById = trashNotesById;
 const deleteNotesFromTrash = function (noteId) {
     return __awaiter(this, void 0, void 0, function* () {
         try {

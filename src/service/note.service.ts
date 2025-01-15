@@ -1,6 +1,7 @@
 import Note from "../models/note.model";
 import httpStatus from "http-status-codes"
 import User from "../models/user.model";
+import redisClient from "../config/redis.config";
 
 export const createNote = async function (notes: {
     noteId: string,
@@ -39,6 +40,7 @@ export const createNote = async function (notes: {
         })
 
         await note.save();
+
 
         return { status: httpStatus.CREATED, message: "Note has been created" };
 
@@ -83,6 +85,12 @@ export const getAllNotes = async function (email: string, skip: number, limit: n
 
         const totalDocument = await Note.countDocuments({ userEmail: email });
 
+        let redisResponse = await redisClient.get("notes");
+
+        if (redisResponse) {
+            return { status: httpStatus.OK, data: JSON.parse(redisResponse) };
+        }
+
         // This is another way of getting the list of notes
 
         // let result: Array<any> = [];
@@ -95,6 +103,8 @@ export const getAllNotes = async function (email: string, skip: number, limit: n
         // }
 
         // if (result.length === 0) return { status: httpStatus.OK, message: "No Note is created yet" };
+
+        await redisClient.setEx("notes", 3600, JSON.stringify(result));
 
         return { status: httpStatus.OK, data: result, totalDocument: totalDocument };
 

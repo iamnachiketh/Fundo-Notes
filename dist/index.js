@@ -46,7 +46,7 @@ const router = __importStar(require("./routes/index.router"));
 const app = (0, express_1.default)();
 (0, db_connection_1.dbConnection)();
 app.use(express_1.default.json());
-const morganFormat = ":method :url :status :response-time ms";
+const morganFormat = ":method :url :status :response-time ms :res[content-length]";
 app.use((0, morgan_1.default)(morganFormat, {
     stream: {
         write: (message) => {
@@ -61,5 +61,5 @@ app.use((0, morgan_1.default)(morganFormat, {
     },
 }));
 app.use("/api/v1", router.handleRouter());
-app.listen(process.env.PORT, () => console.log(`Server is running on port http://localhost:${process.env.PORT}`));
+app.listen(process.env.PORT, () => logger_1.logger.info(`Server is running on port http://localhost:${process.env.PORT}`));
 exports.default = app;

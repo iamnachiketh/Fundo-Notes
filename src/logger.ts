@@ -1,19 +1,22 @@
 import { createLogger, format, transports } from "winston";
-const { combine, timestamp, json, colorize } = format;
 import "winston-daily-rotate-file";
 
 
 const consoleLogFormat = format.combine(
-    format.colorize(),
-    format.printf(({ level, message, timestamp }) => {
-        return `${level}: ${message}`;
+    format.colorize({ all: true }),
+    format.timestamp({
+        format: "YYYY-MM-DD hh:mm:ss.SSS A"
+    }),
+    format.align(),
+    format.printf((info) => {
+        return `[${info.timestamp}] ${info.level}: ${info.message}`;
     })
 );
 
 
 export const logger = createLogger({
     level: "info",
-    format: combine(colorize(), timestamp(), json()),
+    format: consoleLogFormat,
     transports: [
         new transports.Console({
             format: consoleLogFormat,

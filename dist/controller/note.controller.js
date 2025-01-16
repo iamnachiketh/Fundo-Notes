@@ -59,18 +59,22 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.handleAddToArchive = exports.handleUpdateNotes = exports.handleDeleteNotesFromTrash = exports.handleTrashById = exports.handleGetAllNotesOfAUser = exports.handleGetNoteById = exports.handleCreateNote = void 0;
 const NoteService = __importStar(require("../service/note.service"));
 const http_status_codes_1 = __importDefault(require("http-status-codes"));
+const logger_1 = require("../logger");
 const handleCreateNote = function (req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const _a = req.body, { payload } = _a, data = __rest(_a, ["payload"]);
             if (data.userEmail !== payload.email) {
+                logger_1.logger.error("Invalid User");
                 res.status(http_status_codes_1.default.FORBIDDEN).json({ status: http_status_codes_1.default.FORBIDDEN, message: "Invalid User", data: null });
                 return;
             }
             const response = yield NoteService.createNote(data);
+            logger_1.logger.info(response.message);
             res.status(response.status).json({ status: response.status, message: response.message, data: null });
         }
         catch (error) {
+            logger_1.logger.error(error.message);
             res.status(http_status_codes_1.default.INTERNAL_SERVER_ERROR).json({ status: http_status_codes_1.default.INTERNAL_SERVER_ERROR, message: error.message, data: null });
         }
     });
@@ -82,16 +86,22 @@ const handleGetNoteById = function (req, res) {
             const _a = req.body, { payload } = _a, data = __rest(_a, ["payload"]);
             const noteId = req.params.id;
             if (data.userEmail !== payload.email || !(yield NoteService.checkNoteId(noteId, data.userEmail)).value) {
+                logger_1.logger.error("Invalid User/Note dosent exists");
                 res.status(http_status_codes_1.default.NOT_FOUND).json({ status: http_status_codes_1.default.NOT_FOUND, message: "Invalid User/Note dosent exists", data: null });
                 return;
             }
             const response = yield NoteService.getNoteById(noteId);
-            if (response.message === undefined)
+            if (response.message === undefined) {
+                logger_1.logger.info("Data has been created");
                 res.status(response.status).json({ status: response.status, message: "Data has been created", data: response.data });
-            else
+            }
+            else {
+                logger_1.logger.error(response.message);
                 res.status(response.status).json({ status: response.status, message: response.message, data: null });
+            }
         }
         catch (error) {
+            logger_1.logger.error(error.message);
             res.status(http_status_codes_1.default.INTERNAL_SERVER_ERROR).json({ status: http_status_codes_1.default.INTERNAL_SERVER_ERROR, message: error.message, data: null });
         }
     });
@@ -102,13 +112,19 @@ const handleGetAllNotesOfAUser = function (req, res) {
         try {
             const _a = req.body, { payload } = _a, data = __rest(_a, ["payload"]);
             if (data.userEmail !== payload.email) {
+                logger_1.logger.error("Invalid User");
                 res.status(http_status_codes_1.default.FORBIDDEN).json({ status: http_status_codes_1.default.FORBIDDEN, message: "Invalid User", data: null });
                 return;
             }
             const page = Number(req.query.page) || 1;
             const limit = Number(req.query.limit) || 5;
             if (page <= 0 || limit <= 0) {
-                res.status(http_status_codes_1.default.BAD_REQUEST).json({ status: http_status_codes_1.default.BAD_REQUEST, message: "Page and limit must be positive integer", data: null });
+                logger_1.logger.warn("Page and limit must be positive integer");
+                res.status(http_status_codes_1.default.BAD_REQUEST).json({
+                    status: http_status_codes_1.default.BAD_REQUEST,
+                    message: "Page and limit must be positive integer",
+                    data: null
+                });
                 return;
             }
             const skip = (page - 1) * limit;
@@ -127,11 +143,20 @@ const handleGetAllNotesOfAUser = function (req, res) {
                         totalPages
                     }
                 });
-            else
+            else {
+                logger_1.logger.error(response.message);
                 res.status(response.status).json({ status: http_status_codes_1.default.OK, message: response.message, data: null });
+            }
         }
         catch (error) {
-            res.status(http_status_codes_1.default.INTERNAL_SERVER_ERROR).json({ status: http_status_codes_1.default.INTERNAL_SERVER_ERROR, message: error.message, data: null });
+            logger_1.logger.error(error.message);
+            res
+                .status(http_status_codes_1.default.INTERNAL_SERVER_ERROR)
+                .json({
+                status: http_status_codes_1.default.INTERNAL_SERVER_ERROR,
+                message: error.message,
+                data: null
+            });
         }
     });
 };
@@ -142,13 +167,22 @@ const handleTrashById = function (req, res) {
             const _a = req.body, { payload } = _a, data = __rest(_a, ["payload"]);
             const noteId = req.params.id;
             if (data.userEmail !== payload.email || !(yield NoteService.checkNoteId(noteId, data.userEmail)).value) {
-                res.status(http_status_codes_1.default.NOT_FOUND).json({ status: http_status_codes_1.default.NOT_FOUND, message: "Invalid User/Note dosent exists", data: null });
+                logger_1.logger.error("Invalid User/Note dosent exists");
+                res
+                    .status(http_status_codes_1.default.NOT_FOUND)
+                    .json({
+                    status: http_status_codes_1.default.NOT_FOUND,
+                    message: "Invalid User/Note dosent exists",
+                    data: null
+                });
                 return;
             }
             let response = yield NoteService.trashNotesById(noteId, data.userEmail);
+            logger_1.logger.info(response.message);
             res.status(response.status).json({ status: response.status, message: response.message, data: null });
         }
         catch (error) {
+            logger_1.logger.error(error.message);
             res.status(http_status_codes_1.default.INTERNAL_SERVER_ERROR).json({ status: http_status_codes_1.default.INTERNAL_SERVER_ERROR, message: error.message, data: null });
         }
     });
@@ -160,14 +194,27 @@ const handleDeleteNotesFromTrash = function (req, res) {
             const _a = req.body, { payload } = _a, data = __rest(_a, ["payload"]);
             const noteId = req.params.id;
             if (data.userEmail !== payload.email) {
-                res.status(http_status_codes_1.default.FORBIDDEN).json({ status: http_status_codes_1.default.FORBIDDEN, message: "Invalid User", data: null });
+                logger_1.logger.error("Invalid User");
+                res.status(http_status_codes_1.default.FORBIDDEN).json({
+                    status: http_status_codes_1.default.FORBIDDEN,
+                    message: "Invalid User",
+                    data: null
+                });
                 return;
             }
             const response = yield NoteService.deleteNotesFromTrash(noteId);
-            res.status(response.status).json({ status: response.status, message: response.message, data: null });
+            res.status(response.status).json({
+                status: response.status,
+                message: response.message,
+                data: null
+            });
         }
         catch (error) {
-            res.status(http_status_codes_1.default.INTERNAL_SERVER_ERROR).json({ status: http_status_codes_1.default.INSUFFICIENT_SPACE_ON_RESOURCE, message: error.message, data: null });
+            logger_1.logger.error(error.message);
+            res.status(http_status_codes_1.default.INTERNAL_SERVER_ERROR).json({
+                status: http_status_codes_1.default.INTERNAL_SERVER_ERROR,
+                message: error.message, data: null
+            });
         }
     });
 };

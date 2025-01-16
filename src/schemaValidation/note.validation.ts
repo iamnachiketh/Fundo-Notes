@@ -1,6 +1,7 @@
 import { check, validationResult } from "express-validator";
 import { NextFunction, Request, Response } from "express"
 import httpStatus from "http-status-codes";
+import { logger } from "../logger";
 
 export const validateNote = [
     check("noteId")
@@ -40,7 +41,13 @@ export const validate = function (req: Request, res: Response, next: NextFunctio
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-        res.status(httpStatus.BAD_REQUEST).json({ status: httpStatus.BAD_REQUEST, message: errors.array(), data: null });
+
+        logger.error("Model Validation Error");
+        res.status(httpStatus.BAD_REQUEST).json({
+            status: httpStatus.BAD_REQUEST,
+            message: errors.array(),
+            data: null
+        });
         return
     }
 

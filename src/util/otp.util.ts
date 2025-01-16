@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import httpStatus from "http-status-codes";
 import { handleOtp } from "../controller/user.controller";
+import { logger } from "../logger";
 
 
 export const checkOtp = function (req: Request, res: Response) {
@@ -8,6 +9,7 @@ export const checkOtp = function (req: Request, res: Response) {
 
     if (otp !== handleOtp.getOneTimePassword()) {
 
+        logger.error("Invalid OTP");
         res.status(httpStatus.UNAUTHORIZED).json({
             status: httpStatus.UNAUTHORIZED,
             message: "Invalid OTP",

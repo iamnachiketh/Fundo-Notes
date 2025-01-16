@@ -12,7 +12,7 @@ dbConnection();
 
 app.use(express.json())
 
-const morganFormat = ":method :url :status :response-time ms";
+const morganFormat = ":method :url :status :response-time ms :res[content-length]";
 
 app.use(morgan(morganFormat, {
     stream: {
@@ -31,6 +31,6 @@ app.use(morgan(morganFormat, {
 
 app.use("/api/v1", router.handleRouter());
 
-app.listen(process.env.PORT, () => console.log(`Server is running on port http://localhost:${process.env.PORT}`));
+app.listen(process.env.PORT, () => logger.info(`Server is running on port http://localhost:${process.env.PORT}`));
 
 export default app;

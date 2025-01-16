@@ -1,0 +1,139 @@
+[2025-01-16 03:43:39.028 PM] [31merror[39m: 	
+[2025-01-16 03:43:39.227 PM] [32minfo[39m: 	[32mConnected to the database[39m
+[2025-01-16 03:43:39.237 PM] [31merror[39m: 	
+[2025-01-16 03:43:39.307 PM] [31merror[39m: 	
+[2025-01-16 03:43:39.419 PM] [31merror[39m: 	
+[2025-01-16 03:43:39.576 PM] [31merror[39m: 	
+[2025-01-16 03:43:39.792 PM] [31merror[39m: 	
+[2025-01-16 03:43:40.059 PM] [31merror[39m: 	
+[2025-01-16 03:43:40.373 PM] [31merror[39m: 	
+[2025-01-16 03:43:40.735 PM] [31merror[39m: 	
+[2025-01-16 03:43:41.144 PM] [31merror[39m: 	
+[2025-01-16 03:43:41.602 PM] [31merror[39m: 	
+[2025-01-16 03:43:42.124 PM] [31merror[39m: 	
+[2025-01-16 03:43:42.641 PM] [31merror[39m: 	
+[2025-01-16 03:43:43.148 PM] [31merror[39m: 	
+[2025-01-16 03:43:43.667 PM] [31merror[39m: 	
+[2025-01-16 03:43:44.172 PM] [31merror[39m: 	
+[2025-01-16 03:43:44.674 PM] [31merror[39m: 	
+[2025-01-16 03:43:45.191 PM] [31merror[39m: 	
+[2025-01-16 03:43:45.697 PM] [31merror[39m: 	
+[2025-01-16 03:43:46.218 PM] [31merror[39m: 	
+[2025-01-16 03:43:46.723 PM] [31merror[39m: 	
+[2025-01-16 03:43:47.242 PM] [31merror[39m: 	
+[2025-01-16 03:43:47.748 PM] [31merror[39m: 	
+[2025-01-16 03:43:48.255 PM] [31merror[39m: 	
+[2025-01-16 03:43:48.767 PM] [31merror[39m: 	
+[2025-01-16 03:43:49.289 PM] [31merror[39m: 	
+[2025-01-16 03:43:49.804 PM] [31merror[39m: 	
+[2025-01-16 03:43:50.308 PM] [31merror[39m: 	
+[2025-01-16 03:43:50.814 PM] [31merror[39m: 	
+[2025-01-16 03:43:51.329 PM] [31merror[39m: 	
+[2025-01-16 03:43:51.833 PM] [31merror[39m: 	
+[2025-01-16 03:43:52.354 PM] [31merror[39m: 	
+[2025-01-16 03:43:52.868 PM] [31merror[39m: 	
+[2025-01-16 03:43:53.384 PM] [31merror[39m: 	
+[2025-01-16 03:43:53.903 PM] [31merror[39m: 	
+[2025-01-16 03:43:54.424 PM] [31merror[39m: 	
+[2025-01-16 03:47:42.905 PM] [32minfo[39m: 	[32mConnected to Redis[39m
+[2025-01-16 03:47:42.946 PM] [32minfo[39m: 	[32mConnected to the database[39m
+[2025-01-16 03:48:35.012 PM] [32minfo[39m: 	[32mConnected to Redis[39m
+[2025-01-16 03:48:35.051 PM] [32minfo[39m: 	[32mConnected to the database[39m
+[2025-01-16 03:48:38.263 PM] [31merror[39m: 	[31mError has been occured: Error: Socket closed unexpectedly[39m
+[2025-01-16 03:48:38.266 PM] [32minfo[39m: 	[32mConnected to Redis[39m
+[2025-01-16 03:48:38.268 PM] [31merror[39m: 	[31mError has been occured: Error: Socket closed unexpectedly[39m
+[2025-01-16 03:48:38.270 PM] [31merror[39m: 	[31mError has been occured: Error: Socket closed unexpectedly[39m
+[2025-01-16 03:48:38.273 PM] [32minfo[39m: 	[32mConnected to Redis[39m
+[2025-01-16 03:48:38.277 PM] [31merror[39m: 	[31mError has been occured: Error: read ECONNRESET[39m
+[2025-01-16 03:48:38.279 PM] [31merror[39m: 	[31mError has been occured: Error: read ECONNRESET[39m
+[2025-01-16 03:48:38.338 PM] [32minfo[39m: 	[32mConnected to Redis[39m
+[2025-01-16 03:48:38.340 PM] [31merror[39m: 	[31mError has been occured: Error: Socket closed unexpectedly[39m
+[2025-01-16 03:48:38.341 PM] [31merror[39m: 	[31mError has been occured: Error: Socket closed unexpectedly[39m
+[2025-01-16 03:48:38.447 PM] [32minfo[39m: 	[32mConnected to Redis[39m
+[2025-01-16 03:48:38.449 PM] [31merror[39m: 	[31mError has been occured: Error: Socket closed unexpectedly[39m
+[2025-01-16 03:48:38.450 PM] [31merror[39m: 	[31mError has been occured: Error: Socket closed unexpectedly[39m
+[2025-01-16 03:48:38.604 PM] [32minfo[39m: 	[32mConnected to Redis[39m
+[2025-01-16 03:48:38.606 PM] [31merror[39m: 	[31mError has been occured: Error: Socket closed unexpectedly[39m
+[2025-01-16 03:48:38.607 PM] [31merror[39m: 	[31mError has been occured: Error: Socket closed unexpectedly[39m
+[2025-01-16 03:48:38.826 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-16 03:48:39.091 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-16 03:48:39.401 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-16 03:48:39.765 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-16 03:48:40.176 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-16 03:48:40.640 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-16 03:48:41.157 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-16 03:48:41.676 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-16 03:48:42.197 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-16 03:48:42.711 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-16 03:48:43.226 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-16 03:48:43.729 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-16 03:48:44.247 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-16 03:48:44.758 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-16 03:48:45.261 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-16 03:48:45.780 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-16 03:48:46.294 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-16 03:48:46.810 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-16 03:48:47.321 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-16 03:48:47.834 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-16 03:48:48.350 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-16 03:48:48.863 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-16 03:48:49.380 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-16 03:48:49.895 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-16 03:48:50.413 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-16 03:48:50.919 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-16 03:49:26.763 PM] [32minfo[39m: 	[32mConnected to Redis[39m
+[2025-01-16 03:49:26.786 PM] [32minfo[39m: 	[32mConnected to the database[39m
+[2025-01-16 03:49:45.368 PM] [32minfo[39m: 	[32mConnected to Redis[39m
+[2025-01-16 03:49:45.396 PM] [32minfo[39m: 	[32mConnected to the database[39m
+[2025-01-16 03:52:19.546 PM] [32minfo[39m: 	[32mServer is running on port http://localhost:4000[39m
+[2025-01-16 03:52:19.557 PM] [32minfo[39m: 	[32mConnected to Redis[39m
+[2025-01-16 03:52:19.591 PM] [32minfo[39m: 	[32mConnected to the database[39m
+[2025-01-16 03:53:27.102 PM] [32minfo[39m: 	[32mServer is running on port http://localhost:4000[39m
+[2025-01-16 03:53:27.111 PM] [32minfo[39m: 	[32mConnected to Redis[39m
+[2025-01-16 03:53:27.129 PM] [32minfo[39m: 	[32mConnected to the database[39m
+[2025-01-16 04:03:29.950 PM] [32minfo[39m: 	[32mServer is running on port http://localhost:4000[39m
+[2025-01-16 04:03:29.967 PM] [32minfo[39m: 	[32mConnected to Redis[39m
+[2025-01-16 04:03:30.003 PM] [32minfo[39m: 	[32mConnected to the database[39m
+[2025-01-16 04:54:58.228 PM] [32minfo[39m: 	[32mServer is running on port http://localhost:4000[39m
+[2025-01-16 04:54:58.402 PM] [31merror[39m: 	[31mError has been occured: Error: Connection timeout[39m
+[2025-01-16 04:54:59.045 PM] [32minfo[39m: 	[32mConnected to Redis[39m
+[2025-01-16 04:54:59.068 PM] [32minfo[39m: 	[32mConnected to the database[39m
+[2025-01-16 04:55:06.178 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/users/refresh-token","status":"500","responseTime":"4.277"}[39m
+[2025-01-16 04:55:06.327 PM] [32minfo[39m: 	[32m{"method":"POST","url":"/api/v1/notes/","status":"500","responseTime":"122.748"}[39m
+[2025-01-16 04:55:06.806 PM] [32minfo[39m: 	[32m{"method":"POST","url":"/api/v1/users/login","status":"404","responseTime":"4144.467"}[39m
+[2025-01-16 04:55:06.828 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/","status":"500","responseTime":"2.273"}[39m
+[2025-01-16 04:55:06.847 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/undefined","status":"500","responseTime":"1.798"}[39m
+[2025-01-16 04:55:06.868 PM] [32minfo[39m: 	[32m{"method":"PUT","url":"/api/v1/notes/undefined","status":"500","responseTime":"1.424"}[39m
+[2025-01-16 04:55:06.886 PM] [32minfo[39m: 	[32m{"method":"PUT","url":"/api/v1/notes/undefined/archive","status":"500","responseTime":"2.197"}[39m
+[2025-01-16 04:55:06.904 PM] [32minfo[39m: 	[32m{"method":"PUT","url":"/api/v1/notes/undefined/trash","status":"500","responseTime":"1.387"}[39m
+[2025-01-16 04:55:06.921 PM] [32minfo[39m: 	[32m{"method":"DELETE","url":"/api/v1/notes/undefined/delete","status":"500","responseTime":"1.232"}[39m
+[2025-01-16 05:04:08.244 PM] [32minfo[39m: 	[32mServer is running on port http://localhost:4000[39m
+[2025-01-16 05:04:08.272 PM] [32minfo[39m: 	[32mConnected to Redis[39m
+[2025-01-16 05:04:08.327 PM] [32minfo[39m: 	[32mConnected to the database[39m
+[2025-01-16 05:04:09.002 PM] [32minfo[39m: 	[32m{"method":"POST","url":"/api/v1/users/register","status":"201","responseTime":"251.805"}[39m
+[2025-01-16 05:04:09.807 PM] [32minfo[39m: 	[32m{"method":"POST","url":"/api/v1/users/login","status":"200","responseTime":"777.197"}[39m
+[2025-01-16 05:04:09.940 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/users/refresh-token","status":"201","responseTime":"24.177"}[39m
+[2025-01-16 05:04:10.043 PM] [32minfo[39m: 	[32mNote has been created[39m
+[2025-01-16 05:04:10.046 PM] [32minfo[39m: 	[32m{"method":"POST","url":"/api/v1/notes/","status":"201","responseTime":"90.425"}[39m
+[2025-01-16 05:04:12.081 PM] [31merror[39m: 	[31mInvalid User/Note dosent exists[39m
+[2025-01-16 05:04:12.085 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/undefined","status":"404","responseTime":"13.214"}[39m
+[2025-01-16 05:04:12.148 PM] [32minfo[39m: 	[32m{"method":"PUT","url":"/api/v1/notes/undefined","status":"200","responseTime":"46.917"}[39m
+[2025-01-16 05:04:12.170 PM] [31merror[39m: 	[31mInvalid User/Note dosent exists[39m
+[2025-01-16 05:04:12.172 PM] [32minfo[39m: 	[32m{"method":"PUT","url":"/api/v1/notes/undefined/trash","status":"404","responseTime":"11.672"}[39m
+[2025-01-16 05:04:12.346 PM] [32minfo[39m: 	[32m{"method":"DELETE","url":"/api/v1/notes/undefined/delete","status":"410","responseTime":"158.534"}[39m
+[2025-01-16 05:10:29.622 PM] [32minfo[39m: 	[32mServer is running on port http://localhost:4000[39m
+[2025-01-16 05:10:29.825 PM] [31merror[39m: 	[31mError has been occured: Error: Connection timeout[39m
+[2025-01-16 05:10:30.177 PM] [32minfo[39m: 	[32mConnected to Redis[39m
+[2025-01-16 05:10:30.195 PM] [32minfo[39m: 	[32mConnected to the database[39m
+[2025-01-16 05:10:31.477 PM] [32minfo[39m: 	[32m{"method":"POST","url":"/api/v1/users/register","status":"201","responseTime":"414.598"}[39m
+[2025-01-16 05:10:32.467 PM] [32minfo[39m: 	[32m{"method":"POST","url":"/api/v1/users/login","status":"200","responseTime":"934.828"}[39m
+[2025-01-16 05:10:32.538 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/users/refresh-token","status":"201","responseTime":"30.088"}[39m
+[2025-01-16 05:10:32.702 PM] [32minfo[39m: 	[32mNote has been created[39m
+[2025-01-16 05:10:32.705 PM] [32minfo[39m: 	[32m{"method":"POST","url":"/api/v1/notes/","status":"201","responseTime":"149.880"}[39m
+[2025-01-16 05:10:32.742 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/","status":"200","responseTime":"21.644"}[39m
+[2025-01-16 05:10:32.770 PM] [32minfo[39m: 	[32mData has been created[39m
+[2025-01-16 05:10:32.773 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/note011","status":"200","responseTime":"17.571"}[39m
+[2025-01-16 05:10:32.801 PM] [32minfo[39m: 	[32m{"method":"PUT","url":"/api/v1/notes/note011","status":"200","responseTime":"13.855"}[39m
+[2025-01-16 05:10:33.239 PM] [32minfo[39m: 	[32mNotes has been trashed[39m
+[2025-01-16 05:10:33.241 PM] [32minfo[39m: 	[32m{"method":"PUT","url":"/api/v1/notes/note011/trash","status":"200","responseTime":"373.573"}[39m
+[2025-01-16 05:10:33.265 PM] [32minfo[39m: 	[32m{"method":"DELETE","url":"/api/v1/notes/note011/delete","status":"410","responseTime":"10.363"}[39m

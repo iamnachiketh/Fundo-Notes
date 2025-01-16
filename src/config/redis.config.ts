@@ -1,20 +1,21 @@
-import { createClient } from 'redis';
+import { createClient } from "redis";
+import { logger } from "../logger";
 
 const redisClient = createClient();
 
-redisClient.on('connect', () => {
-    console.log('Connected to Redis');
+redisClient.on("connect", () => {
+    logger.info("Connected to Redis");
 });
 
-redisClient.on('error', (err) => {
-    console.error('Error connecting to Redis:', err);
+redisClient.on("error", (err) => {
+    logger.error(`Error has been occured: ${err}`);
 });
 
 
 redisClient
-.connect()
-.catch((err) => {
-    console.error('Redis connection failed:', err);
-});
+    .connect()
+    .catch((err) => {
+        logger.error(`Error has been occured: ${err}`);
+    });
 
 export default redisClient;

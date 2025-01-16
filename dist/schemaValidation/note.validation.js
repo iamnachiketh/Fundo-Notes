@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.validate = exports.validateNote = void 0;
 const express_validator_1 = require("express-validator");
 const http_status_codes_1 = __importDefault(require("http-status-codes"));
+const logger_1 = require("../logger");
 exports.validateNote = [
     (0, express_validator_1.check)("noteId")
         .isString()
@@ -40,7 +41,12 @@ exports.validateNote = [
 const validate = function (req, res, next) {
     const errors = (0, express_validator_1.validationResult)(req);
     if (!errors.isEmpty()) {
-        res.status(http_status_codes_1.default.BAD_REQUEST).json({ status: http_status_codes_1.default.BAD_REQUEST, message: errors.array(), data: null });
+        logger_1.logger.error("Model Validation Error");
+        res.status(http_status_codes_1.default.BAD_REQUEST).json({
+            status: http_status_codes_1.default.BAD_REQUEST,
+            message: errors.array(),
+            data: null
+        });
         return;
     }
     next();

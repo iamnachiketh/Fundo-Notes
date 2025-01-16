@@ -126,17 +126,17 @@ describe("Routes", () => {
     });
 
     // Archive Note Test
-    // it("should archive a note by ID", async () => {
-    //     const response = await request(app)
-    //         .put(`/api/v1/notes/${noteId}/archive`)
-    //         .set("x-token", `Bearer ${accessToken}`)
-    //         .send({
-    //             userEmail: "testuser@example.com",
-    //             noteId: "note011"
-    //         })
-    //     expect(response.status).to.equal(httpStatus.OK);
-    //     expect(response.body).to.have.property("message");
-    // });
+    it("should archive a note by ID", async () => {
+        const response = await request(app)
+            .put(`/api/v1/notes/${noteId}/archive`)
+            .set("x-token", `Bearer ${accessToken}`)
+            .send({
+                userEmail: "testuser@example.com",
+                noteId: "note011"
+            })
+        expect(response.status).to.equal(httpStatus.OK);
+        expect(response.body).to.have.property("message");
+    });
 
     // Trash Note Test
     it("should trash a note by ID", async () => {

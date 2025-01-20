@@ -2,6 +2,9 @@ import Note from "../models/note.model";
 import httpStatus from "http-status-codes"
 import User from "../models/user.model";
 import redisClient from "../config/redis.config";
+import { logger } from "../logger";
+import mongoose from "mongoose";
+
 
 export const createNote = async function (notes: {
     noteId: string,
@@ -14,9 +17,9 @@ export const createNote = async function (notes: {
 
     try {
 
-        let isNotePresentRedisCache = await redisClient.get(`${notes.userEmail}:${notes.noteId}`);
+        let isNotePresentRedisCache = await redisClient.get(`notes:${notes.userEmail}:${notes.noteId}`);
 
-        if(isNotePresentRedisCache){
+        if (isNotePresentRedisCache) {
             return { status: httpStatus.BAD_REQUEST, message: "Note already exists" };
         }
 
@@ -26,7 +29,7 @@ export const createNote = async function (notes: {
             return { status: httpStatus.BAD_REQUEST, message: "Note already exists" };
         }
 
-        await User.findOneAndUpdate({ email: notes.userEmail }, {
+        let userUpdateResult = await User.findOneAndUpdate({ email: notes.userEmail }, {
             $push: {
                 notesId: notes.noteId
             },
@@ -34,6 +37,10 @@ export const createNote = async function (notes: {
                 notesCount: 1
             }
         });
+
+        if (!userUpdateResult) {
+            return { status: httpStatus.NOT_FOUND, message: "User not found" };
+        }
 
         const note = new Note({
 
@@ -47,7 +54,7 @@ export const createNote = async function (notes: {
 
         await note.save();
 
-        await redisClient.setEx(`${notes.userEmail}:${notes.noteId}`, 3600, JSON.stringify(note));
+        await redisClient.set(`notes:${notes.userEmail}:${notes.noteId}`, JSON.stringify(note));
 
         return { status: httpStatus.CREATED, message: "Note has been created" };
 
@@ -65,13 +72,18 @@ export const getNoteById = async function (noteId: string, email: string): Promi
         const noteData = await redisClient.get(`${email}:${noteId}`);
 
         if (noteData) {
+
             return { status: httpStatus.OK, data: JSON.parse(noteData) };
         }
 
         let note = await Note.findOne({ noteId: noteId, userEmail: email }, { _id: 0, __v: 0 });
 
+        if (!note) {
+            return { status: httpStatus.NOT_FOUND, message: "Note not found" };
+        }
+
         await redisClient.setEx(`${email}:${noteId}`, 3600, JSON.stringify(note));
-        
+
         return { status: httpStatus.OK, data: note }
 
     } catch (error: any) {
@@ -91,15 +103,24 @@ export const checkNoteId = async function (noteId: String, email: string): Promi
 }
 
 
-export const getAllNotes = async function (email: string, skip: number, limit: number): Promise<{ status: number, message?: string, data?: any, totalDocument?: number }> {
+export const getAllNotes = async function (email: string, skip: number, limit: number):
+    Promise<{
+        status: number,
+        message?: string,
+        data?: any,
+        totalDocument?: number
+    }> {
     try {
 
         const totalDocument = await Note.countDocuments({ userEmail: email });
 
-        let notes = await redisClient.get(`${email}:notes`);
+        let notes = await redisClient.lRange(`${email}:notes`, skip, skip + limit - 1);
 
-        if (notes) {
-            return { status: httpStatus.OK, data: JSON.parse(notes),  totalDocument: totalDocument};
+        logger.info(notes);
+
+        if (notes.length !== 0) {
+            let newNotes = notes.map(value => JSON.parse(value));
+            return { status: httpStatus.OK, data: newNotes, totalDocument: totalDocument };
         }
 
         const result = await Note
@@ -107,22 +128,7 @@ export const getAllNotes = async function (email: string, skip: number, limit: n
             .skip(skip)
             .limit(limit);
 
-        
-
-        // This is another way of getting the list of notes
-
-        // let result: Array<any> = [];
-
-        // let totalNumberOfNotes = user?.notesId.length === undefined ? 0 : user?.notesId.length;
-
-        // for (let i = 0; i < totalNumberOfNotes; i++) {
-        //     let response = await Note.findOne({ noteId: user?.notesId[i] }, { _id: 0, __v: 0 });
-        //     result.push(response);
-        // }
-
-        // if (result.length === 0) return { status: httpStatus.OK, message: "No Note is created yet" };
-
-        await redisClient.setEx(`${email}:notes`, 3600, JSON.stringify(result));
+        result.forEach(async value => await redisClient.lPush(`${email}:notes`, JSON.stringify(value)));
 
         return { status: httpStatus.OK, data: result, totalDocument: totalDocument };
 
@@ -132,14 +138,22 @@ export const getAllNotes = async function (email: string, skip: number, limit: n
 }
 
 
-export const trashNotesById = async function (noteId: string, userEmail: string): Promise<{ status: number, message: string }> {
+export const trashNotesById = async function (noteId: string, userEmail: string):
+    Promise<{
+        status: number,
+        message: string
+    }> {
+
+    const session = await mongoose.startSession();
+
+    session.startTransaction();
 
     try {
         await Note.findOneAndUpdate({ noteId: noteId }, {
             $set: {
                 isTrash: true
             }
-        });
+        }, { session });
 
         await User.findOneAndUpdate({ email: userEmail }, {
             $pull: {
@@ -148,11 +162,18 @@ export const trashNotesById = async function (noteId: string, userEmail: string)
             $inc: {
                 notesCount: -1
             }
-        })
+        }, { session });
+
+        await redisClient.del(`${userEmail}:${noteId}`);
+
+        await session.commitTransaction();
+        session.endSession();
 
         return { status: httpStatus.OK, message: "Notes has been trashed" };
     } catch (error: any) {
 
+        await session.abortTransaction();
+        session.endSession();
         return { status: httpStatus.INTERNAL_SERVER_ERROR, message: error.message };
 
     }
@@ -160,7 +181,11 @@ export const trashNotesById = async function (noteId: string, userEmail: string)
 }
 
 
-export const deleteNotesFromTrash = async function (noteId: string): Promise<{ status: number, message: string }> {
+export const deleteNotesFromTrash = async function (noteId: string):
+    Promise<{
+        status: number,
+        message: string
+    }> {
 
     try {
         await Note.findOneAndDelete({ noteId: noteId, isTrash: true });
@@ -175,17 +200,35 @@ export const deleteNotesFromTrash = async function (noteId: string): Promise<{ s
 
 export const updateNotes = async function (data: {
     noteId: string,
+    userEmail: string,
     title?: string,
     desc?: string
-}): Promise<{ status: number, message: string }> {
+}): Promise<{
+    status: number,
+    message: string
+}> {
     try {
-        await Note.findOneAndUpdate({ noteId: data.noteId }, {
+        let result = await Note.findOneAndUpdate({ noteId: data.noteId }, {
             $set: {
                 title: data?.title,
                 desc: data?.desc
             }
-        })
-        return { status: httpStatus.OK, message: "Note has been updated" };
+        }, { new: true })
+
+        let note = await redisClient.get(`${data.userEmail}:${data.noteId}`);
+
+        if (note) {
+            let newNote = JSON.parse(note);
+            if (data.title !== undefined) newNote.title = data.title;
+            if (data.desc !== undefined) newNote.desc = data.desc;
+
+            await redisClient.set(`${data.userEmail}:${data.noteId}`, JSON.stringify(newNote));
+
+        } else {
+            await redisClient.setEx(`${data.userEmail}:${data.noteId}`, 3600, JSON.stringify(result));
+        }
+
+        return { status: httpStatus.OK, message: `Note with ID ${data.noteId} has been updated.` };
 
     } catch (error: any) {
 
@@ -194,15 +237,33 @@ export const updateNotes = async function (data: {
     }
 }
 
-
-export const addToArchive = async function (noteId: string): Promise<{ status: number, message: string }> {
+export const addToArchive = async function (noteId: string, userEmail: string): Promise<{ status: number, message: string }> {
 
     try {
-        await Note.findOneAndUpdate({ noteId: noteId, isArchive: false }, {
+
+        const cachedNote = await redisClient.get(`${userEmail}:${noteId}`);
+
+        if (cachedNote) {
+
+            const note = JSON.parse(cachedNote);
+            note.isArchive = true;
+
+            await redisClient.setEx(`${userEmail}:${noteId}`, 3600, JSON.stringify(note));
+        }
+
+        const result = await Note.findOneAndUpdate({ noteId: noteId, isArchive: false, isTrash: false }, {
             $set: {
                 isArchive: true
             }
         });
+
+        if (!result) {
+            return { status: httpStatus.NOT_FOUND, message: "Note not found or already archived." };
+        }
+
+        if (!cachedNote) {
+            await redisClient.setEx(`${userEmail}:${noteId}`, 3600, JSON.stringify(result));
+        }
 
         return { status: httpStatus.OK, message: "Note has been Archived" };
 

@@ -14,6 +14,12 @@ export const createNote = async function (notes: {
 
     try {
 
+        let isNotePresentRedisCache = await redisClient.get(`${notes.userEmail}:${notes.noteId}`);
+
+        if(isNotePresentRedisCache){
+            return { status: httpStatus.BAD_REQUEST, message: "Note already exists" };
+        }
+
         let isNoteAlreadyPresent = await Note.findOne({ noteId: notes.noteId });
 
         if (isNoteAlreadyPresent) {
@@ -41,6 +47,7 @@ export const createNote = async function (notes: {
 
         await note.save();
 
+        await redisClient.setEx(`${notes.userEmail}:${notes.noteId}`, 3600, JSON.stringify(note));
 
         return { status: httpStatus.CREATED, message: "Note has been created" };
 
@@ -52,10 +59,19 @@ export const createNote = async function (notes: {
 
 }
 
-export const getNoteById = async function (noteId: string): Promise<{ status: number, message?: string, data?: any }> {
+export const getNoteById = async function (noteId: string, email: string): Promise<{ status: number, message?: string, data?: any }> {
     try {
-        let note = await Note.findOne({ noteId: noteId }, { _id: 0, __v: 0 });
 
+        const noteData = await redisClient.get(`${email}:${noteId}`);
+
+        if (noteData) {
+            return { status: httpStatus.OK, data: JSON.parse(noteData) };
+        }
+
+        let note = await Note.findOne({ noteId: noteId, userEmail: email }, { _id: 0, __v: 0 });
+
+        await redisClient.setEx(`${email}:${noteId}`, 3600, JSON.stringify(note));
+        
         return { status: httpStatus.OK, data: note }
 
     } catch (error: any) {
@@ -78,18 +94,20 @@ export const checkNoteId = async function (noteId: String, email: string): Promi
 export const getAllNotes = async function (email: string, skip: number, limit: number): Promise<{ status: number, message?: string, data?: any, totalDocument?: number }> {
     try {
 
+        const totalDocument = await Note.countDocuments({ userEmail: email });
+
+        let notes = await redisClient.get(`${email}:notes`);
+
+        if (notes) {
+            return { status: httpStatus.OK, data: JSON.parse(notes),  totalDocument: totalDocument};
+        }
+
         const result = await Note
             .find({ userEmail: email, isTrash: false, isArchive: false }, { _id: 0, __v: 0 })
             .skip(skip)
             .limit(limit);
 
-        const totalDocument = await Note.countDocuments({ userEmail: email });
-
-        let redisResponse = await redisClient.get("notes");
-
-        if (redisResponse) {
-            return { status: httpStatus.OK, data: JSON.parse(redisResponse) };
-        }
+        
 
         // This is another way of getting the list of notes
 
@@ -104,7 +122,7 @@ export const getAllNotes = async function (email: string, skip: number, limit: n
 
         // if (result.length === 0) return { status: httpStatus.OK, message: "No Note is created yet" };
 
-        await redisClient.setEx("notes", 3600, JSON.stringify(result));
+        await redisClient.setEx(`${email}:notes`, 3600, JSON.stringify(result));
 
         return { status: httpStatus.OK, data: result, totalDocument: totalDocument };
 

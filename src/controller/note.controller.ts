@@ -45,8 +45,11 @@ export const handleGetNoteById = async function (req: Request, res: Response) {
             return;
         }
 
-        const response = await NoteService.getNoteById(noteId);
+        const response = await NoteService.getNoteById(noteId, data.userEmail);
 
+        if (response.message === undefined)
+            res.status(response.status).json({ status: response.status, message: "Data has been fetched", data: response.data });
+        else
         if (response.message === undefined){
 
             logger.info("Data has been created");

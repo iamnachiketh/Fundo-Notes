@@ -20,6 +20,10 @@ const redis_config_1 = __importDefault(require("../config/redis.config"));
 const createNote = function (notes) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
+            let isNotePresentRedisCache = yield redis_config_1.default.get(`${notes.userEmail}:${notes.noteId}`);
+            if (isNotePresentRedisCache) {
+                return { status: http_status_codes_1.default.BAD_REQUEST, message: "Note already exists" };
+            }
             let isNoteAlreadyPresent = yield note_model_1.default.findOne({ noteId: notes.noteId });
             if (isNoteAlreadyPresent) {
                 return { status: http_status_codes_1.default.BAD_REQUEST, message: "Note already exists" };
@@ -41,6 +45,7 @@ const createNote = function (notes) {
                 color: notes === null || notes === void 0 ? void 0 : notes.color
             });
             yield note.save();
+            yield redis_config_1.default.setEx(`${notes.userEmail}:${notes.noteId}`, 3600, JSON.stringify(note));
             return { status: http_status_codes_1.default.CREATED, message: "Note has been created" };
         }
         catch (error) {
@@ -49,10 +54,15 @@ const createNote = function (notes) {
     });
 };
 exports.createNote = createNote;
-const getNoteById = function (noteId) {
+const getNoteById = function (noteId, email) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            let note = yield note_model_1.default.findOne({ noteId: noteId }, { _id: 0, __v: 0 });
+            const noteData = yield redis_config_1.default.get(`${email}:${noteId}`);
+            if (noteData) {
+                return { status: http_status_codes_1.default.OK, data: JSON.parse(noteData) };
+            }
+            let note = yield note_model_1.default.findOne({ noteId: noteId, userEmail: email }, { _id: 0, __v: 0 });
+            yield redis_config_1.default.setEx(`${email}:${noteId}`, 3600, JSON.stringify(note));
             return { status: http_status_codes_1.default.OK, data: note };
         }
         catch (error) {
@@ -74,15 +84,15 @@ exports.checkNoteId = checkNoteId;
 const getAllNotes = function (email, skip, limit) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
+            const totalDocument = yield note_model_1.default.countDocuments({ userEmail: email });
+            let notes = yield redis_config_1.default.get(`${email}:notes`);
+            if (notes) {
+                return { status: http_status_codes_1.default.OK, data: JSON.parse(notes), totalDocument: totalDocument };
+            }
             const result = yield note_model_1.default
                 .find({ userEmail: email, isTrash: false, isArchive: false }, { _id: 0, __v: 0 })
                 .skip(skip)
                 .limit(limit);
-            const totalDocument = yield note_model_1.default.countDocuments({ userEmail: email });
-            let redisResponse = yield redis_config_1.default.get("notes");
-            if (redisResponse) {
-                return { status: http_status_codes_1.default.OK, data: JSON.parse(redisResponse) };
-            }
             // This is another way of getting the list of notes
             // let result: Array<any> = [];
             // let totalNumberOfNotes = user?.notesId.length === undefined ? 0 : user?.notesId.length;
@@ -91,7 +101,7 @@ const getAllNotes = function (email, skip, limit) {
             //     result.push(response);
             // }
             // if (result.length === 0) return { status: httpStatus.OK, message: "No Note is created yet" };
-            yield redis_config_1.default.setEx("notes", 3600, JSON.stringify(result));
+            yield redis_config_1.default.setEx(`${email}:notes`, 3600, JSON.stringify(result));
             return { status: http_status_codes_1.default.OK, data: result, totalDocument: totalDocument };
         }
         catch (error) {

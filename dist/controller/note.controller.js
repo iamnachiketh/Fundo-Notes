@@ -90,6 +90,7 @@ const handleGetNoteById = function (req, res) {
                 res.status(http_status_codes_1.default.NOT_FOUND).json({ status: http_status_codes_1.default.NOT_FOUND, message: "Invalid User/Note dosent exists", data: null });
                 return;
             }
+<<<<<<< HEAD
             const response = yield NoteService.getNoteById(noteId);
             if (response.message === undefined) {
                 logger_1.logger.info("Data has been created");
@@ -97,6 +98,12 @@ const handleGetNoteById = function (req, res) {
             }
             else {
                 logger_1.logger.error(response.message);
+=======
+            const response = yield NoteService.getNoteById(noteId, data.userEmail);
+            if (response.message === undefined)
+                res.status(response.status).json({ status: response.status, message: "Data has been fetched", data: response.data });
+            else
+>>>>>>> redis-feature
                 res.status(response.status).json({ status: response.status, message: response.message, data: null });
             }
         }

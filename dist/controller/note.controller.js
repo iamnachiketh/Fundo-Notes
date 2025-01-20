@@ -90,20 +90,15 @@ const handleGetNoteById = function (req, res) {
                 res.status(http_status_codes_1.default.NOT_FOUND).json({ status: http_status_codes_1.default.NOT_FOUND, message: "Invalid User/Note dosent exists", data: null });
                 return;
             }
-<<<<<<< HEAD
-            const response = yield NoteService.getNoteById(noteId);
-            if (response.message === undefined) {
+            const response = yield NoteService.getNoteById(noteId, data.userEmail);
+            if (response.message === undefined)
+                res.status(response.status).json({ status: response.status, message: "Data has been fetched", data: response.data });
+            else if (response.message === undefined) {
                 logger_1.logger.info("Data has been created");
                 res.status(response.status).json({ status: response.status, message: "Data has been created", data: response.data });
             }
             else {
                 logger_1.logger.error(response.message);
-=======
-            const response = yield NoteService.getNoteById(noteId, data.userEmail);
-            if (response.message === undefined)
-                res.status(response.status).json({ status: response.status, message: "Data has been fetched", data: response.data });
-            else
->>>>>>> redis-feature
                 res.status(response.status).json({ status: response.status, message: response.message, data: null });
             }
         }
@@ -230,12 +225,13 @@ const handleUpdateNotes = function (req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const _a = req.body, { payload } = _a, data = __rest(_a, ["payload"]);
-            const noteId = req.body.noteId;
+            const noteId = req.params.id;
+            data.noteId = noteId;
             if (data.userEmail !== payload.email || !(yield NoteService.checkNoteId(noteId, data.userEmail)).value) {
                 res.status(http_status_codes_1.default.NOT_FOUND).json({ status: http_status_codes_1.default.NOT_FOUND, message: "Invalid User/Note dosent exists", data: null });
                 return;
             }
-            const response = yield NoteService.updateNotes(noteId);
+            const response = yield NoteService.updateNotes(data);
             res.status(response.status).json({ status: response.status, message: response.message, data: null });
         }
         catch (error) {
@@ -253,7 +249,7 @@ const handleAddToArchive = function (req, res) {
                 res.status(http_status_codes_1.default.NOT_FOUND).json({ status: http_status_codes_1.default.NOT_FOUND, message: "Invalid User/Note dosent exists", data: null });
                 return;
             }
-            const response = yield NoteService.addToArchive(noteId);
+            const response = yield NoteService.addToArchive(noteId, data.userEmail);
             res.status(response.status).json({ status: response.status, message: response.message, data: null });
         }
         catch (error) {

@@ -611,3 +611,314 @@
 {"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/notes?page=1&limit=3\",\"status\":\"200\",\"responseTime\":\"16.036\"}","timestamp":"2025-01-18T18:59:03.730Z"}
 {"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/notes?page=1&limit=3\",\"status\":\"200\",\"responseTime\":\"16.761\"}","timestamp":"2025-01-18T18:59:07.550Z"}
 >>>>>>> redis-feature
+[2025-01-20 12:48:54.934 PM] [32minfo[39m: 	[32mServer is running on port http://localhost:4000[39m
+[2025-01-20 12:48:55.980 PM] [31merror[39m: 	[31mError has been occured: Error: Connection timeout[39m
+[2025-01-20 12:48:58.145 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:48:58.203 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:48:58.409 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:48:58.568 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:48:58.784 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:48:59.051 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:48:59.363 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:48:59.724 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:00.133 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:00.587 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:01.106 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:01.622 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:02.140 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:02.656 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:03.160 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:03.675 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:04.194 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:04.710 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:05.229 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:05.748 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:06.266 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:06.784 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:07.303 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:07.817 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:08.334 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:08.850 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:09.356 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:09.873 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:10.392 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:10.906 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:11.427 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:11.932 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:12.447 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:12.954 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:13.461 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:13.967 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:14.484 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:15.001 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:15.515 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:16.019 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:16.537 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:17.046 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:17.558 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:18.073 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:18.593 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:19.105 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:19.618 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:20.133 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:20.639 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:21.154 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:21.669 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:22.187 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:22.697 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:23.207 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:23.726 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:23.833 PM] [31merror[39m: 	[31mconnect ECONNREFUSED ::1:27017, connect ECONNREFUSED 127.0.0.1:27017[39m
+[2025-01-20 12:49:24.239 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:24.745 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:25.258 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:25.775 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:26.295 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:26.802 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:27.318 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:27.831 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:28.347 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:28.854 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:29.374 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:29.891 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:30.403 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:30.920 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:31.433 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:31.946 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:32.449 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:32.956 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:33.469 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:33.979 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:34.491 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:35.003 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:35.514 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:36.021 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:36.538 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:37.058 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:37.578 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:38.095 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:38.608 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:39.122 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:39.632 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:40.147 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:40.662 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:41.183 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:41.704 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:42.213 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:42.719 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:43.231 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:43.752 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:44.269 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:44.786 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:45.291 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:45.807 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:46.326 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:46.834 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:47.349 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:47.859 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:48.378 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:48.887 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:49.403 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:49.924 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:50.436 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:50.945 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:51.454 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:51.965 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:52.484 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:53.003 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:53.523 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:54.036 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:54.551 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:55.072 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:55.583 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:56.090 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:56.598 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:57.114 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:57.634 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:58.155 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:58.677 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:59.188 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:49:59.707 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:00.223 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:00.731 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:01.239 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:01.751 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:02.262 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:02.771 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:03.280 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:03.790 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:04.307 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:04.814 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:05.332 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:05.840 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:06.361 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:06.881 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:07.401 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:07.917 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:08.427 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:08.937 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:09.457 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:09.968 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:10.486 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:11.005 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:11.519 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:12.025 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:12.539 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:13.049 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:13.563 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:14.080 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:14.601 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:15.113 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:15.626 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:16.134 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:16.646 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:17.154 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:17.675 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:18.194 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:18.708 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:19.227 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:19.746 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:20.262 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:20.770 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:21.285 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:21.793 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:22.309 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:22.824 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:23.341 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:23.852 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:24.359 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:24.877 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:25.395 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:25.910 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:26.417 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:26.921 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:27.425 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:27.932 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:28.441 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:28.956 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:29.472 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:29.979 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:30.495 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:31.009 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:31.521 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:33.698 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:34.212 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:34.718 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:35.225 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:35.735 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:36.239 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:36.759 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:37.281 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:37.797 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:38.315 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:38.827 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:39.337 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:39.854 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:40.360 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:40.885 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:41.402 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:41.912 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:42.422 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:42.930 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:43.437 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:43.701 PM] [31merror[39m: 	[31mOperation `notes.countDocuments()` buffering timed out after 10000ms[39m
+[2025-01-20 12:50:43.755 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?page=1&limit=3","status":"500","responseTime":"10415.684"}[39m
+[2025-01-20 12:50:43.947 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:44.453 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:44.969 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:45.474 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:45.993 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:46.511 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:50:47.029 PM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-20 12:54:07.646 PM] [32minfo[39m: 	[32mServer is running on port http://localhost:4000[39m
+[2025-01-20 12:54:07.691 PM] [31merror[39m: 	[31mError has been occured: Error: Connection timeout[39m
+[2025-01-20 12:54:08.216 PM] [32minfo[39m: 	[32mConnected to Redis[39m
+[2025-01-20 12:54:37.404 PM] [31merror[39m: 	[31mconnect ECONNREFUSED ::1:27017, connect ECONNREFUSED 127.0.0.1:27017[39m
+[2025-01-20 12:56:45.475 PM] [32minfo[39m: 	[32mServer is running on port http://localhost:4000[39m
+[2025-01-20 12:56:45.486 PM] [32minfo[39m: 	[32mConnected to Redis[39m
+[2025-01-20 12:56:45.803 PM] [32minfo[39m: 	[32mConnected to the database[39m
+[2025-01-20 12:57:01.302 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?page=1&limit=3","status":"200","responseTime":"793.273"}[39m
+[2025-01-20 01:01:13.738 PM] [32minfo[39m: 	[32mServer is running on port http://localhost:4000[39m
+[2025-01-20 01:01:13.751 PM] [32minfo[39m: 	[32mConnected to Redis[39m
+[2025-01-20 01:01:13.787 PM] [32minfo[39m: 	[32mConnected to the database[39m
+[2025-01-20 01:01:44.228 PM] [32minfo[39m: 	[32m[][39m
+[2025-01-20 01:01:44.233 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?page=1&limit=3","status":"200","responseTime":"31.595"}[39m
+[2025-01-20 01:02:26.915 PM] [32minfo[39m: 	[32mServer is running on port http://localhost:4000[39m
+[2025-01-20 01:02:26.929 PM] [32minfo[39m: 	[32mConnected to Redis[39m
+[2025-01-20 01:02:26.951 PM] [32minfo[39m: 	[32mConnected to the database[39m
+[2025-01-20 01:02:45.752 PM] [32minfo[39m: 	[32mServer is running on port http://localhost:4000[39m
+[2025-01-20 01:02:45.761 PM] [32minfo[39m: 	[32mConnected to Redis[39m
+[2025-01-20 01:02:45.778 PM] [32minfo[39m: 	[32mConnected to the database[39m
+[2025-01-20 01:03:00.440 PM] [32minfo[39m: 	[32m[][39m
+[2025-01-20 01:03:02.325 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?page=1&limit=3","status":"200","responseTime":"1901.858"}[39m
+[2025-01-20 01:03:42.347 PM] [32minfo[39m: 	[32mServer is running on port http://localhost:4000[39m
+[2025-01-20 01:03:42.364 PM] [32minfo[39m: 	[32mConnected to Redis[39m
+[2025-01-20 01:03:42.389 PM] [32minfo[39m: 	[32mConnected to the database[39m
+[2025-01-20 01:03:53.574 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?page=1&limit=3","status":"200","responseTime":"22.443"}[39m
+[2025-01-20 01:03:58.662 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?page=1&limit=3","status":"200","responseTime":"5.555"}[39m
+[2025-01-20 01:04:01.300 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?page=1&limit=3","status":"200","responseTime":"6.206"}[39m
+[2025-01-20 01:05:34.678 PM] [32minfo[39m: 	[32mServer is running on port http://localhost:4000[39m
+[2025-01-20 01:05:34.692 PM] [32minfo[39m: 	[32mConnected to Redis[39m
+[2025-01-20 01:05:34.733 PM] [32minfo[39m: 	[32mConnected to the database[39m
+[2025-01-20 01:05:42.638 PM] [32minfo[39m: 	[32m[[39m
+[32m  '{"noteId":"note004","userEmail":"rachel.green@example.com","title":"Shopping Ideas","desc":"New heels, summer dresses, and a leather handbag.","isTrash":false,"isArchive":false,"color":"white"}',[39m
+[32m  '{"noteId":"note003","userEmail":"rachel.green@example.com","title":"Series Recommendation","desc":"Friends is a classic, but also check out How I Met Your Mother.","isTrash":false,"isArchive":false,"color":"pink"}',[39m
+[32m  '{"noteId":"note001","userEmail":"rachel.green@example.com","title":"Anime To Watch","desc":"Bleach, Naruto, and One Piece are next on my list.","isTrash":false,"isArchive":false,"color":"blue"}'[39m
+[32m][39m
+[2025-01-20 01:05:42.644 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?page=1&limit=3","status":"200","responseTime":"22.368"}[39m
+[2025-01-20 01:36:38.559 PM] [32minfo[39m: 	[32mServer is running on port http://localhost:4000[39m
+[2025-01-20 01:36:38.572 PM] [32minfo[39m: 	[32mConnected to Redis[39m
+[2025-01-20 01:36:38.606 PM] [32minfo[39m: 	[32mConnected to the database[39m
+[2025-01-20 01:44:03.947 PM] [32minfo[39m: 	[32mServer is running on port http://localhost:4000[39m
+[2025-01-20 01:44:03.964 PM] [32minfo[39m: 	[32mConnected to the database[39m
+[2025-01-20 01:44:04.424 PM] [32minfo[39m: 	[32mConnected to Redis[39m
+[2025-01-20 01:44:40.283 PM] [32minfo[39m: 	[32m{"method":"PUT","url":"/api/v1/notes/api/v1/notes/note001","status":"404","responseTime":"3.769"}[39m
+[2025-01-20 01:44:56.821 PM] [32minfo[39m: 	[32m{"method":"PUT","url":"/api/v1/notes/note001","status":"404","responseTime":"1452.683"}[39m
+[2025-01-20 01:46:21.580 PM] [32minfo[39m: 	[32mServer is running on port http://localhost:4000[39m
+[2025-01-20 01:46:21.588 PM] [32minfo[39m: 	[32mConnected to Redis[39m
+[2025-01-20 01:46:21.615 PM] [32minfo[39m: 	[32mConnected to the database[39m
+[2025-01-20 01:46:30.793 PM] [32minfo[39m: 	[32m{ email: 'rachel.green@example.com', iat: 1737225626, exp: 1737484826 }[39m
+[2025-01-20 01:46:30.812 PM] [32minfo[39m: 	[32m{"method":"PUT","url":"/api/v1/notes/note001","status":"404","responseTime":"22.617"}[39m
+[2025-01-20 01:47:37.928 PM] [32minfo[39m: 	[32mServer is running on port http://localhost:4000[39m
+[2025-01-20 01:47:37.937 PM] [32minfo[39m: 	[32mConnected to Redis[39m
+[2025-01-20 01:47:37.959 PM] [32minfo[39m: 	[32mConnected to the database[39m
+[2025-01-20 01:47:49.171 PM] [32minfo[39m: 	[32m{ email: 'rachel.green@example.com', iat: 1737225626, exp: 1737484826 }[39m
+[2025-01-20 01:47:49.190 PM] [32minfo[39m: 	[32m{"method":"PUT","url":"/api/v1/notes/note001","status":"404","responseTime":"23.383"}[39m
+[2025-01-20 01:48:49.038 PM] [32minfo[39m: 	[32mServer is running on port http://localhost:4000[39m
+[2025-01-20 01:48:49.053 PM] [32minfo[39m: 	[32mConnected to Redis[39m
+[2025-01-20 01:48:49.076 PM] [32minfo[39m: 	[32mConnected to the database[39m
+[2025-01-20 01:48:58.246 PM] [32minfo[39m: 	[32mServer is running on port http://localhost:4000[39m
+[2025-01-20 01:48:58.259 PM] [32minfo[39m: 	[32mConnected to Redis[39m
+[2025-01-20 01:48:58.278 PM] [32minfo[39m: 	[32mConnected to the database[39m
+[2025-01-20 01:49:12.630 PM] [32minfo[39m: 	[32m{"method":"PUT","url":"/api/v1/notes/note001","status":"200","responseTime":"785.798"}[39m
+[2025-01-20 01:51:33.137 PM] [32minfo[39m: 	[32mServer is running on port http://localhost:4000[39m
+[2025-01-20 01:51:33.145 PM] [32minfo[39m: 	[32mConnected to Redis[39m
+[2025-01-20 01:51:33.158 PM] [32minfo[39m: 	[32mConnected to the database[39m
+[2025-01-20 02:46:11.625 PM] [32minfo[39m: 	[32mServer is running on port http://localhost:4000[39m
+[2025-01-20 02:46:11.653 PM] [32minfo[39m: 	[32mConnected to Redis[39m
+[2025-01-20 02:46:11.735 PM] [32minfo[39m: 	[32mConnected to the database[39m
+[2025-01-20 02:48:36.832 PM] [32minfo[39m: 	[32m[[39m
+[32m  '{"noteId":"note004","userEmail":"rachel.green@example.com","title":"Shopping Ideas","desc":"New heels, summer dresses, and a leather handbag.","isTrash":false,"isArchive":false,"color":"white"}',[39m
+[32m  '{"noteId":"note003","userEmail":"rachel.green@example.com","title":"Series Recommendation","desc":"Friends is a classic, but also check out How I Met Your Mother.","isTrash":false,"isArchive":false,"color":"pink"}',[39m
+[32m  '{"noteId":"note001","userEmail":"rachel.green@example.com","title":"Anime To Watch","desc":"Bleach, Naruto, and One Piece are next on my list.","isTrash":false,"isArchive":false,"color":"blue"}'[39m
+[32m][39m
+[2025-01-20 02:48:36.845 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?page=1&limit=3","status":"200","responseTime":"174.839"}[39m
+[2025-01-20 02:49:35.482 PM] [32minfo[39m: 	[32m[][39m
+[2025-01-20 02:49:35.741 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?page=2&limit=3","status":"200","responseTime":"270.114"}[39m
+[2025-01-20 02:49:55.839 PM] [32minfo[39m: 	[32m[[39m
+[32m  '{"noteId":"note005","userEmail":"rachel.green@example.com","title":"Quotes I Love","desc":"“Fashion is what you’re offered four times a year by designers. Style is what you choose.”","isTrash":false,"isArchive":false,"color":"green"}',[39m
+[32m  '{"noteId":"note004","userEmail":"rachel.green@example.com","title":"Shopping Ideas","desc":"New heels, summer dresses, and a leather handbag.","isTrash":false,"isArchive":false,"color":"white"}',[39m
+[32m  '{"noteId":"note003","userEmail":"rachel.green@example.com","title":"Series Recommendation","desc":"Friends is a classic, but also check out How I Met Your Mother.","isTrash":false,"isArchive":false,"color":"pink"}'[39m
+[32m][39m
+[2025-01-20 02:49:56.119 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?page=1&limit=3","status":"200","responseTime":"288.432"}[39m
+[2025-01-20 02:50:30.699 PM] [32minfo[39m: 	[32m[[39m
+[32m  '{"noteId":"note001","userEmail":"rachel.green@example.com","title":"Anime To Watch","desc":"Bleach, Naruto, and One Piece are next on my list.","isTrash":false,"isArchive":false,"color":"blue"}'[39m
+[32m][39m
+[2025-01-20 02:50:30.702 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?page=2&limit=3","status":"200","responseTime":"13.204"}[39m
+[2025-01-20 03:05:20.554 PM] [32minfo[39m: 	[32mServer is running on port http://localhost:4000[39m
+[2025-01-20 03:05:20.572 PM] [32minfo[39m: 	[32mConnected to Redis[39m
+[2025-01-20 03:05:20.599 PM] [32minfo[39m: 	[32mConnected to the database[39m
+[2025-01-20 03:07:04.345 PM] [32minfo[39m: 	[32m{"method":"PUT","url":"/api/v1/notes/note001","status":"200","responseTime":"84.900"}[39m
+[2025-01-20 03:19:24.601 PM] [32minfo[39m: 	[32mServer is running on port http://localhost:4000[39m
+[2025-01-20 03:19:24.621 PM] [32minfo[39m: 	[32mConnected to Redis[39m
+[2025-01-20 03:19:24.686 PM] [32minfo[39m: 	[32mConnected to the database[39m

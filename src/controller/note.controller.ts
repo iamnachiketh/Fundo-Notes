@@ -209,14 +209,16 @@ export const handleUpdateNotes = async function (req: Request, res: Response) {
     try {
         const { payload, ...data } = req.body;
 
-        const noteId = req.body.noteId;
+        const noteId = req.params.id;
+
+        data.noteId = noteId;
 
         if (data.userEmail !== payload.email || !(await NoteService.checkNoteId(noteId, data.userEmail as string)).value) {
             res.status(httpStatus.NOT_FOUND).json({ status: httpStatus.NOT_FOUND, message: "Invalid User/Note dosent exists", data: null });
             return;
         }
 
-        const response = await NoteService.updateNotes(noteId);
+        const response = await NoteService.updateNotes(data);
 
         res.status(response.status).json({ status: response.status, message: response.message, data: null });
 
@@ -240,7 +242,7 @@ export const handleAddToArchive = async function (req: Request, res: Response) {
             return;
         }
 
-        const response = await NoteService.addToArchive(noteId);
+        const response = await NoteService.addToArchive(noteId, data.userEmail);
 
         res.status(response.status).json({ status: response.status, message: response.message, data: null });
 

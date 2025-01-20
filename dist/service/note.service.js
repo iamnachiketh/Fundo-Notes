@@ -17,10 +17,12 @@ const note_model_1 = __importDefault(require("../models/note.model"));
 const http_status_codes_1 = __importDefault(require("http-status-codes"));
 const user_model_1 = __importDefault(require("../models/user.model"));
 const redis_config_1 = __importDefault(require("../config/redis.config"));
+const logger_1 = require("../logger");
+const mongoose_1 = __importDefault(require("mongoose"));
 const createNote = function (notes) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            let isNotePresentRedisCache = yield redis_config_1.default.get(`${notes.userEmail}:${notes.noteId}`);
+            let isNotePresentRedisCache = yield redis_config_1.default.get(`notes:${notes.userEmail}:${notes.noteId}`);
             if (isNotePresentRedisCache) {
                 return { status: http_status_codes_1.default.BAD_REQUEST, message: "Note already exists" };
             }
@@ -28,7 +30,7 @@ const createNote = function (notes) {
             if (isNoteAlreadyPresent) {
                 return { status: http_status_codes_1.default.BAD_REQUEST, message: "Note already exists" };
             }
-            yield user_model_1.default.findOneAndUpdate({ email: notes.userEmail }, {
+            let userUpdateResult = yield user_model_1.default.findOneAndUpdate({ email: notes.userEmail }, {
                 $push: {
                     notesId: notes.noteId
                 },
@@ -36,6 +38,9 @@ const createNote = function (notes) {
                     notesCount: 1
                 }
             });
+            if (!userUpdateResult) {
+                return { status: http_status_codes_1.default.NOT_FOUND, message: "User not found" };
+            }
             const note = new note_model_1.default({
                 noteId: notes.noteId,
                 userEmail: notes.userEmail,
@@ -45,7 +50,7 @@ const createNote = function (notes) {
                 color: notes === null || notes === void 0 ? void 0 : notes.color
             });
             yield note.save();
-            yield redis_config_1.default.setEx(`${notes.userEmail}:${notes.noteId}`, 3600, JSON.stringify(note));
+            yield redis_config_1.default.set(`notes:${notes.userEmail}:${notes.noteId}`, JSON.stringify(note));
             return { status: http_status_codes_1.default.CREATED, message: "Note has been created" };
         }
         catch (error) {
@@ -62,6 +67,9 @@ const getNoteById = function (noteId, email) {
                 return { status: http_status_codes_1.default.OK, data: JSON.parse(noteData) };
             }
             let note = yield note_model_1.default.findOne({ noteId: noteId, userEmail: email }, { _id: 0, __v: 0 });
+            if (!note) {
+                return { status: http_status_codes_1.default.NOT_FOUND, message: "Note not found" };
+            }
             yield redis_config_1.default.setEx(`${email}:${noteId}`, 3600, JSON.stringify(note));
             return { status: http_status_codes_1.default.OK, data: note };
         }
@@ -85,23 +93,17 @@ const getAllNotes = function (email, skip, limit) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const totalDocument = yield note_model_1.default.countDocuments({ userEmail: email });
-            let notes = yield redis_config_1.default.get(`${email}:notes`);
-            if (notes) {
-                return { status: http_status_codes_1.default.OK, data: JSON.parse(notes), totalDocument: totalDocument };
+            let notes = yield redis_config_1.default.lRange(`${email}:notes`, skip, skip + limit - 1);
+            logger_1.logger.info(notes);
+            if (notes.length !== 0) {
+                let newNotes = notes.map(value => JSON.parse(value));
+                return { status: http_status_codes_1.default.OK, data: newNotes, totalDocument: totalDocument };
             }
             const result = yield note_model_1.default
                 .find({ userEmail: email, isTrash: false, isArchive: false }, { _id: 0, __v: 0 })
                 .skip(skip)
                 .limit(limit);
-            // This is another way of getting the list of notes
-            // let result: Array<any> = [];
-            // let totalNumberOfNotes = user?.notesId.length === undefined ? 0 : user?.notesId.length;
-            // for (let i = 0; i < totalNumberOfNotes; i++) {
-            //     let response = await Note.findOne({ noteId: user?.notesId[i] }, { _id: 0, __v: 0 });
-            //     result.push(response);
-            // }
-            // if (result.length === 0) return { status: httpStatus.OK, message: "No Note is created yet" };
-            yield redis_config_1.default.setEx(`${email}:notes`, 3600, JSON.stringify(result));
+            result.forEach((value) => __awaiter(this, void 0, void 0, function* () { return yield redis_config_1.default.lPush(`${email}:notes`, JSON.stringify(value)); }));
             return { status: http_status_codes_1.default.OK, data: result, totalDocument: totalDocument };
         }
         catch (error) {
@@ -112,12 +114,14 @@ const getAllNotes = function (email, skip, limit) {
 exports.getAllNotes = getAllNotes;
 const trashNotesById = function (noteId, userEmail) {
     return __awaiter(this, void 0, void 0, function* () {
+        const session = yield mongoose_1.default.startSession();
+        session.startTransaction();
         try {
             yield note_model_1.default.findOneAndUpdate({ noteId: noteId }, {
                 $set: {
                     isTrash: true
                 }
-            });
+            }, { session });
             yield user_model_1.default.findOneAndUpdate({ email: userEmail }, {
                 $pull: {
                     notesId: noteId
@@ -125,10 +129,15 @@ const trashNotesById = function (noteId, userEmail) {
                 $inc: {
                     notesCount: -1
                 }
-            });
+            }, { session });
+            yield redis_config_1.default.del(`${userEmail}:${noteId}`);
+            yield session.commitTransaction();
+            session.endSession();
             return { status: http_status_codes_1.default.OK, message: "Notes has been trashed" };
         }
         catch (error) {
+            yield session.abortTransaction();
+            session.endSession();
             return { status: http_status_codes_1.default.INTERNAL_SERVER_ERROR, message: error.message };
         }
     });
@@ -149,13 +158,25 @@ exports.deleteNotesFromTrash = deleteNotesFromTrash;
 const updateNotes = function (data) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            yield note_model_1.default.findOneAndUpdate({ noteId: data.noteId }, {
+            let result = yield note_model_1.default.findOneAndUpdate({ noteId: data.noteId }, {
                 $set: {
                     title: data === null || data === void 0 ? void 0 : data.title,
                     desc: data === null || data === void 0 ? void 0 : data.desc
                 }
-            });
-            return { status: http_status_codes_1.default.OK, message: "Note has been updated" };
+            }, { new: true });
+            let note = yield redis_config_1.default.get(`${data.userEmail}:${data.noteId}`);
+            if (note) {
+                let newNote = JSON.parse(note);
+                if (data.title !== undefined)
+                    newNote.title = data.title;
+                if (data.desc !== undefined)
+                    newNote.desc = data.desc;
+                yield redis_config_1.default.set(`${data.userEmail}:${data.noteId}`, JSON.stringify(newNote));
+            }
+            else {
+                yield redis_config_1.default.setEx(`${data.userEmail}:${data.noteId}`, 3600, JSON.stringify(result));
+            }
+            return { status: http_status_codes_1.default.OK, message: `Note with ID ${data.noteId} has been updated.` };
         }
         catch (error) {
             return { status: http_status_codes_1.default.INTERNAL_SERVER_ERROR, message: error.message };
@@ -163,14 +184,26 @@ const updateNotes = function (data) {
     });
 };
 exports.updateNotes = updateNotes;
-const addToArchive = function (noteId) {
+const addToArchive = function (noteId, userEmail) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            yield note_model_1.default.findOneAndUpdate({ noteId: noteId, isArchive: false }, {
+            const cachedNote = yield redis_config_1.default.get(`${userEmail}:${noteId}`);
+            if (cachedNote) {
+                const note = JSON.parse(cachedNote);
+                note.isArchive = true;
+                yield redis_config_1.default.setEx(`${userEmail}:${noteId}`, 3600, JSON.stringify(note));
+            }
+            const result = yield note_model_1.default.findOneAndUpdate({ noteId: noteId, isArchive: false, isTrash: false }, {
                 $set: {
                     isArchive: true
                 }
             });
+            if (!result) {
+                return { status: http_status_codes_1.default.NOT_FOUND, message: "Note not found or already archived." };
+            }
+            if (!cachedNote) {
+                yield redis_config_1.default.setEx(`${userEmail}:${noteId}`, 3600, JSON.stringify(result));
+            }
             return { status: http_status_codes_1.default.OK, message: "Note has been Archived" };
         }
         catch (error) {

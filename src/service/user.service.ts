@@ -1,11 +1,12 @@
 import User from "../models/user.model";
 import httpStatus from "http-status-codes";
-import { userSchemaValidation } from "../schemaValidation/user.validation";
 import bcrypt from "bcrypt";
 import * as AuthMiddleware from "../middleware/auth.middleware";
 import jwt from "jsonwebtoken";
 import otp from "otp-generator";
+import { userSchemaValidation } from "../schemaValidation/user.validation";
 import { sendEmail } from "../util/nodeMailer.util";
+import { connectToRabbitMQ } from "../util/rabbitMQ.util";
 
 
 
@@ -44,6 +45,27 @@ export const registerUser = async function (userData: {
         });
 
         await user.save();
+
+        const emailData = {
+            to: userData.email,
+            from: process.env.USER_EMAIL as string,
+            subject: "User Registered",
+            body: `Hello ${userData.name}, You have been registered successfully`
+        }
+
+        const rabbitMQConnection = await connectToRabbitMQ();
+
+        if (rabbitMQConnection && rabbitMQConnection.sendToExchange) {
+
+            await rabbitMQConnection.sendToExchange(
+                process.env.RABBITMQ_EXCHANGE as string,
+                process.env.RABBITMQ_ROUTING_KEY as string,
+                emailData
+            );
+
+        } else {
+            return { status: httpStatus.INTERNAL_SERVER_ERROR, message: "Failed to connect to RabbitMQ" };
+        }
 
         return { status: httpStatus.CREATED, message: "User registered successfully" }
 
@@ -92,6 +114,29 @@ export const loginUser = async function (data: {
                 refreshToken: token.refreshToken
             }
         });
+
+        const rabbitMQConnection = await connectToRabbitMQ();
+
+        if (rabbitMQConnection && rabbitMQConnection.sendToExchange) {
+
+            const emailData = {
+
+                to: data.email,
+                from: process.env.EMAIL as string,
+                subject: "User Logged In",
+                body: `Hello ${user.name}, You have been logged in successfully`
+
+            }
+
+            await rabbitMQConnection.sendToExchange(
+                process.env.RABBITMQ_EXCHANGE as string,
+                process.env.RABBITMQ_ROUTING_KEY as string,
+                emailData
+            );
+
+        } else {
+            return { status: httpStatus.INTERNAL_SERVER_ERROR, message: "Failed to connect to RabbitMQ" };
+        }
 
         return { status: httpStatus.OK, UserDetails: user, token: token };
 
@@ -171,9 +216,9 @@ export const getForgetPassword = async function (email: string): Promise<{
 
 
 export const resetPassword = async function (data: { email: string, password: string }): Promise<{
-    status:number,
-    message:string
-}>{
+    status: number,
+    message: string
+}> {
     try {
         await User.findOneAndUpdate({ email: data.email }, {
             $set: {

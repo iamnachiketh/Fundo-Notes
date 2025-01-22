@@ -186,7 +186,7 @@ export const handleDeleteNotesFromTrash = async function (req: Request, res: Res
             return;
         }
 
-        const response = await NoteService.deleteNotesFromTrash(noteId);
+        const response = await NoteService.deleteNotesFromTrash(noteId, data.userEmail);
 
         res.status(response.status).json({
             status: response.status,
@@ -235,7 +235,7 @@ export const handleAddToArchive = async function (req: Request, res: Response) {
     try {
         const { payload, ...data } = req.body;
 
-        const noteId = req.body.noteId;
+        const noteId = req.params.id;
 
         if (data.userEmail !== payload.email || !(await NoteService.checkNoteId(noteId, data.userEmail as string)).value) {
             res.status(httpStatus.NOT_FOUND).json({ status: httpStatus.NOT_FOUND, message: "Invalid User/Note dosent exists", data: null });

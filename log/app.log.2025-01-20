@@ -309,3 +309,6 @@
 [2025-01-20 03:19:24.601 PM] [32minfo[39m: 	[32mServer is running on port http://localhost:4000[39m
 [2025-01-20 03:19:24.621 PM] [32minfo[39m: 	[32mConnected to Redis[39m
 [2025-01-20 03:19:24.686 PM] [32minfo[39m: 	[32mConnected to the database[39m
+[2025-01-20 03:32:59.201 PM] [32minfo[39m: 	[32mServer is running on port http://localhost:4000[39m
+[2025-01-20 03:32:59.218 PM] [32minfo[39m: 	[32mConnected to Redis[39m
+[2025-01-20 03:32:59.260 PM] [32minfo[39m: 	[32mConnected to the database[39m

@@ -23,33 +23,42 @@ export const createJWToken = function (email: string): { token: { accessToken: s
 
 export const verifyToken = function (req: Request, res: Response, next: NextFunction) {
 
-    let token = req.headers["x-token"];
+    try {
+        let token = req.headers["x-token"];
 
-    if (!token) {
+        if (!token) {
 
-        logger.error("Token not provided");
-        res.status(httpStatus.UNAUTHORIZED).json({
-            status: httpStatus.UNAUTHORIZED,
-            message: "Token not provided",
-            data: null
-        });
-        return;
+            logger.error("Token not provided");
+            res.status(httpStatus.UNAUTHORIZED).json({
+                status: httpStatus.UNAUTHORIZED,
+                message: "Token not provided",
+                data: null
+            });
+            return;
+        }
+
+        if (typeof token === "string") {
+            token = token.split(/\s+/)[1];
+        }
+
+        const payload = jwt.verify(token as string, process.env.JWT_SECERT as string);
+
+        if (!payload) {
+            logger.error("Invalid token");
+            res.status(httpStatus.UNAUTHORIZED).json({ status: httpStatus.UNAUTHORIZED, message: "Invalid token", data: null });
+            return;
+        }
+
+        req.body.payload = payload;
+        next();
+
+    } catch (err: any) {
+        
+        logger.error(err.message);
+        
+        res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ status: httpStatus.INTERNAL_SERVER_ERROR, message: err.message, data: null });
     }
 
-    if (typeof token === "string") {
-        token = token.split(/\s+/)[1];
-    }
-
-    const payload = jwt.verify(token as string, process.env.JWT_SECERT as string);
-
-    if (!payload) {
-        logger.error("Invalid token");
-        res.status(httpStatus.UNAUTHORIZED).json({ status: httpStatus.UNAUTHORIZED, message: "Invalid token", data: null });
-        return;
-    }
-
-    req.body.payload = payload;
-    next();
 }
 
 

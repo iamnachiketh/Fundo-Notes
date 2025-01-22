@@ -14,6 +14,8 @@ export const handleRegisterUser = async function (req: Request, res: Response) {
 
         const response = await UserService.registerUser(data);
 
+
+
         res.status(response.status).json({ status: response.status, message: response.message, data: null });
 
     } catch (error: any) {

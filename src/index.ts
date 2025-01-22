@@ -6,6 +6,7 @@ import { logger } from "./logger";
 import morgan from "morgan";
 import * as router from "./routes/index.router";
 
+
 const app = express();
 
 dbConnection();

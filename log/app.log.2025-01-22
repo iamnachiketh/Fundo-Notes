@@ -1,0 +1,28 @@
+[2025-01-22 12:17:33.841 AM] [31merror[39m: 	[31mjwt expired[39m
+[2025-01-22 12:17:33.985 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?page=1&limit=3","status":"500","responseTime":"158.007"}[39m
+[2025-01-22 12:18:26.453 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/users/refresh-token","status":"401","responseTime":"6.087"}[39m
+[2025-01-22 12:18:52.388 AM] [32minfo[39m: 	[32m{"method":"POST","url":"/api/v1/users/login","status":"200","responseTime":"1059.209"}[39m
+[2025-01-22 12:19:25.376 AM] [32minfo[39m: 	[32mRedis key does not exist; skipping update.[39m
+[2025-01-22 12:19:25.610 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?page=1&limit=3","status":"200","responseTime":"2626.227"}[39m
+[2025-01-22 12:19:31.300 AM] [32minfo[39m: 	[32mSliced notes: {"noteId":"note005","userEmail":"rachel.green@example.com","title":"Quotes I Love","desc":"“Fashion is what you’re offered four times a year by designers. Style is what you choose.”","isTrash":false,"isArchive":false,"color":"green"},{"noteId":"note004","userEmail":"rachel.green@example.com","title":"Shopping Ideas","desc":"New heels, summer dresses, and a leather handbag.","isTrash":false,"isArchive":false,"color":"white"},{"noteId":"note003","userEmail":"rachel.green@example.com","title":"Series Recommendation","desc":"Friends is a classic, but also check out How I Met Your Mother.","isTrash":false,"isArchive":false,"color":"pink"}[39m
+[2025-01-22 12:19:31.303 AM] [32minfo[39m: 	[32mSkip notes: 0[39m
+[2025-01-22 12:19:31.304 AM] [32minfo[39m: 	[32mlimit notes: 3[39m
+[2025-01-22 12:19:31.307 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?page=1&limit=3","status":"200","responseTime":"14.775"}[39m
+[2025-01-22 12:19:40.137 AM] [32minfo[39m: 	[32mSliced notes: {"noteId":"note0013","userEmail":"rachel.green@example.com","title":"SUPERNATURAL","desc":"It a series where two brothers hunt demons all around america","isTrash":false,"isArchive":false,"color":"green"}[39m
+[2025-01-22 12:19:40.139 AM] [32minfo[39m: 	[32mSkip notes: 3[39m
+[2025-01-22 12:19:40.140 AM] [32minfo[39m: 	[32mlimit notes: 3[39m
+[2025-01-22 12:19:40.145 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?page=2&limit=3","status":"200","responseTime":"14.913"}[39m
+[2025-01-22 12:19:44.778 AM] [32minfo[39m: 	[32mSliced notes: {"noteId":"note0013","userEmail":"rachel.green@example.com","title":"SUPERNATURAL","desc":"It a series where two brothers hunt demons all around america","isTrash":false,"isArchive":false,"color":"green"}[39m
+[2025-01-22 12:19:44.780 AM] [32minfo[39m: 	[32mSkip notes: 3[39m
+[2025-01-22 12:19:44.781 AM] [32minfo[39m: 	[32mlimit notes: 3[39m
+[2025-01-22 12:19:44.783 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?page=2&limit=3","status":"200","responseTime":"1371.659"}[39m
+[2025-01-22 12:19:47.576 AM] [32minfo[39m: 	[32mSliced notes: {"noteId":"note0013","userEmail":"rachel.green@example.com","title":"SUPERNATURAL","desc":"It a series where two brothers hunt demons all around america","isTrash":false,"isArchive":false,"color":"green"}[39m
+[2025-01-22 12:19:47.578 AM] [32minfo[39m: 	[32mSkip notes: 3[39m
+[2025-01-22 12:19:47.579 AM] [32minfo[39m: 	[32mlimit notes: 3[39m
+[2025-01-22 12:19:47.581 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?page=2&limit=3","status":"200","responseTime":"175.552"}[39m
+[2025-01-22 12:19:58.648 AM] [31merror[39m: 	[31mjwt expired[39m
+[2025-01-22 12:19:58.652 AM] [32minfo[39m: 	[32m{"method":"PUT","url":"/api/v1/notes/note0012/trash","status":"500","responseTime":"4.989"}[39m
+[2025-01-22 12:20:11.454 AM] [32minfo[39m: 	[32mNote has been trashed[39m
+[2025-01-22 12:20:11.456 AM] [32minfo[39m: 	[32m{"method":"PUT","url":"/api/v1/notes/note0012/trash","status":"200","responseTime":"334.332"}[39m
+[2025-01-22 12:20:32.999 AM] [31merror[39m: 	[31mInvalid User/Note dosent exists[39m
+[2025-01-22 12:20:33.002 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/note0012","status":"404","responseTime":"13.394"}[39m

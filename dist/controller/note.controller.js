@@ -204,7 +204,7 @@ const handleDeleteNotesFromTrash = function (req, res) {
                 });
                 return;
             }
-            const response = yield NoteService.deleteNotesFromTrash(noteId);
+            const response = yield NoteService.deleteNotesFromTrash(noteId, data.userEmail);
             res.status(response.status).json({
                 status: response.status,
                 message: response.message,
@@ -244,7 +244,7 @@ const handleAddToArchive = function (req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const _a = req.body, { payload } = _a, data = __rest(_a, ["payload"]);
-            const noteId = req.body.noteId;
+            const noteId = req.params.id;
             if (data.userEmail !== payload.email || !(yield NoteService.checkNoteId(noteId, data.userEmail)).value) {
                 res.status(http_status_codes_1.default.NOT_FOUND).json({ status: http_status_codes_1.default.NOT_FOUND, message: "Invalid User/Note dosent exists", data: null });
                 return;

@@ -95,14 +95,16 @@ const handleLoginUser = function (req, res) {
         const data = req.body;
         try {
             const response = yield UserService.loginUser(data);
-            if (response.message === undefined)
+            if (response.message === undefined) {
+                const _c = response.UserDetails, { refreshToken } = _c, newUserData = __rest(_c, ["refreshToken"]);
                 res.status(response.status).json({
                     status: response.status,
                     message: "User logged in successfully",
-                    data: response.UserDetails,
+                    data: newUserData,
                     accessToken: (_a = response.token) === null || _a === void 0 ? void 0 : _a.accessToken,
                     refreshToken: (_b = response.token) === null || _b === void 0 ? void 0 : _b.refreshToken
                 });
+            }
             else
                 res.status(response.status).json({ status: response.status, messsage: response.message, data: null });
         }

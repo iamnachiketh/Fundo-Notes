@@ -5,11 +5,14 @@ import { dbConnection } from "./dbconnection/db.connection";
 import { logger } from "./logger";
 import morgan from "morgan";
 import * as router from "./routes/index.router";
+import cors from "cors";
 
 
 const app = express();
 
 dbConnection();
+
+app.use(cors());
 
 app.use(express.json())
 

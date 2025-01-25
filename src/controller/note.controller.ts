@@ -50,16 +50,16 @@ export const handleGetNoteById = async function (req: Request, res: Response) {
         if (response.message === undefined)
             res.status(response.status).json({ status: response.status, message: "Data has been fetched", data: response.data });
         else
-        if (response.message === undefined){
+            if (response.message === undefined) {
 
-            logger.info("Data has been created");
-            res.status(response.status).json({ status: response.status, message: "Data has been created", data: response.data });
-        }
-        else{
+                logger.info("Data has been created");
+                res.status(response.status).json({ status: response.status, message: "Data has been created", data: response.data });
+            }
+            else {
 
-            logger.error(response.message);
-            res.status(response.status).json({ status: response.status, message: response.message, data: null });
-        }
+                logger.error(response.message);
+                res.status(response.status).json({ status: response.status, message: response.message, data: null });
+            }
 
 
     } catch (error: any) {
@@ -91,7 +91,8 @@ export const handleGetAllNotesOfAUser = async function (req: Request, res: Respo
             res.status(httpStatus.BAD_REQUEST).json({
                 status: httpStatus.BAD_REQUEST,
                 message: "Page and limit must be positive integer",
-                data: null });
+                data: null
+            });
             return;
         }
 
@@ -115,7 +116,7 @@ export const handleGetAllNotesOfAUser = async function (req: Request, res: Respo
                     totalPages
                 }
             });
-        else{
+        else {
 
             logger.error(response.message);
             res.status(response.status).json({ status: httpStatus.OK, message: response.message, data: null })
@@ -248,5 +249,66 @@ export const handleAddToArchive = async function (req: Request, res: Response) {
 
     } catch (error: any) {
         res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ status: httpStatus.INTERNAL_SERVER_ERROR, message: error.message, data: null });
+    }
+}
+
+
+
+export const handleSearchNotes = async function (req: Request, res: Response) {
+    try {
+        const { payload, ...data } = req.body;
+
+        if (data.userEmail !== payload.email) {
+            res.status(httpStatus.FORBIDDEN).json({ status: httpStatus.FORBIDDEN, message: "Invalid User", data: null });
+            return;
+        }
+
+        const page = Number(req.query.page as string) || 1;
+
+        const limit = Number(req.query.limit as string) || 5;
+
+        if (page <= 0 || limit <= 0) {
+            res.status(httpStatus.BAD_REQUEST).json({ status: httpStatus.BAD_REQUEST, message: "Page and limit must be positive integer", data: null });
+            return;
+        }
+
+        const skip = (page - 1) * limit;
+
+        const response = await NoteService.searchNote(data.query, data.userEmail, skip, limit);
+
+        const docCount = response.totalDocument === undefined ? 0 : response.totalDocument;
+
+        const totalPages = Math.ceil(docCount / limit);
+
+        if (response.message === undefined) {
+
+            res
+                .status(response.status)
+                .json({
+                    status: httpStatus.OK,
+                    message: "List of Notes",
+                    data: response.data,
+                    meta: { page, limit, docCount, totalPages }
+                });
+
+        } else {
+            res
+                .status(response.status)
+                .json({
+                    status: httpStatus.OK,
+                    message: response.message,
+                    data: null
+                });
+
+        }
+    } catch (error: any) {
+
+        res
+            .status(httpStatus.INTERNAL_SERVER_ERROR)
+            .json({
+                status: httpStatus.INTERNAL_SERVER_ERROR,
+                message: error.message,
+                data: null
+            });
     }
 }

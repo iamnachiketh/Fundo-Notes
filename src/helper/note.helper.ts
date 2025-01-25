@@ -2,7 +2,7 @@ import redisClient from "../config/redis.config";
 import { logger } from "../logger";
 
 
-export const getNotesOfARange = function (notes: string[], skip: number, limit: number): string[] {
+export const getNotesOfARange = function (notes: any[], skip: number, limit: number): string[] {
     return notes.slice(skip, skip + limit);
 };
 

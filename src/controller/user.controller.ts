@@ -49,13 +49,16 @@ export const handleLoginUser = async function (req: Request, res: Response) {
     try {
         const response = await UserService.loginUser(data);
         if (response.message === undefined)
+        {
+            const {refreshToken, ...newUserData} = response.UserDetails;
             res.status(response.status).json({
                 status: response.status,
                 message: "User logged in successfully",
-                data: response.UserDetails,
+                data: newUserData,
                 accessToken: response.token?.accessToken,
                 refreshToken: response.token?.refreshToken
             });
+        }
         else
             res.status(response.status).json({ status: response.status, messsage: response.message, data: null });
     } catch (error: any) {

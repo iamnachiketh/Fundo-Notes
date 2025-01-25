@@ -56,7 +56,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.handleAddToArchive = exports.handleUpdateNotes = exports.handleDeleteNotesFromTrash = exports.handleTrashById = exports.handleGetAllNotesOfAUser = exports.handleGetNoteById = exports.handleCreateNote = void 0;
+exports.handleSearchNotes = exports.handleAddToArchive = exports.handleUpdateNotes = exports.handleDeleteNotesFromTrash = exports.handleTrashById = exports.handleGetAllNotesOfAUser = exports.handleGetNoteById = exports.handleCreateNote = void 0;
 const NoteService = __importStar(require("../service/note.service"));
 const http_status_codes_1 = __importDefault(require("http-status-codes"));
 const logger_1 = require("../logger");
@@ -258,3 +258,53 @@ const handleAddToArchive = function (req, res) {
     });
 };
 exports.handleAddToArchive = handleAddToArchive;
+const handleSearchNotes = function (req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const _a = req.body, { payload } = _a, data = __rest(_a, ["payload"]);
+            if (data.userEmail !== payload.email) {
+                res.status(http_status_codes_1.default.FORBIDDEN).json({ status: http_status_codes_1.default.FORBIDDEN, message: "Invalid User", data: null });
+                return;
+            }
+            const page = Number(req.query.page) || 1;
+            const limit = Number(req.query.limit) || 5;
+            if (page <= 0 || limit <= 0) {
+                res.status(http_status_codes_1.default.BAD_REQUEST).json({ status: http_status_codes_1.default.BAD_REQUEST, message: "Page and limit must be positive integer", data: null });
+                return;
+            }
+            const skip = (page - 1) * limit;
+            const response = yield NoteService.searchNote(data.query, data.userEmail, skip, limit);
+            const docCount = response.totalDocument === undefined ? 0 : response.totalDocument;
+            const totalPages = Math.ceil(docCount / limit);
+            if (response.message === undefined) {
+                res
+                    .status(response.status)
+                    .json({
+                    status: http_status_codes_1.default.OK,
+                    message: "List of Notes",
+                    data: response.data,
+                    meta: { page, limit, docCount, totalPages }
+                });
+            }
+            else {
+                res
+                    .status(response.status)
+                    .json({
+                    status: http_status_codes_1.default.OK,
+                    message: response.message,
+                    data: null
+                });
+            }
+        }
+        catch (error) {
+            res
+                .status(http_status_codes_1.default.INTERNAL_SERVER_ERROR)
+                .json({
+                status: http_status_codes_1.default.INTERNAL_SERVER_ERROR,
+                message: error.message,
+                data: null
+            });
+        }
+    });
+};
+exports.handleSearchNotes = handleSearchNotes;

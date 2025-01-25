@@ -391,3 +391,54 @@ export const addToArchive = async function (noteId: string, userEmail: string):
         return { status: httpStatus.INTERNAL_SERVER_ERROR, message: error.message };
     }
 };
+
+
+export const searchNote = async function(searchString: string, email:string,skip:number, limit:number){
+    try{
+        const redisUserNoteKey = `${email}:notes:search`;
+
+        const notes = await redisClient.lRange(redisUserNoteKey, 0, -1);
+
+        if(notes.length > 0){
+            const parsedNotes = notes.map(note => JSON.parse(note));
+            const searchResult = parsedNotes.filter(note => {
+                return note.title.includes(searchString) || note.desc.includes(searchString);
+            });
+
+            const slicedNotes = NoteHelper.getNotesOfARange(searchResult, skip, limit);
+
+            return { status: httpStatus.OK, data: slicedNotes, totalDocument: searchResult.length };
+        }
+
+        let result = await Note.find({
+            userEmail: email,
+            $or: [
+                { title: { $regex: searchString, $options: "i" } },
+                { desc: { $regex: searchString, $options: "i" } }
+            ]
+        }, { _id: 0, __v: 0 })
+        .sort({ noteId: -1 });
+
+        let totalDocument = result.length;
+
+        if(result.length > 0){
+            await redisClient.del(redisUserNoteKey);
+
+            const pipeline = redisClient.multi();
+
+            result.forEach(note => pipeline.rPush(redisUserNoteKey, JSON.stringify(note)));
+
+            pipeline.expire(redisUserNoteKey, 3600);
+
+            await pipeline.exec();
+        }
+
+        result = result.slice(skip, skip + limit);
+
+        return { status: httpStatus.OK, data: result, totalDocument };
+
+    }catch(error: any){
+        return { status: httpStatus.INTERNAL_SERVER_ERROR, message: error.message };
+    }
+
+}

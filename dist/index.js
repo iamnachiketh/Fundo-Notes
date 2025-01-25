@@ -43,8 +43,10 @@ const db_connection_1 = require("./dbconnection/db.connection");
 const logger_1 = require("./logger");
 const morgan_1 = __importDefault(require("morgan"));
 const router = __importStar(require("./routes/index.router"));
+const cors_1 = __importDefault(require("cors"));
 const app = (0, express_1.default)();
 (0, db_connection_1.dbConnection)();
+app.use((0, cors_1.default)());
 app.use(express_1.default.json());
 const morganFormat = ":method :url :status :response-time ms :res[content-length]";
 app.use((0, morgan_1.default)(morganFormat, {

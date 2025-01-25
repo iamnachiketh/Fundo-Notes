@@ -45,7 +45,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.addToArchive = exports.updateNotes = exports.deleteNotesFromTrash = exports.trashNotesById = exports.getAllNotes = exports.checkNoteId = exports.getNoteById = exports.createNote = void 0;
+exports.searchNote = exports.addToArchive = exports.updateNotes = exports.deleteNotesFromTrash = exports.trashNotesById = exports.getAllNotes = exports.checkNoteId = exports.getNoteById = exports.createNote = void 0;
 const note_model_1 = __importDefault(require("../models/note.model"));
 const http_status_codes_1 = __importDefault(require("http-status-codes"));
 const user_model_1 = __importDefault(require("../models/user.model"));
@@ -294,3 +294,41 @@ const addToArchive = function (noteId, userEmail) {
     });
 };
 exports.addToArchive = addToArchive;
+const searchNote = function (searchString, email, skip, limit) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const redisUserNoteKey = `${email}:notes:search`;
+            const notes = yield redis_config_1.default.lRange(redisUserNoteKey, 0, -1);
+            if (notes.length > 0) {
+                const parsedNotes = notes.map(note => JSON.parse(note));
+                const searchResult = parsedNotes.filter(note => {
+                    return note.title.includes(searchString) || note.desc.includes(searchString);
+                });
+                const slicedNotes = NoteHelper.getNotesOfARange(searchResult, skip, limit);
+                return { status: http_status_codes_1.default.OK, data: slicedNotes, totalDocument: searchResult.length };
+            }
+            let result = yield note_model_1.default.find({
+                userEmail: email,
+                $or: [
+                    { title: { $regex: searchString, $options: "i" } },
+                    { desc: { $regex: searchString, $options: "i" } }
+                ]
+            }, { _id: 0, __v: 0 })
+                .sort({ noteId: -1 });
+            let totalDocument = result.length;
+            if (result.length > 0) {
+                yield redis_config_1.default.del(redisUserNoteKey);
+                const pipeline = redis_config_1.default.multi();
+                result.forEach(note => pipeline.rPush(redisUserNoteKey, JSON.stringify(note)));
+                pipeline.expire(redisUserNoteKey, 3600);
+                yield pipeline.exec();
+            }
+            result = result.slice(skip, skip + limit);
+            return { status: http_status_codes_1.default.OK, data: result, totalDocument };
+        }
+        catch (error) {
+            return { status: http_status_codes_1.default.INTERNAL_SERVER_ERROR, message: error.message };
+        }
+    });
+};
+exports.searchNote = searchNote;

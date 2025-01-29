@@ -72,12 +72,18 @@ export const handleGetNoteById = async function (req: Request, res: Response) {
 
 export const handleGetAllNotesOfAUser = async function (req: Request, res: Response) {
     try {
-        const { payload, ...data } = req.body;
+        const { payload } = req.body;
 
-        if (data.userEmail !== payload.email) {
+        const userEmail = (req.query.userEmail) as string;
+
+        if (userEmail !== payload.email) {
 
             logger.error("Invalid User");
-            res.status(httpStatus.FORBIDDEN).json({ status: httpStatus.FORBIDDEN, message: "Invalid User", data: null });
+            res.status(httpStatus.FORBIDDEN).json({
+                status: httpStatus.FORBIDDEN,
+                message: "Invalid User",
+                data: null
+            });
             return;
         }
 
@@ -98,7 +104,7 @@ export const handleGetAllNotesOfAUser = async function (req: Request, res: Respo
 
         const skip = (page - 1) * limit;
 
-        const response = await NoteService.getAllNotes(data.userEmail, skip, limit);
+        const response = await NoteService.getAllNotes(userEmail, skip, limit);
 
         const docCount = response.totalDocument === undefined ? 0 : response.totalDocument;
 
@@ -172,11 +178,13 @@ export const handleTrashById = async function (req: Request, res: Response) {
 
 export const handleDeleteNotesFromTrash = async function (req: Request, res: Response) {
     try {
-        const { payload, ...data } = req.body;
+        const { payload } = req.body;
 
         const noteId = req.params.id;
 
-        if (data.userEmail !== payload.email) {
+        const userEmail = (req.query.userEmail) as string;
+
+        if (userEmail !== payload.email) {
 
             logger.error("Invalid User");
             res.status(httpStatus.FORBIDDEN).json({
@@ -187,7 +195,7 @@ export const handleDeleteNotesFromTrash = async function (req: Request, res: Res
             return;
         }
 
-        const response = await NoteService.deleteNotesFromTrash(noteId, data.userEmail);
+        const response = await NoteService.deleteNotesFromTrash(noteId, userEmail);
 
         res.status(response.status).json({
             status: response.status,
@@ -303,6 +311,131 @@ export const handleSearchNotes = async function (req: Request, res: Response) {
         }
     } catch (error: any) {
 
+        res
+            .status(httpStatus.INTERNAL_SERVER_ERROR)
+            .json({
+                status: httpStatus.INTERNAL_SERVER_ERROR,
+                message: error.message,
+                data: null
+            });
+    }
+}
+
+
+export const handleGetAllNotesFromArchive = async function (req: Request, res: Response) {
+    try {
+        const email = (req.query.email) as string;
+
+        const { payload } = req.body;
+
+        if (email !== payload.email) {
+
+            logger.error("Invalid User");
+            res
+                .status(httpStatus.FORBIDDEN)
+                .json({
+                    status: httpStatus.FORBIDDEN,
+                    message: "Invalid User",
+                    data: null
+                });
+            return;
+        }
+
+        const response = await NoteService.getAllFromArchive(email);
+
+        res
+            .status(response.status)
+            .json({
+                status: response.status,
+                message: response.message,
+                data: response.data
+            })
+
+    } catch (error: any) {
+        res
+            .status(httpStatus.INTERNAL_SERVER_ERROR)
+            .json({
+                status: httpStatus.INTERNAL_SERVER_ERROR,
+                message: error.message,
+                data: null
+            })
+    }
+}
+
+
+
+
+export const handleGetAllFromTrash = async function (req: Request, res: Response) {
+    try {
+        const { payload } = req.body;
+
+        const email = (req.query.email) as string;
+
+        if (email !== payload.email) {
+
+            logger.error("Invalid User");
+            res
+                .status(httpStatus.FORBIDDEN)
+                .json({
+                    status: httpStatus.FORBIDDEN,
+                    message: "Invalid User",
+                    data: null
+                });
+            return;
+        }
+
+        const response = await NoteService.getAllFromTrash(email);
+
+        res
+            .status(response.status)
+            .json({
+                status: response.status,
+                message: response.message,
+                data: response.data
+            });
+
+    } catch (error: any) {
+        res
+            .status(httpStatus.INTERNAL_SERVER_ERROR)
+            .json({
+                status: httpStatus.INTERNAL_SERVER_ERROR,
+                message: error.message,
+                data: null
+            })
+    }
+}
+
+
+export const handleRestoreNote = async function (req: Request, res: Response) {
+    try {
+        const { payload, ...data } = req.body;
+
+        const noteId = req.params.id;
+
+        if (data.email !== payload.email) {
+
+            logger.error("Invalid User");
+            res
+                .status(httpStatus.FORBIDDEN)
+                .json({
+                    status: httpStatus.FORBIDDEN,
+                    message: "Invalid User",
+                    data: null
+                });
+            return;
+        }
+
+        const response = await NoteService.restoreNote(noteId, data.email);
+
+        res
+            .status(response.status)
+            .json({
+                status: response.status,
+                message: response.message,
+                data: null
+            });
+
+    } catch (error: any) {
         res
             .status(httpStatus.INTERNAL_SERVER_ERROR)
             .json({

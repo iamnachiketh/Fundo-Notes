@@ -14,11 +14,19 @@ router.get("/", AuthMiddleware.verifyToken, NoteController.handleGetAllNotesOfAU
 
 router.get("/note-search/search", AuthMiddleware.verifyToken, NoteController.handleSearchNotes);
 
+router.get("/archive/data", AuthMiddleware.verifyToken, NoteController.handleGetAllNotesFromArchive);
+
+router.get("/trash/data", AuthMiddleware.verifyToken, NoteController.handleGetAllFromTrash);
+
 router.put("/:id", AuthMiddleware.verifyToken, NoteController.handleUpdateNotes);
 
 router.put("/:id/trash", AuthMiddleware.verifyToken, NoteController.handleTrashById);
 
+router.put("/:id/restore", AuthMiddleware.verifyToken, NoteController.handleRestoreNote);
+
 router.put("/:id/archive", AuthMiddleware.verifyToken, NoteController.handleAddToArchive);
+
+router.put("/:id/unarchive", AuthMiddleware.verifyToken);
 
 router.delete("/:id/delete", AuthMiddleware.verifyToken, NoteController.handleDeleteNotesFromTrash);
 

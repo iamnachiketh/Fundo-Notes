@@ -45,7 +45,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.searchNote = exports.addToArchive = exports.updateNotes = exports.deleteNotesFromTrash = exports.trashNotesById = exports.getAllNotes = exports.checkNoteId = exports.getNoteById = exports.createNote = void 0;
+exports.restoreNote = exports.getAllFromTrash = exports.getAllFromArchive = exports.searchNote = exports.addToArchive = exports.updateNotes = exports.deleteNotesFromTrash = exports.trashNotesById = exports.getAllNotes = exports.checkNoteId = exports.getNoteById = exports.createNote = void 0;
 const note_model_1 = __importDefault(require("../models/note.model"));
 const http_status_codes_1 = __importDefault(require("http-status-codes"));
 const user_model_1 = __importDefault(require("../models/user.model"));
@@ -227,9 +227,12 @@ exports.trashNotesById = trashNotesById;
 const deleteNotesFromTrash = function (noteId, userEmail) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            yield note_model_1.default.findOneAndDelete({ noteId: noteId, isTrash: true });
+            const response = yield note_model_1.default.findOneAndDelete({ noteId: noteId, isTrash: true });
+            if (!response) {
+                return { status: http_status_codes_1.default.NOT_FOUND, message: "Note is not present/already been deleted" };
+            }
             yield redis_config_1.default.del(`notes:${userEmail}:${noteId}`);
-            return { status: http_status_codes_1.default.GONE, message: "Note has been deleted from trash" };
+            return { status: http_status_codes_1.default.OK, message: "Note has been deleted from trash" };
         }
         catch (error) {
             return { status: http_status_codes_1.default.INTERNAL_SERVER_ERROR, message: error.message };
@@ -332,3 +335,78 @@ const searchNote = function (searchString, email, skip, limit) {
     });
 };
 exports.searchNote = searchNote;
+const getAllFromArchive = function (email) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const response = yield note_model_1.default.find({
+                userEmail: email, isArchive: true, isTrash: false
+            }, { _id: 0, __v: 0 })
+                .sort({ noteId: -1 });
+            if (response.length <= 0) {
+                return { status: http_status_codes_1.default.OK, message: "No Notes present", data: null };
+            }
+            return { status: http_status_codes_1.default.OK, message: "List of Notes", data: response };
+        }
+        catch (error) {
+            return { status: http_status_codes_1.default.INTERNAL_SERVER_ERROR, message: error.message, data: null };
+        }
+    });
+};
+exports.getAllFromArchive = getAllFromArchive;
+const getAllFromTrash = function (email) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const response = yield note_model_1.default
+                .find({ userEmail: email, isTrash: true }, { _id: 0, __v: 0 })
+                .sort({ noteId: -1 });
+            if (response.length <= 0) {
+                return { status: http_status_codes_1.default.OK, message: "No Note in the trash", data: null };
+            }
+            return { status: http_status_codes_1.default.OK, message: "List of the trash notes", data: response };
+        }
+        catch (error) {
+            return { status: http_status_codes_1.default.INTERNAL_SERVER_ERROR, message: error.message, data: null };
+        }
+    });
+};
+exports.getAllFromTrash = getAllFromTrash;
+const restoreNote = function (noteId, email) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const session = yield mongoose_1.default.startSession();
+        session.startTransaction();
+        try {
+            const response = yield user_model_1.default.findOneAndUpdate({ email: email }, {
+                $pull: {
+                    notesId: noteId
+                },
+                $inc: {
+                    notesCount: 1
+                }
+            }, { new: true });
+            if (!response) {
+                yield session.abortTransaction();
+                session.endSession();
+                return { status: http_status_codes_1.default.NOT_FOUND, message: "User Not Found" };
+            }
+            const result = yield note_model_1.default.findOneAndUpdate({ userEmail: email, noteId: noteId }, {
+                $set: {
+                    isTrash: false
+                }
+            }, { new: true });
+            if (!result) {
+                yield session.abortTransaction();
+                session.endSession();
+                return { status: http_status_codes_1.default.NOT_FOUND, message: `Note with id ${noteId} does not exist` };
+            }
+            yield session.commitTransaction();
+            session.endSession();
+            return { status: http_status_codes_1.default.OK, message: "Note has been restored" };
+        }
+        catch (error) {
+            yield session.abortTransaction();
+            session.endSession();
+            return { status: http_status_codes_1.default.INTERNAL_SERVER_ERROR, message: error.message };
+        }
+    });
+};
+exports.restoreNote = restoreNote;

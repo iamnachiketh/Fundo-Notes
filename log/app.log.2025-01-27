@@ -1,0 +1,84 @@
+[2025-01-27 01:32:58.362 PM] [32minfo[39m: 	[32mServer is running on port http://localhost:4000[39m
+[2025-01-27 01:33:01.209 PM] [31merror[39m: 	[31mError has been occured: Error: Connection timeout[39m
+[2025-01-27 01:33:06.142 PM] [32minfo[39m: 	[32mConnected to Redis[39m
+[2025-01-27 01:33:08.223 PM] [32minfo[39m: 	[32mConnected to the database[39m
+[2025-01-27 02:55:32.932 PM] [32minfo[39m: 	[32m{"method":"POST","url":"/api/v1/register","status":"404","responseTime":"71.149"}[39m
+[2025-01-27 02:57:59.546 PM] [32minfo[39m: 	[32m{"method":"POST","url":"/api/v1/users/register","status":"201","responseTime":"8495.309"}[39m
+[2025-01-27 03:15:05.159 PM] [32minfo[39m: 	[32m{"method":"POST","url":"/api/v1/users/register","status":"201","responseTime":"507.541"}[39m
+[2025-01-27 03:16:11.758 PM] [32minfo[39m: 	[32m{"method":"POST","url":"/api/v1/users/register","status":"409","responseTime":"5445.983"}[39m
+[2025-01-27 03:18:55.583 PM] [32minfo[39m: 	[32m{"method":"POST","url":"/api/v1/users/register","status":"409","responseTime":"195.093"}[39m
+[2025-01-27 03:31:06.675 PM] [32minfo[39m: 	[32m{"method":"POST","url":"/api/v1/users/register","status":"409","responseTime":"251.744"}[39m
+[2025-01-27 03:33:42.624 PM] [32minfo[39m: 	[32m{"method":"POST","url":"/api/v1/users/register","status":"201","responseTime":"240.218"}[39m
+[2025-01-27 03:42:19.515 PM] [32minfo[39m: 	[32m{"method":"POST","url":"/api/v1/users/register","status":"409","responseTime":"612.705"}[39m
+[2025-01-27 03:42:35.412 PM] [32minfo[39m: 	[32m{"method":"POST","url":"/api/v1/users/register","status":"409","responseTime":"113.590"}[39m
+[2025-01-27 05:07:43.473 PM] [32minfo[39m: 	[32m{"method":"POST","url":"/api/v1/users/register","status":"201","responseTime":"732.781"}[39m
+[2025-01-27 05:10:23.669 PM] [32minfo[39m: 	[32m{"method":"POST","url":"/api/v1/users/register","status":"201","responseTime":"270.751"}[39m
+[2025-01-27 05:12:40.325 PM] [32minfo[39m: 	[32m{"method":"POST","url":"/api/v1/users/register","status":"201","responseTime":"316.740"}[39m
+[2025-01-27 05:16:05.734 PM] [32minfo[39m: 	[32m{"method":"POST","url":"/api/v1/users/register","status":"201","responseTime":"4158.143"}[39m
+[2025-01-27 05:17:08.547 PM] [32minfo[39m: 	[32m{"method":"POST","url":"/api/v1/users/register","status":"409","responseTime":"106.590"}[39m
+[2025-01-27 05:19:17.105 PM] [32minfo[39m: 	[32m{"method":"POST","url":"/api/v1/users/register","status":"201","responseTime":"295.959"}[39m
+[2025-01-27 05:46:24.934 PM] [32minfo[39m: 	[32m{"method":"POST","url":"/api/v1/login","status":"404","responseTime":"378.368"}[39m
+[2025-01-27 05:46:53.701 PM] [32minfo[39m: 	[32m{"method":"POST","url":"/api/v1/users/login","status":"401","responseTime":"1914.378"}[39m
+[2025-01-27 05:48:20.911 PM] [31merror[39m: 	[31mError in connecting to RabbitMQ: [39m
+[2025-01-27 05:48:20.922 PM] [32minfo[39m: 	[32m{"method":"POST","url":"/api/v1/users/login","status":"500","responseTime":"6027.369"}[39m
+[2025-01-27 05:52:20.831 PM] [32minfo[39m: 	[32mServer is running on port http://localhost:4000[39m
+[2025-01-27 05:52:20.836 PM] [31merror[39m: 	[31mError has been occured: Error: Connection timeout[39m
+[2025-01-27 05:52:20.846 PM] [32minfo[39m: 	[32mConnected to Redis[39m
+[2025-01-27 05:52:21.148 PM] [32minfo[39m: 	[32mConnected to the database[39m
+[2025-01-27 05:53:00.944 PM] [32minfo[39m: 	[32m{"method":"POST","url":"/api/v1/users/login","status":"200","responseTime":"130.241"}[39m
+[2025-01-27 06:06:35.576 PM] [32minfo[39m: 	[32m{"method":"POST","url":"/api/v1/users/login","status":"401","responseTime":"151.856"}[39m
+[2025-01-27 06:08:01.179 PM] [32minfo[39m: 	[32m{"method":"POST","url":"/api/v1/users/login","status":"401","responseTime":"150.546"}[39m
+[2025-01-27 06:10:42.594 PM] [32minfo[39m: 	[32mServer is running on port http://localhost:4000[39m
+[2025-01-27 06:10:42.605 PM] [31merror[39m: 	[31mError has been occured: Error: Connection timeout[39m
+[2025-01-27 06:10:42.632 PM] [32minfo[39m: 	[32mConnected to Redis[39m
+[2025-01-27 06:10:42.757 PM] [32minfo[39m: 	[32mConnected to the database[39m
+[2025-01-27 06:11:05.567 PM] [32minfo[39m: 	[32m{"method":"POST","url":"/api/v1/users/login","status":"401","responseTime":"176.631"}[39m
+[2025-01-27 07:23:33.333 PM] [32minfo[39m: 	[32mServer is running on port http://localhost:4000[39m
+[2025-01-27 07:23:33.517 PM] [32minfo[39m: 	[32mConnected to Redis[39m
+[2025-01-27 07:23:33.902 PM] [32minfo[39m: 	[32mConnected to the database[39m
+[2025-01-27 07:25:24.327 PM] [32minfo[39m: 	[32m{"method":"POST","url":"/api/v1/users/login","status":"401","responseTime":"129.407"}[39m
+[2025-01-27 07:26:36.397 PM] [32minfo[39m: 	[32m{"method":"POST","url":"/api/v1/users/login","status":"200","responseTime":"4418.951"}[39m
+[2025-01-27 07:35:34.760 PM] [32minfo[39m: 	[32m{"method":"POST","url":"/api/v1/users/login","status":"200","responseTime":"1119.109"}[39m
+[2025-01-27 07:37:16.594 PM] [32minfo[39m: 	[32m{"method":"POST","url":"/api/v1/users/login","status":"200","responseTime":"1453.947"}[39m
+[2025-01-27 08:03:33.318 PM] [32minfo[39m: 	[32mServer is running on port http://localhost:4000[39m
+[2025-01-27 08:03:33.328 PM] [32minfo[39m: 	[32mConnected to Redis[39m
+[2025-01-27 08:03:33.448 PM] [32minfo[39m: 	[32mConnected to the database[39m
+[2025-01-27 08:04:46.852 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/docs","status":"301","responseTime":"3.545"}[39m
+[2025-01-27 08:04:46.858 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/docs/","status":"200","responseTime":"2.455"}[39m
+[2025-01-27 08:04:50.560 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/docs/swagger-ui-init.js","status":"200","responseTime":"0.771"}[39m
+[2025-01-27 08:04:50.964 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/docs/swagger-ui-standalone-preset.js","status":"200","responseTime":"327.847"}[39m
+[2025-01-27 08:04:51.078 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/docs/swagger-ui.css","status":"200","responseTime":"436.748"}[39m
+[2025-01-27 08:04:51.193 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/docs/swagger-ui-bundle.js","status":"200","responseTime":"420.094"}[39m
+[2025-01-27 08:04:51.790 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/docs/favicon-32x32.png","status":"200","responseTime":"40.430"}[39m
+[2025-01-27 08:45:39.624 PM] [31merror[39m: 	[31mInvalid User[39m
+[2025-01-27 08:45:39.708 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes","status":"403","responseTime":"589.776"}[39m
+[2025-01-27 08:45:42.696 PM] [31merror[39m: 	[31mInvalid User[39m
+[2025-01-27 08:45:42.699 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes","status":"403","responseTime":"5.768"}[39m
+[2025-01-27 08:46:02.280 PM] [31merror[39m: 	[31mInvalid User[39m
+[2025-01-27 08:46:02.283 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes","status":"403","responseTime":"4.108"}[39m
+[2025-01-27 08:46:28.624 PM] [31merror[39m: 	[31mInvalid User[39m
+[2025-01-27 08:46:28.628 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes","status":"403","responseTime":"6.192"}[39m
+[2025-01-27 08:48:03.080 PM] [32minfo[39m: 	[32m{"method":"POST","url":"/api/v1/users/login","status":"200","responseTime":"452.108"}[39m
+[2025-01-27 08:48:03.314 PM] [31merror[39m: 	[31mInvalid User[39m
+[2025-01-27 08:48:03.318 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com","status":"403","responseTime":"4.784"}[39m
+[2025-01-27 08:49:13.855 PM] [31merror[39m: 	[31mInvalid User[39m
+[2025-01-27 08:49:13.859 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com","status":"403","responseTime":"5.737"}[39m
+[2025-01-27 08:57:37.018 PM] [32minfo[39m: 	[32mServer is running on port http://localhost:4000[39m
+[2025-01-27 08:57:37.029 PM] [31merror[39m: 	[31mError has been occured: Error: Connection timeout[39m
+[2025-01-27 08:57:37.052 PM] [32minfo[39m: 	[32mConnected to Redis[39m
+[2025-01-27 08:57:37.228 PM] [32minfo[39m: 	[32mConnected to the database[39m
+[2025-01-27 09:01:26.946 PM] [32minfo[39m: 	[32mServer is running on port http://localhost:4000[39m
+[2025-01-27 09:01:26.973 PM] [32minfo[39m: 	[32mConnected to Redis[39m
+[2025-01-27 09:01:27.032 PM] [32minfo[39m: 	[32mConnected to the database[39m
+[2025-01-27 09:02:42.490 PM] [32minfo[39m: 	[32mRedis key does not exist; skipping update.[39m
+[2025-01-27 09:02:43.201 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"200","responseTime":"4886.693"}[39m
+[2025-01-27 09:04:58.858 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"84.914"}[39m
+[2025-01-27 09:06:46.161 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"69.772"}[39m
+[2025-01-27 09:08:42.584 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"9.545"}[39m
+[2025-01-27 09:09:24.030 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"11.443"}[39m
+[2025-01-27 09:12:05.627 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"11.915"}[39m
+[2025-01-27 09:12:20.453 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"7.890"}[39m
+[2025-01-27 09:17:50.623 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"4328.295"}[39m
+[2025-01-27 09:17:50.804 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"176.450"}[39m
+[2025-01-27 09:20:49.733 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"17.440"}[39m
+[2025-01-27 09:21:06.211 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"15.663"}[39m

@@ -1,0 +1,296 @@
+[2025-01-29 12:00:17.057 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/archive/data?email=rachel.green%40example.com","status":"304","responseTime":"3.647"}[39m
+[2025-01-29 12:00:17.204 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/archive/data?email=rachel.green%40example.com","status":"304","responseTime":"4.020"}[39m
+[2025-01-29 12:01:06.651 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/archive/data?email=rachel.green%40example.com","status":"304","responseTime":"5.080"}[39m
+[2025-01-29 12:01:06.810 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/archive/data?email=rachel.green%40example.com","status":"304","responseTime":"13.030"}[39m
+[2025-01-29 12:01:19.082 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"16.311"}[39m
+[2025-01-29 12:01:19.156 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"72.750"}[39m
+[2025-01-29 12:01:29.176 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/archive/data?email=rachel.green%40example.com","status":"304","responseTime":"3.266"}[39m
+[2025-01-29 12:01:29.183 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/archive/data?email=rachel.green%40example.com","status":"304","responseTime":"4.181"}[39m
+[2025-01-29 12:01:45.888 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/trash/data?email=rachel.green%40example.com","status":"304","responseTime":"13.687"}[39m
+[2025-01-29 12:01:45.904 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/trash/data?email=rachel.green%40example.com","status":"304","responseTime":"11.613"}[39m
+[2025-01-29 12:07:43.886 AM] [31merror[39m: 	[31mError has been occured: Error: Socket closed unexpectedly[39m
+[2025-01-29 12:07:45.735 AM] [32minfo[39m: 	[32mConnected to Redis[39m
+[2025-01-29 12:07:45.773 AM] [31merror[39m: 	[31mError has been occured: Error: Socket closed unexpectedly[39m
+[2025-01-29 12:07:45.774 AM] [31merror[39m: 	[31mError has been occured: Error: Socket closed unexpectedly[39m
+[2025-01-29 12:07:45.789 AM] [32minfo[39m: 	[32mConnected to Redis[39m
+[2025-01-29 12:07:45.792 AM] [31merror[39m: 	[31mError has been occured: Error: Socket closed unexpectedly[39m
+[2025-01-29 12:07:45.818 AM] [31merror[39m: 	[31mError has been occured: Error: Socket closed unexpectedly[39m
+[2025-01-29 12:07:45.882 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:07:45.991 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:07:46.149 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:07:46.612 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:07:46.953 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:07:47.275 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:07:47.661 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:07:48.070 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:07:48.536 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:07:49.048 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:07:49.564 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:07:50.077 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:07:50.590 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:07:51.106 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:07:51.618 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:07:52.135 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:07:52.650 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:07:53.160 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:07:53.674 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:07:54.186 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:07:54.704 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:07:55.221 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:07:55.734 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:07:56.252 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:07:56.764 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:07:57.278 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:07:57.795 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:07:58.312 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:07:58.824 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:07:59.340 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:07:59.856 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:00.368 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:00.888 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:01.407 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:01.923 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:02.438 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:02.959 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:03.469 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:03.982 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:04.489 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:05.003 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:05.518 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:06.030 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:06.547 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:07.063 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:07.580 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:08.097 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:08.613 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:09.130 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:09.650 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:10.167 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:10.670 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:11.192 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:11.708 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:12.224 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:12.741 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:13.258 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:13.778 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:14.295 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:14.815 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:15.332 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:15.852 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:16.369 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:16.884 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:17.399 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:17.912 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:18.426 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:18.942 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:19.457 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:19.973 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:20.490 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:21.005 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:21.520 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:22.032 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:22.552 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:23.067 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:23.588 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:24.102 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:24.619 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:25.132 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:25.648 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:26.163 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:26.677 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:27.195 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:27.711 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:28.225 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:28.742 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:29.256 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:29.773 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:30.292 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:30.810 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:31.328 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:31.836 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:32.354 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:32.873 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:33.389 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:33.893 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:34.408 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:34.921 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:35.438 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:35.949 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:36.465 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:36.983 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:37.497 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:38.010 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:38.529 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:39.042 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:39.558 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:40.071 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:40.588 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:41.107 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:41.621 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:42.136 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:42.650 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:43.164 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:43.683 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:44.198 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:44.706 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:45.210 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:45.726 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:46.241 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:46.758 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:47.275 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:47.789 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:48.298 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:48.814 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:49.332 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:49.848 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:50.360 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:50.876 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:51.393 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:51.910 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 12:08:52.423 AM] [31merror[39m: 	[31mError has been occured: AggregateError[39m
+[2025-01-29 08:20:25.066 AM] [32minfo[39m: 	[32mServer is running on port http://localhost:4000[39m
+[2025-01-29 08:20:25.263 AM] [31merror[39m: 	[31mError has been occured: Error: Connection timeout[39m
+[2025-01-29 08:20:25.568 AM] [32minfo[39m: 	[32mConnected to Redis[39m
+[2025-01-29 08:20:25.762 AM] [32minfo[39m: 	[32mConnected to the database[39m
+[2025-01-29 08:26:30.088 AM] [32minfo[39m: 	[32mRedis key does not exist; skipping update.[39m
+[2025-01-29 08:26:30.795 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"19609.368"}[39m
+[2025-01-29 08:26:30.803 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"200","responseTime":"5.541"}[39m
+[2025-01-29 08:26:49.308 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/trash/data?email=rachel.green%40example.com","status":"304","responseTime":"12.153"}[39m
+[2025-01-29 08:26:49.320 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/trash/data?email=rachel.green%40example.com","status":"304","responseTime":"7.828"}[39m
+[2025-01-29 08:27:08.694 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/archive/data?email=rachel.green%40example.com","status":"304","responseTime":"4.101"}[39m
+[2025-01-29 08:27:08.701 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/archive/data?email=rachel.green%40example.com","status":"304","responseTime":"4.588"}[39m
+[2025-01-29 08:45:49.669 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/archive/data?email=rachel.green%40example.com","status":"304","responseTime":"5.580"}[39m
+[2025-01-29 08:45:49.676 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/archive/data?email=rachel.green%40example.com","status":"304","responseTime":"4.666"}[39m
+[2025-01-29 10:12:24.725 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/archive/data?email=rachel.green%40example.com","status":"304","responseTime":"49.756"}[39m
+[2025-01-29 10:12:24.755 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/archive/data?email=rachel.green%40example.com","status":"304","responseTime":"21.459"}[39m
+[2025-01-29 10:12:33.247 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/trash/data?email=rachel.green%40example.com","status":"200","responseTime":"3.907"}[39m
+[2025-01-29 10:12:33.349 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/trash/data?email=rachel.green%40example.com","status":"304","responseTime":"9.967"}[39m
+[2025-01-29 10:13:25.594 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/trash/data?email=rachel.green%40example.com","status":"304","responseTime":"6.475"}[39m
+[2025-01-29 10:13:25.616 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/trash/data?email=rachel.green%40example.com","status":"304","responseTime":"15.751"}[39m
+[2025-01-29 10:24:47.607 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/trash/data?email=rachel.green%40example.com","status":"304","responseTime":"9.612"}[39m
+[2025-01-29 10:24:47.866 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/trash/data?email=rachel.green%40example.com","status":"304","responseTime":"216.417"}[39m
+[2025-01-29 10:24:56.682 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/trash/data?email=rachel.green%40example.com","status":"304","responseTime":"3.908"}[39m
+[2025-01-29 10:24:56.690 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/trash/data?email=rachel.green%40example.com","status":"304","responseTime":"4.462"}[39m
+[2025-01-29 10:27:01.810 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/archive/data?email=rachel.green%40example.com","status":"304","responseTime":"4.844"}[39m
+[2025-01-29 10:27:01.817 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/archive/data?email=rachel.green%40example.com","status":"304","responseTime":"3.646"}[39m
+[2025-01-29 10:27:35.398 AM] [32minfo[39m: 	[32mRedis key does not exist; skipping update.[39m
+[2025-01-29 10:28:11.267 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"-","responseTime":"-"}[39m
+[2025-01-29 10:28:11.268 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"-","responseTime":"-"}[39m
+[2025-01-29 10:28:15.019 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"200","responseTime":"6.865"}[39m
+[2025-01-29 10:28:17.520 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"2497.710"}[39m
+[2025-01-29 10:29:35.076 AM] [31merror[39m: 	[31mModel Validation Error[39m
+[2025-01-29 10:29:35.078 AM] [32minfo[39m: 	[32m{"method":"POST","url":"/api/v1/notes","status":"400","responseTime":"26.045"}[39m
+[2025-01-29 10:39:17.006 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"5.639"}[39m
+[2025-01-29 10:39:19.625 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"2615.136"}[39m
+[2025-01-29 10:44:43.461 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"6.585"}[39m
+[2025-01-29 10:44:43.482 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"13.861"}[39m
+[2025-01-29 10:47:25.396 AM] [31merror[39m: 	[31mModel Validation Error[39m
+[2025-01-29 10:47:25.398 AM] [32minfo[39m: 	[32m{"method":"POST","url":"/api/v1/notes","status":"400","responseTime":"5.008"}[39m
+[2025-01-29 10:53:10.063 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"695.737"}[39m
+[2025-01-29 10:53:11.032 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"965.541"}[39m
+[2025-01-29 10:54:12.439 AM] [31merror[39m: 	[31mModel Validation Error[39m
+[2025-01-29 10:54:12.442 AM] [32minfo[39m: 	[32m{"method":"POST","url":"/api/v1/notes","status":"400","responseTime":"3.958"}[39m
+[2025-01-29 10:57:44.670 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"10.721"}[39m
+[2025-01-29 10:57:44.697 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"22.766"}[39m
+[2025-01-29 10:58:01.796 AM] [31merror[39m: 	[31mModel Validation Error[39m
+[2025-01-29 10:58:01.798 AM] [32minfo[39m: 	[32m{"method":"POST","url":"/api/v1/notes","status":"400","responseTime":"3.801"}[39m
+[2025-01-29 11:03:15.006 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"340.347"}[39m
+[2025-01-29 11:03:15.026 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"12.463"}[39m
+[2025-01-29 11:04:04.465 AM] [31merror[39m: 	[31mModel Validation Error[39m
+[2025-01-29 11:04:04.467 AM] [32minfo[39m: 	[32m{"method":"POST","url":"/api/v1/notes","status":"400","responseTime":"3.008"}[39m
+[2025-01-29 11:06:33.049 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"9.260"}[39m
+[2025-01-29 11:06:35.061 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"2008.722"}[39m
+[2025-01-29 11:06:47.156 AM] [31merror[39m: 	[31mModel Validation Error[39m
+[2025-01-29 11:06:47.158 AM] [32minfo[39m: 	[32m{"method":"POST","url":"/api/v1/notes","status":"400","responseTime":"3.426"}[39m
+[2025-01-29 11:14:58.873 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"102.974"}[39m
+[2025-01-29 11:14:58.907 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"26.734"}[39m
+[2025-01-29 11:15:18.116 AM] [32minfo[39m: 	[32mNote has been created[39m
+[2025-01-29 11:15:18.118 AM] [32minfo[39m: 	[32m{"method":"POST","url":"/api/v1/notes","status":"201","responseTime":"2063.563"}[39m
+[2025-01-29 11:15:42.804 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"200","responseTime":"4.098"}[39m
+[2025-01-29 11:15:42.827 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"12.241"}[39m
+[2025-01-29 11:17:25.206 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"4.368"}[39m
+[2025-01-29 11:17:25.222 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"12.965"}[39m
+[2025-01-29 11:26:10.425 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"4.831"}[39m
+[2025-01-29 11:26:10.432 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"5.064"}[39m
+[2025-01-29 11:28:11.161 AM] [32minfo[39m: 	[32mRedis key does not exist; skipping update.[39m
+[2025-01-29 11:28:11.277 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"200","responseTime":"125.540"}[39m
+[2025-01-29 11:28:11.434 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"154.520"}[39m
+[2025-01-29 11:32:42.356 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"5.031"}[39m
+[2025-01-29 11:32:42.363 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"4.632"}[39m
+[2025-01-29 11:32:51.824 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"9.138"}[39m
+[2025-01-29 11:32:51.832 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"5.709"}[39m
+[2025-01-29 11:49:06.008 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"9.512"}[39m
+[2025-01-29 11:49:06.175 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"162.561"}[39m
+[2025-01-29 11:50:50.627 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"15.575"}[39m
+[2025-01-29 11:50:50.641 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"8.683"}[39m
+[2025-01-29 11:51:23.034 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"8.880"}[39m
+[2025-01-29 11:51:23.045 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"8.140"}[39m
+[2025-01-29 11:51:46.449 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"8.596"}[39m
+[2025-01-29 11:51:46.461 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"8.984"}[39m
+[2025-01-29 11:52:35.025 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"7.708"}[39m
+[2025-01-29 11:52:35.035 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"6.568"}[39m
+[2025-01-29 12:00:33.768 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"9.949"}[39m
+[2025-01-29 12:00:33.780 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"7.559"}[39m
+[2025-01-29 12:04:57.514 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"9.201"}[39m
+[2025-01-29 12:04:57.525 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"7.169"}[39m
+[2025-01-29 12:12:11.374 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"8.929"}[39m
+[2025-01-29 12:12:11.385 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"7.242"}[39m
+[2025-01-29 12:27:35.032 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/trash/data?email=rachel.green%40example.com","status":"304","responseTime":"225.610"}[39m
+[2025-01-29 12:27:35.041 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/trash/data?email=rachel.green%40example.com","status":"304","responseTime":"5.610"}[39m
+[2025-01-29 12:27:45.205 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/archive/data?email=rachel.green%40example.com","status":"304","responseTime":"44.965"}[39m
+[2025-01-29 12:27:45.263 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/archive/data?email=rachel.green%40example.com","status":"304","responseTime":"6.113"}[39m
+[2025-01-29 12:28:23.151 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/trash/data?email=rachel.green%40example.com","status":"304","responseTime":"14.158"}[39m
+[2025-01-29 12:28:23.162 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/trash/data?email=rachel.green%40example.com","status":"304","responseTime":"7.086"}[39m
+[2025-01-29 12:29:36.899 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/archive/data?email=rachel.green%40example.com","status":"304","responseTime":"517.264"}[39m
+[2025-01-29 12:29:36.957 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/archive/data?email=rachel.green%40example.com","status":"304","responseTime":"8.115"}[39m
+[2025-01-29 12:40:08.019 PM] [32minfo[39m: 	[32mRedis key does not exist; skipping update.[39m
+[2025-01-29 12:40:08.726 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"721.124"}[39m
+[2025-01-29 12:40:08.746 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"14.664"}[39m
+[2025-01-29 12:43:56.879 PM] [32minfo[39m: 	[32mNote has been created[39m
+[2025-01-29 12:43:56.883 PM] [32minfo[39m: 	[32m{"method":"POST","url":"/api/v1/notes","status":"201","responseTime":"310.384"}[39m
+[2025-01-29 01:14:11.961 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"200","responseTime":"47.747"}[39m
+[2025-01-29 01:14:12.195 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"40.875"}[39m
+[2025-01-29 01:14:27.884 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"4.712"}[39m
+[2025-01-29 01:14:41.044 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"1218.343"}[39m
+[2025-01-29 01:14:41.051 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"5.124"}[39m
+[2025-01-29 01:15:04.100 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"4.799"}[39m
+[2025-01-29 01:15:07.506 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"58.836"}[39m
+[2025-01-29 01:15:07.559 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"10.940"}[39m
+[2025-01-29 01:15:22.101 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"4.744"}[39m
+[2025-01-29 01:15:24.245 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"13.364"}[39m
+[2025-01-29 01:15:24.257 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"8.406"}[39m
+[2025-01-29 01:16:47.207 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/trash/data?email=rachel.green%40example.com","status":"304","responseTime":"34.762"}[39m
+[2025-01-29 01:16:47.284 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/trash/data?email=rachel.green%40example.com","status":"304","responseTime":"4.749"}[39m
+[2025-01-29 01:20:17.522 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/trash/data?email=rachel.green%40example.com","status":"304","responseTime":"426.195"}[39m
+[2025-01-29 01:20:25.913 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/trash/data?email=rachel.green%40example.com","status":"304","responseTime":"5.883"}[39m
+[2025-01-29 01:20:25.920 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/trash/data?email=rachel.green%40example.com","status":"304","responseTime":"4.389"}[39m
+[2025-01-29 01:23:27.094 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/trash/data?email=rachel.green%40example.com","status":"304","responseTime":"3.515"}[39m
+[2025-01-29 01:23:27.106 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/trash/data?email=rachel.green%40example.com","status":"304","responseTime":"10.095"}[39m
+[2025-01-29 01:23:56.098 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/trash/data?email=rachel.green%40example.com","status":"304","responseTime":"10.645"}[39m
+[2025-01-29 01:24:11.156 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/trash/data?email=rachel.green%40example.com","status":"304","responseTime":"4.752"}[39m
+[2025-01-29 01:24:11.222 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/trash/data?email=rachel.green%40example.com","status":"304","responseTime":"2.997"}[39m
+[2025-01-29 01:24:59.083 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/trash/data?email=rachel.green%40example.com","status":"304","responseTime":"4.833"}[39m
+[2025-01-29 01:25:01.602 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/trash/data?email=rachel.green%40example.com","status":"304","responseTime":"4.119"}[39m
+[2025-01-29 01:25:01.609 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/trash/data?email=rachel.green%40example.com","status":"304","responseTime":"4.671"}[39m
+[2025-01-29 01:25:04.135 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/trash/data?email=rachel.green%40example.com","status":"304","responseTime":"3.973"}[39m
+[2025-01-29 01:25:04.147 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/trash/data?email=rachel.green%40example.com","status":"304","responseTime":"10.105"}[39m
+[2025-01-29 01:26:12.901 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"84.404"}[39m
+[2025-01-29 01:26:12.917 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"10.471"}[39m
+[2025-01-29 01:56:40.046 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/archive/data?email=rachel.green%40example.com","status":"304","responseTime":"83.932"}[39m
+[2025-01-29 01:56:40.065 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/archive/data?email=rachel.green%40example.com","status":"304","responseTime":"8.087"}[39m
+[2025-01-29 01:56:49.899 PM] [32minfo[39m: 	[32mRedis key does not exist; skipping update.[39m
+[2025-01-29 01:56:50.446 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"200","responseTime":"851.852"}[39m
+[2025-01-29 01:56:50.606 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=5","status":"304","responseTime":"153.130"}[39m
+[2025-01-29 03:13:06.571 PM] [32minfo[39m: 	[32mServer is running on port http://localhost:4000[39m
+[2025-01-29 03:13:06.576 PM] [31merror[39m: 	[31mError has been occured: Error: Connection timeout[39m
+[2025-01-29 03:13:06.587 PM] [32minfo[39m: 	[32mConnected to Redis[39m
+[2025-01-29 03:13:06.791 PM] [32minfo[39m: 	[32mConnected to the database[39m
+[2025-01-29 05:05:20.471 PM] [32minfo[39m: 	[32mServer is running on port http://localhost:4000[39m
+[2025-01-29 05:05:20.495 PM] [32minfo[39m: 	[32mConnected to Redis[39m
+[2025-01-29 05:05:20.551 PM] [32minfo[39m: 	[32mConnected to the database[39m
+[2025-01-29 05:12:59.166 PM] [32minfo[39m: 	[32mServer is running on port http://localhost:4000[39m
+[2025-01-29 05:12:59.193 PM] [32minfo[39m: 	[32mConnected to Redis[39m
+[2025-01-29 05:12:59.277 PM] [32minfo[39m: 	[32mConnected to the database[39m
+[2025-01-29 05:31:44.165 PM] [32minfo[39m: 	[32mServer is running on port http://localhost:4000[39m
+[2025-01-29 05:31:44.195 PM] [32minfo[39m: 	[32mConnected to Redis[39m
+[2025-01-29 05:31:44.281 PM] [32minfo[39m: 	[32mConnected to the database[39m

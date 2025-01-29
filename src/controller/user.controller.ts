@@ -60,7 +60,7 @@ export const handleLoginUser = async function (req: Request, res: Response) {
             });
         }
         else
-            res.status(response.status).json({ status: response.status, messsage: response.message, data: null });
+            res.status(response.status).json({ status: response.status, message: response.message, data: null });
     } catch (error: any) {
 
         res.status(httpStatus.INTERNAL_SERVER_ERROR).json({

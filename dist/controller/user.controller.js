@@ -106,7 +106,7 @@ const handleLoginUser = function (req, res) {
                 });
             }
             else
-                res.status(response.status).json({ status: response.status, messsage: response.message, data: null });
+                res.status(response.status).json({ status: response.status, message: response.message, data: null });
         }
         catch (error) {
             res.status(http_status_codes_1.default.INTERNAL_SERVER_ERROR).json({

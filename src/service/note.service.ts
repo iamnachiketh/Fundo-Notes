@@ -14,7 +14,7 @@ export const createNote = async function (notes: {
     desc: string,
     isArchive?: boolean,
     color?: string
-}): Promise<{ status: number, message: string }> {
+}): Promise<{ status: number, message: string, data?: any }> {
 
     const session = await mongoose.startSession();
     session.startTransaction();
@@ -67,7 +67,7 @@ export const createNote = async function (notes: {
         await redisClient.set(redisNoteKey, JSON.stringify(note), { "EX": 3600 });
         await redisClient.lPush(redisUserNotesKey, JSON.stringify(note));
 
-        return { status: httpStatus.CREATED, message: "Note has been created" };
+        return { status: httpStatus.CREATED, message: "Note has been created", data: note };
 
     } catch (error: any) {
         await session.abortTransaction();
@@ -229,6 +229,7 @@ export const trashNotesById = async function (
 ): Promise<{
     status: number,
     message: string;
+    data: any
 }> {
     const session = await mongoose.startSession();
     session.startTransaction();
@@ -237,7 +238,7 @@ export const trashNotesById = async function (
 
         const noteUpdate = await Note.findOneAndUpdate(
             { noteId: noteId, isTrash: false },
-            { $set: { isTrash: true } },
+            { $set: { isTrash: true, isArchive: false } },
             { session }
         );
 
@@ -264,13 +265,13 @@ export const trashNotesById = async function (
 
         await NoteHelper.updateRedisArchiveOrTrash(noteId, userEmail);
 
-        return { status: httpStatus.OK, message: "Note has been trashed" };
+        return { status: httpStatus.OK, message: "Note has been trashed", data: noteUpdate };
     } catch (error: any) {
 
         await session.abortTransaction();
         session.endSession();
 
-        return { status: httpStatus.INTERNAL_SERVER_ERROR, message: error.message };
+        return { status: httpStatus.INTERNAL_SERVER_ERROR, message: error.message, data: null };
     }
 };
 
@@ -502,7 +503,7 @@ export const restoreNote = async function (noteId: string, email: string): Promi
     try {
 
         const response = await User.findOneAndUpdate({ email: email }, {
-            $pull: {
+            $push: {
                 notesId: noteId
             },
             $inc: {
@@ -538,5 +539,51 @@ export const restoreNote = async function (noteId: string, email: string): Promi
         session.endSession();
 
         return { status: httpStatus.INTERNAL_SERVER_ERROR, message: error.message };
+    }
+}
+
+export const unarchiveNote = async function (noteId: string) {
+    try {
+        const response = await Note.findOneAndUpdate({
+            noteId: noteId,
+            isArchive: true
+        }, {
+            $set: {
+                isArchive: false
+            }
+        }, { new: true });
+
+        if (!response) {
+            return { status: httpStatus.NOT_FOUND, message: "Note Not found", data: null };
+        }
+        return { status: httpStatus.OK, message: "Note has Unarchived", data: null }
+
+    } catch (error: any) {
+        return { status: httpStatus.INTERNAL_SERVER_ERROR, message: error.message, data: null };
+    }
+}
+
+
+export const updateNoteColor = async function (noteId: string, color: string):
+Promise<{
+    status: number, 
+    message: string, 
+    data: any
+}>{
+    try {
+        const response = await Note.findOneAndUpdate(
+            { noteId: noteId },
+            { $set: { color: color } },
+            { new: true }
+        )
+
+        if (!response) {
+            return { status: httpStatus.NOT_FOUND, message: "Note not found", data: null };
+        }
+
+        return { status: httpStatus.OK, message: "Note color has been updated", data: response }
+
+    } catch (error: any) {
+        return { status: httpStatus.INTERNAL_SERVER_ERROR, message: error.message, data: null }
     }
 }

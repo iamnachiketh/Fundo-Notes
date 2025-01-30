@@ -26,7 +26,9 @@ router.put("/:id/restore", AuthMiddleware.verifyToken, NoteController.handleRest
 
 router.put("/:id/archive", AuthMiddleware.verifyToken, NoteController.handleAddToArchive);
 
-router.put("/:id/unarchive", AuthMiddleware.verifyToken);
+router.put("/:id/unarchive", AuthMiddleware.verifyToken, NoteController.handleUnarchiveNote);
+
+router.put("/:id/color", AuthMiddleware.verifyToken, NoteController.handleNoteColor);
 
 router.delete("/:id/delete", AuthMiddleware.verifyToken, NoteController.handleDeleteNotesFromTrash);
 

@@ -14,7 +14,7 @@ export const createNote = async function (notes: {
     desc: string,
     isArchive?: boolean,
     color?: string
-}): Promise<{ status: number, message: string }> {
+}): Promise<{ status: number, message: string, data?: any }> {
 
     const session = await mongoose.startSession();
     session.startTransaction();
@@ -67,7 +67,7 @@ export const createNote = async function (notes: {
         await redisClient.set(redisNoteKey, JSON.stringify(note), { "EX": 3600 });
         await redisClient.lPush(redisUserNotesKey, JSON.stringify(note));
 
-        return { status: httpStatus.CREATED, message: "Note has been created" };
+        return { status: httpStatus.CREATED, message: "Note has been created", data: note };
 
     } catch (error: any) {
         await session.abortTransaction();
@@ -193,7 +193,7 @@ export const getAllNotes = async function (
             { userEmail: email, isTrash: false, isArchive: false },
             { _id: 0, __v: 0 }
         )
-        .sort({ noteId: -1 });
+            .sort({ noteId: -1 });
 
         if (result.length > 0) {
 
@@ -229,6 +229,7 @@ export const trashNotesById = async function (
 ): Promise<{
     status: number,
     message: string;
+    data: any
 }> {
     const session = await mongoose.startSession();
     session.startTransaction();
@@ -237,7 +238,7 @@ export const trashNotesById = async function (
 
         const noteUpdate = await Note.findOneAndUpdate(
             { noteId: noteId, isTrash: false },
-            { $set: { isTrash: true } },
+            { $set: { isTrash: true, isArchive: false } },
             { session }
         );
 
@@ -264,13 +265,13 @@ export const trashNotesById = async function (
 
         await NoteHelper.updateRedisArchiveOrTrash(noteId, userEmail);
 
-        return { status: httpStatus.OK, message: "Note has been trashed" };
+        return { status: httpStatus.OK, message: "Note has been trashed", data: noteUpdate };
     } catch (error: any) {
 
         await session.abortTransaction();
         session.endSession();
 
-        return { status: httpStatus.INTERNAL_SERVER_ERROR, message: error.message };
+        return { status: httpStatus.INTERNAL_SERVER_ERROR, message: error.message, data: null };
     }
 };
 
@@ -282,11 +283,15 @@ export const deleteNotesFromTrash = async function (noteId: string, userEmail: s
     }> {
 
     try {
-        await Note.findOneAndDelete({ noteId: noteId, isTrash: true });
+        const response = await Note.findOneAndDelete({ noteId: noteId, isTrash: true });
+
+        if (!response) {
+            return { status: httpStatus.NOT_FOUND, message: "Note is not present/already been deleted" }
+        }
 
         await redisClient.del(`notes:${userEmail}:${noteId}`);
 
-        return { status: httpStatus.GONE, message: "Note has been deleted from trash" };
+        return { status: httpStatus.OK, message: "Note has been deleted from trash" };
     } catch (error: any) {
         return { status: httpStatus.INTERNAL_SERVER_ERROR, message: error.message };
     }
@@ -393,13 +398,13 @@ export const addToArchive = async function (noteId: string, userEmail: string):
 };
 
 
-export const searchNote = async function(searchString: string, email:string,skip:number, limit:number){
-    try{
+export const searchNote = async function (searchString: string, email: string, skip: number, limit: number) {
+    try {
         const redisUserNoteKey = `${email}:notes:search`;
 
         const notes = await redisClient.lRange(redisUserNoteKey, 0, -1);
 
-        if(notes.length > 0){
+        if (notes.length > 0) {
             const parsedNotes = notes.map(note => JSON.parse(note));
             const searchResult = parsedNotes.filter(note => {
                 return note.title.includes(searchString) || note.desc.includes(searchString);
@@ -417,11 +422,11 @@ export const searchNote = async function(searchString: string, email:string,skip
                 { desc: { $regex: searchString, $options: "i" } }
             ]
         }, { _id: 0, __v: 0 })
-        .sort({ noteId: -1 });
+            .sort({ noteId: -1 });
 
         let totalDocument = result.length;
 
-        if(result.length > 0){
+        if (result.length > 0) {
             await redisClient.del(redisUserNoteKey);
 
             const pipeline = redisClient.multi();
@@ -437,8 +442,148 @@ export const searchNote = async function(searchString: string, email:string,skip
 
         return { status: httpStatus.OK, data: result, totalDocument };
 
-    }catch(error: any){
+    } catch (error: any) {
         return { status: httpStatus.INTERNAL_SERVER_ERROR, message: error.message };
     }
 
+}
+
+
+export const getAllFromArchive = async function (email: string):
+    Promise<{ status: number, message: string, data: any }> {
+    try {
+        const response = await Note.find({
+            userEmail: email, isArchive: true, isTrash: false
+        },
+            { _id: 0, __v: 0 }
+        )
+            .sort({ noteId: -1 });
+
+        if (response.length <= 0) {
+            return { status: httpStatus.OK, message: "No Notes present", data: null }
+        }
+
+        return { status: httpStatus.OK, message: "List of Notes", data: response };
+
+
+    } catch (error: any) {
+        return { status: httpStatus.INTERNAL_SERVER_ERROR, message: error.message, data: null }
+    }
+}
+
+export const getAllFromTrash = async function (email: string):
+    Promise<{
+        status: number,
+        message: string,
+        data: any
+    }> {
+    try {
+        const response = await Note
+            .find({ userEmail: email, isTrash: true }, { _id: 0, __v: 0 })
+            .sort({ noteId: -1 });
+
+        if (response.length <= 0) {
+            return { status: httpStatus.OK, message: "No Note in the trash", data: null };
+        }
+
+        return { status: httpStatus.OK, message: "List of the trash notes", data: response };
+
+    } catch (error: any) {
+        return { status: httpStatus.INTERNAL_SERVER_ERROR, message: error.message, data: null };
+    }
+}
+
+export const restoreNote = async function (noteId: string, email: string): Promise<{
+    status: number,
+    message: string
+}> {
+
+    const session = await mongoose.startSession();
+    session.startTransaction();
+    try {
+
+        const response = await User.findOneAndUpdate({ email: email }, {
+            $push: {
+                notesId: noteId
+            },
+            $inc: {
+                notesCount: 1
+            }
+        }, { new: true })
+
+        if (!response) {
+            await session.abortTransaction();
+            session.endSession();
+            return { status: httpStatus.NOT_FOUND, message: "User Not Found" };
+        }
+
+        const result = await Note.findOneAndUpdate({ userEmail: email, noteId: noteId }, {
+            $set: {
+                isTrash: false
+            }
+        }, { new: true });
+
+        if (!result) {
+            await session.abortTransaction();
+            session.endSession();
+            return { status: httpStatus.NOT_FOUND, message: `Note with id ${noteId} does not exist` };
+        }
+
+        await session.commitTransaction();
+        session.endSession();
+
+        return { status: httpStatus.OK, message: "Note has been restored" };
+    } catch (error: any) {
+
+        await session.abortTransaction();
+        session.endSession();
+
+        return { status: httpStatus.INTERNAL_SERVER_ERROR, message: error.message };
+    }
+}
+
+export const unarchiveNote = async function (noteId: string) {
+    try {
+        const response = await Note.findOneAndUpdate({
+            noteId: noteId,
+            isArchive: true
+        }, {
+            $set: {
+                isArchive: false
+            }
+        }, { new: true });
+
+        if (!response) {
+            return { status: httpStatus.NOT_FOUND, message: "Note Not found", data: null };
+        }
+        return { status: httpStatus.OK, message: "Note has Unarchived", data: null }
+
+    } catch (error: any) {
+        return { status: httpStatus.INTERNAL_SERVER_ERROR, message: error.message, data: null };
+    }
+}
+
+
+export const updateNoteColor = async function (noteId: string, color: string):
+Promise<{
+    status: number, 
+    message: string, 
+    data: any
+}>{
+    try {
+        const response = await Note.findOneAndUpdate(
+            { noteId: noteId },
+            { $set: { color: color } },
+            { new: true }
+        )
+
+        if (!response) {
+            return { status: httpStatus.NOT_FOUND, message: "Note not found", data: null };
+        }
+
+        return { status: httpStatus.OK, message: "Note color has been updated", data: response }
+
+    } catch (error: any) {
+        return { status: httpStatus.INTERNAL_SERVER_ERROR, message: error.message, data: null }
+    }
 }

@@ -53,19 +53,19 @@ export const registerUser = async function (userData: {
             body: `Hello ${userData.name}, You have been registered successfully`
         }
 
-        const rabbitMQConnection = await connectToRabbitMQ();
+        // const rabbitMQConnection = await connectToRabbitMQ();
 
-        if (rabbitMQConnection && rabbitMQConnection.sendToExchange) {
+        // if (rabbitMQConnection && rabbitMQConnection.sendToExchange) {
 
-            await rabbitMQConnection.sendToExchange(
-                process.env.RABBITMQ_EXCHANGE as string,
-                process.env.RABBITMQ_ROUTING_KEY as string,
-                emailData
-            );
+        //     await rabbitMQConnection.sendToExchange(
+        //         process.env.RABBITMQ_EXCHANGE as string,
+        //         process.env.RABBITMQ_ROUTING_KEY as string,
+        //         emailData
+        //     );
 
-        } else {
-            return { status: httpStatus.INTERNAL_SERVER_ERROR, message: "Failed to connect to RabbitMQ" };
-        }
+        // } else {
+        //     return { status: httpStatus.INTERNAL_SERVER_ERROR, message: "Failed to connect to RabbitMQ" };
+        // }
 
         return { status: httpStatus.CREATED, message: "User registered successfully" }
 
@@ -115,28 +115,28 @@ export const loginUser = async function (data: {
             }
         });
 
-        const rabbitMQConnection = await connectToRabbitMQ();
+        // const rabbitMQConnection = await connectToRabbitMQ();
 
-        if (rabbitMQConnection && rabbitMQConnection.sendToExchange) {
+        // if (rabbitMQConnection && rabbitMQConnection.sendToExchange) {
 
-            const emailData = {
+        //     const emailData = {
 
-                to: data.email,
-                from: process.env.EMAIL as string,
-                subject: "User Logged In",
-                body: `Hello ${user.name}, You have been logged in successfully`
+        //         to: data.email,
+        //         from: process.env.EMAIL as string,
+        //         subject: "User Logged In",
+        //         body: `Hello ${user.name}, You have been logged in successfully`
 
-            }
+        //     }
 
-            await rabbitMQConnection.sendToExchange(
-                process.env.RABBITMQ_EXCHANGE as string,
-                process.env.RABBITMQ_ROUTING_KEY as string,
-                emailData
-            );
+        //     await rabbitMQConnection.sendToExchange(
+        //         process.env.RABBITMQ_EXCHANGE as string,
+        //         process.env.RABBITMQ_ROUTING_KEY as string,
+        //         emailData
+        //     );
 
-        } else {
-            return { status: httpStatus.INTERNAL_SERVER_ERROR, message: "Failed to connect to RabbitMQ" };
-        }
+        // } else {
+        //     return { status: httpStatus.INTERNAL_SERVER_ERROR, message: "Failed to connect to RabbitMQ" };
+        // }
 
         return { status: httpStatus.OK, UserDetails: user, token: token };
 

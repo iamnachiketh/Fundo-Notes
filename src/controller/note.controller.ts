@@ -12,7 +12,13 @@ export const handleCreateNote = async function (req: Request, res: Response) {
 
             logger.error("Invalid User");
 
-            res.status(httpStatus.FORBIDDEN).json({ status: httpStatus.FORBIDDEN, message: "Invalid User", data: null });
+            res
+                .status(httpStatus.FORBIDDEN)
+                .json({
+                    status: httpStatus.FORBIDDEN,
+                    message: "Invalid User",
+                    data: null
+                });
             return;
         }
 
@@ -20,13 +26,25 @@ export const handleCreateNote = async function (req: Request, res: Response) {
 
         logger.info(response.message);
 
-        res.status(response.status).json({ status: response.status, message: response.message, data: null });
+        res
+            .status(response.status)
+            .json({
+                status: response.status,
+                message: response.message,
+                data: response?.data
+            });
 
     } catch (error: any) {
 
         logger.error(error.message);
 
-        res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ status: httpStatus.INTERNAL_SERVER_ERROR, message: error.message, data: null });
+        res
+            .status(httpStatus.INTERNAL_SERVER_ERROR)
+            .json({
+                status: httpStatus.INTERNAL_SERVER_ERROR,
+                message: error.message,
+                data: null
+            });
     }
 }
 
@@ -41,43 +59,79 @@ export const handleGetNoteById = async function (req: Request, res: Response) {
 
             logger.error("Invalid User/Note dosent exists");
 
-            res.status(httpStatus.NOT_FOUND).json({ status: httpStatus.NOT_FOUND, message: "Invalid User/Note dosent exists", data: null });
+            res
+                .status(httpStatus.NOT_FOUND)
+                .json({
+                    status: httpStatus.NOT_FOUND,
+                    message: "Invalid User/Note dosent exists",
+                    data: null
+                });
             return;
         }
 
         const response = await NoteService.getNoteById(noteId, data.userEmail);
 
         if (response.message === undefined)
-            res.status(response.status).json({ status: response.status, message: "Data has been fetched", data: response.data });
+            res
+                .status(response.status)
+                .json({
+                    status: response.status,
+                    message: "Data has been fetched",
+                    data: response.data
+                });
         else
             if (response.message === undefined) {
 
                 logger.info("Data has been created");
-                res.status(response.status).json({ status: response.status, message: "Data has been created", data: response.data });
+                res
+                    .status(response.status)
+                    .json({
+                        status: response.status,
+                        message: "Data has been created",
+                        data: response.data
+                    });
             }
             else {
 
                 logger.error(response.message);
-                res.status(response.status).json({ status: response.status, message: response.message, data: null });
+                res
+                    .status(response.status)
+                    .json({
+                        status: response.status,
+                        message: response.message,
+                        data: null
+                    });
             }
 
 
     } catch (error: any) {
 
         logger.error(error.message);
-        res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ status: httpStatus.INTERNAL_SERVER_ERROR, message: error.message, data: null });
+        res
+            .status(httpStatus.INTERNAL_SERVER_ERROR)
+            .json({
+                status: httpStatus.INTERNAL_SERVER_ERROR,
+                message: error.message,
+                data: null
+            });
     }
 }
 
 
 export const handleGetAllNotesOfAUser = async function (req: Request, res: Response) {
     try {
-        const { payload, ...data } = req.body;
+        const { payload } = req.body;
 
-        if (data.userEmail !== payload.email) {
+        const userEmail = (req.query.userEmail) as string;
+
+        if (userEmail !== payload.email) {
 
             logger.error("Invalid User");
-            res.status(httpStatus.FORBIDDEN).json({ status: httpStatus.FORBIDDEN, message: "Invalid User", data: null });
+            res.status(httpStatus.FORBIDDEN).json({
+                status: httpStatus.FORBIDDEN,
+                message: "Invalid User",
+                data: null
+            });
             return;
         }
 
@@ -88,38 +142,48 @@ export const handleGetAllNotesOfAUser = async function (req: Request, res: Respo
         if (page <= 0 || limit <= 0) {
 
             logger.warn("Page and limit must be positive integer");
-            res.status(httpStatus.BAD_REQUEST).json({
-                status: httpStatus.BAD_REQUEST,
-                message: "Page and limit must be positive integer",
-                data: null
-            });
+            res
+                .status(httpStatus.BAD_REQUEST)
+                .json({
+                    status: httpStatus.BAD_REQUEST,
+                    message: "Page and limit must be positive integer",
+                    data: null
+                });
             return;
         }
 
         const skip = (page - 1) * limit;
 
-        const response = await NoteService.getAllNotes(data.userEmail, skip, limit);
+        const response = await NoteService.getAllNotes(userEmail, skip, limit);
 
         const docCount = response.totalDocument === undefined ? 0 : response.totalDocument;
 
         const totalPages = Math.ceil(docCount / limit);
 
         if (response.message === undefined)
-            res.status(response.status).json({
-                status: httpStatus.OK,
-                message: "List of Notes",
-                data: response.data,
-                meta: {
-                    page,
-                    limit,
-                    docCount,
-                    totalPages
-                }
-            });
+            res
+                .status(response.status)
+                .json({
+                    status: httpStatus.OK,
+                    message: "List of Notes",
+                    data: response.data,
+                    meta: {
+                        page,
+                        limit,
+                        docCount,
+                        totalPages
+                    }
+                });
         else {
 
             logger.error(response.message);
-            res.status(response.status).json({ status: httpStatus.OK, message: response.message, data: null })
+            res
+                .status(response.status)
+                .json({
+                    status: httpStatus.OK,
+                    message: response.message,
+                    data: null
+                })
         }
 
     } catch (error: any) {
@@ -143,6 +207,9 @@ export const handleTrashById = async function (req: Request, res: Response) {
 
         const noteId = req.params.id;
 
+        console.log(noteId);
+        console.log(data.userEmail);
+
         if (data.userEmail !== payload.email || !(await NoteService.checkNoteId(noteId, data.userEmail as string)).value) {
 
             logger.error("Invalid User/Note dosent exists");
@@ -159,7 +226,13 @@ export const handleTrashById = async function (req: Request, res: Response) {
         let response = await NoteService.trashNotesById(noteId, data.userEmail);
 
         logger.info(response.message);
-        res.status(response.status).json({ status: response.status, message: response.message, data: null });
+        res
+            .status(response.status)
+            .json({
+                status: response.status,
+                message: response.message,
+                data: response.data
+            });
 
     } catch (error: any) {
 
@@ -172,11 +245,13 @@ export const handleTrashById = async function (req: Request, res: Response) {
 
 export const handleDeleteNotesFromTrash = async function (req: Request, res: Response) {
     try {
-        const { payload, ...data } = req.body;
+        const { payload } = req.body;
 
         const noteId = req.params.id;
 
-        if (data.userEmail !== payload.email) {
+        const userEmail = (req.query.userEmail) as string;
+
+        if (userEmail !== payload.email) {
 
             logger.error("Invalid User");
             res.status(httpStatus.FORBIDDEN).json({
@@ -187,7 +262,7 @@ export const handleDeleteNotesFromTrash = async function (req: Request, res: Res
             return;
         }
 
-        const response = await NoteService.deleteNotesFromTrash(noteId, data.userEmail);
+        const response = await NoteService.deleteNotesFromTrash(noteId, userEmail);
 
         res.status(response.status).json({
             status: response.status,
@@ -310,5 +385,210 @@ export const handleSearchNotes = async function (req: Request, res: Response) {
                 message: error.message,
                 data: null
             });
+    }
+}
+
+
+export const handleGetAllNotesFromArchive = async function (req: Request, res: Response) {
+    try {
+        const email = (req.query.email) as string;
+
+        const { payload } = req.body;
+
+        if (email !== payload.email) {
+
+            logger.error("Invalid User");
+            res
+                .status(httpStatus.FORBIDDEN)
+                .json({
+                    status: httpStatus.FORBIDDEN,
+                    message: "Invalid User",
+                    data: null
+                });
+            return;
+        }
+
+        const response = await NoteService.getAllFromArchive(email);
+
+        res
+            .status(response.status)
+            .json({
+                status: response.status,
+                message: response.message,
+                data: response.data
+            })
+
+    } catch (error: any) {
+        res
+            .status(httpStatus.INTERNAL_SERVER_ERROR)
+            .json({
+                status: httpStatus.INTERNAL_SERVER_ERROR,
+                message: error.message,
+                data: null
+            })
+    }
+}
+
+
+
+
+export const handleGetAllFromTrash = async function (req: Request, res: Response) {
+    try {
+        const { payload } = req.body;
+
+        const email = (req.query.email) as string;
+
+        if (email !== payload.email) {
+
+            logger.error("Invalid User");
+            res
+                .status(httpStatus.FORBIDDEN)
+                .json({
+                    status: httpStatus.FORBIDDEN,
+                    message: "Invalid User",
+                    data: null
+                });
+            return;
+        }
+
+        const response = await NoteService.getAllFromTrash(email);
+
+        res
+            .status(response.status)
+            .json({
+                status: response.status,
+                message: response.message,
+                data: response.data
+            });
+
+    } catch (error: any) {
+        res
+            .status(httpStatus.INTERNAL_SERVER_ERROR)
+            .json({
+                status: httpStatus.INTERNAL_SERVER_ERROR,
+                message: error.message,
+                data: null
+            })
+    }
+}
+
+
+export const handleRestoreNote = async function (req: Request, res: Response) {
+    try {
+        const { payload, ...data } = req.body;
+
+        const noteId = req.params.id;
+
+        if (data.email !== payload.email) {
+
+            logger.error("Invalid User");
+            res
+                .status(httpStatus.FORBIDDEN)
+                .json({
+                    status: httpStatus.FORBIDDEN,
+                    message: "Invalid User",
+                    data: null
+                });
+            return;
+        }
+
+        const response = await NoteService.restoreNote(noteId, data.email);
+
+        res
+            .status(response.status)
+            .json({
+                status: response.status,
+                message: response.message,
+                data: null
+            });
+
+    } catch (error: any) {
+        res
+            .status(httpStatus.INTERNAL_SERVER_ERROR)
+            .json({
+                status: httpStatus.INTERNAL_SERVER_ERROR,
+                message: error.message,
+                data: null
+            });
+    }
+}
+
+
+export const handleUnarchiveNote = async function (req: Request, res: Response) {
+    try {
+        const { payload, ...data } = req.body;
+
+        const noteId = req.params.id;
+
+        if (data.email !== payload.email || !(await NoteService.checkNoteId(noteId, data.email as string)).value) {
+            res
+                .status(httpStatus.NOT_FOUND)
+                .json({
+                    status: httpStatus.NOT_FOUND,
+                    message: "Invalid User/Note dosent exists",
+                    data: null
+                });
+            return;
+        }
+
+        const response = await NoteService.unarchiveNote(noteId);
+
+        res
+            .status(response.status)
+            .json({
+                status: response.status,
+                message: response.message,
+                data: response.data
+            })
+
+    } catch (error: any) {
+        res
+            .status(httpStatus.INTERNAL_SERVER_ERROR)
+            .json({
+                status: httpStatus.INTERNAL_SERVER_ERROR,
+                message: error.message,
+                data: null
+            });
+    }
+}
+
+
+export const handleNoteColor = async function (req: Request, res: Response) {
+    try {
+        const { payload, ...data } = req.body;
+
+        const noteId = req.params.id;
+
+        const color = req.body.color;
+
+        if (data.email !== payload.email || !(await NoteService.checkNoteId(noteId, data.email as string)).value) {
+            res
+                .status(httpStatus.NOT_FOUND)
+                .json({
+                    status: httpStatus.NOT_FOUND,
+                    message: "Invalid User/Note dosent exists",
+                    data: null
+                });
+            return;
+        }
+
+        const response = await NoteService.updateNoteColor(noteId, color);
+
+        res
+            .status(response.status)
+            .json({
+                status: response.status,
+                message: response.message,
+                data: response.data
+            });
+
+    } catch (error: any) {
+        res
+            .status(httpStatus.INTERNAL_SERVER_ERROR)
+            .json({
+                status: httpStatus.INTERNAL_SERVER_ERROR,
+                message: error.message,
+                data: null
+            })
     }
 }

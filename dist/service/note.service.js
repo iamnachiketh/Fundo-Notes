@@ -159,10 +159,6 @@ const getAllNotes = function (email, skip, limit) {
             else {
                 totalDocument = parseInt(totalDocument, 10);
             }
-            const listExists = yield redis_config_1.default.exists(redisUserNotesKey);
-            if (!listExists) {
-                logger_1.logger.info("Redis key does not exist; skipping update.");
-            }
             let notes;
             try {
                 notes = yield redis_config_1.default.lRange(redisUserNotesKey, 0, -1);
@@ -179,8 +175,8 @@ const getAllNotes = function (email, skip, limit) {
             }
             let result = yield note_model_1.default.find({ userEmail: email, isTrash: false, isArchive: false }, { _id: 0, __v: 0 })
                 .sort({ noteId: -1 });
+            yield redis_config_1.default.del(redisUserNotesKey);
             if (result.length > 0) {
-                yield redis_config_1.default.del(redisUserNotesKey);
                 const pipeline = redis_config_1.default.multi();
                 result.forEach(note => pipeline.rPush(redisUserNotesKey, JSON.stringify(note)));
                 pipeline.expire(redisUserNotesKey, 3600);
@@ -199,6 +195,7 @@ const trashNotesById = function (noteId, userEmail) {
     return __awaiter(this, void 0, void 0, function* () {
         const session = yield mongoose_1.default.startSession();
         session.startTransaction();
+        const indivisualNoteKey = `notes:${userEmail}:${noteId}`;
         try {
             const noteUpdate = yield note_model_1.default.findOneAndUpdate({ noteId: noteId, isTrash: false }, { $set: { isTrash: true, isArchive: false } }, { session });
             if (!noteUpdate) {
@@ -398,6 +395,7 @@ const restoreNote = function (noteId, email) {
                 session.endSession();
                 return { status: http_status_codes_1.default.NOT_FOUND, message: `Note with id ${noteId} does not exist` };
             }
+            yield NoteHelper.updateRedisUnarchiveOrRestore(email, result);
             yield session.commitTransaction();
             session.endSession();
             return { status: http_status_codes_1.default.OK, message: "Note has been restored" };
@@ -410,8 +408,9 @@ const restoreNote = function (noteId, email) {
     });
 };
 exports.restoreNote = restoreNote;
-const unarchiveNote = function (noteId) {
+const unarchiveNote = function (noteId, email) {
     return __awaiter(this, void 0, void 0, function* () {
+        const indivisualNote = `notes:${email}:${noteId}`;
         try {
             const response = yield note_model_1.default.findOneAndUpdate({
                 noteId: noteId,
@@ -424,6 +423,9 @@ const unarchiveNote = function (noteId) {
             if (!response) {
                 return { status: http_status_codes_1.default.NOT_FOUND, message: "Note Not found", data: null };
             }
+            yield redis_config_1.default.del(indivisualNote);
+            yield redis_config_1.default.set(indivisualNote, JSON.stringify(response), { "EX": 3600 });
+            yield NoteHelper.updateRedisUnarchiveOrRestore(email, response);
             return { status: http_status_codes_1.default.OK, message: "Note has Unarchived", data: null };
         }
         catch (error) {
@@ -432,12 +434,26 @@ const unarchiveNote = function (noteId) {
     });
 };
 exports.unarchiveNote = unarchiveNote;
-const updateNoteColor = function (noteId, color) {
+const updateNoteColor = function (noteId, color, email) {
     return __awaiter(this, void 0, void 0, function* () {
+        const redisNoteKey = `notes:${email}:${noteId}`;
+        const redisNoteListKey = `${email}:notes`;
         try {
             const response = yield note_model_1.default.findOneAndUpdate({ noteId: noteId }, { $set: { color: color } }, { new: true });
             if (!response) {
                 return { status: http_status_codes_1.default.NOT_FOUND, message: "Note not found", data: null };
+            }
+            yield redis_config_1.default.del(redisNoteKey);
+            yield redis_config_1.default.set(redisNoteKey, JSON.stringify(response), { "EX": 3600 });
+            let noteList = yield redis_config_1.default.lRange(redisNoteListKey, 0, -1);
+            yield redis_config_1.default.del(redisNoteListKey);
+            if (noteList && noteList.length > 0) {
+                noteList = noteList.filter((value) => JSON.parse(value).noteId !== noteId);
+                noteList.push(JSON.stringify(response));
+                const pipeline = redis_config_1.default.multi();
+                noteList.forEach((note) => pipeline.rPush(redisNoteListKey, note));
+                pipeline.expire(redisNoteListKey, 3600);
+                yield pipeline.exec();
             }
             return { status: http_status_codes_1.default.OK, message: "Note color has been updated", data: response };
         }

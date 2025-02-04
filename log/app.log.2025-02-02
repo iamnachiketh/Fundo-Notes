@@ -1,0 +1,23 @@
+[2025-02-02 08:25:47.096 AM] [32minfo[39m: 	[32mServer is running on port http://localhost:4000[39m
+[2025-02-02 08:25:47.134 AM] [32minfo[39m: 	[32mConnected to Redis[39m
+[2025-02-02 08:25:47.202 AM] [32minfo[39m: 	[32mConnected to the database[39m
+[2025-02-02 08:27:51.957 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=100","status":"200","responseTime":"69.922"}[39m
+[2025-02-02 08:27:51.972 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=100","status":"304","responseTime":"7.598"}[39m
+[2025-02-02 08:32:12.328 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=100","status":"304","responseTime":"83.501"}[39m
+[2025-02-02 08:32:12.346 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=100","status":"304","responseTime":"7.973"}[39m
+[2025-02-02 08:34:51.933 AM] [32minfo[39m: 	[32m{"method":"PUT","url":"/api/v1/notes/NOTE7844/color","status":"200","responseTime":"65.135"}[39m
+[2025-02-02 08:44:22.603 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/trash/data?email=rachel.green%40example.com","status":"200","responseTime":"15.314"}[39m
+[2025-02-02 08:44:22.613 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/trash/data?email=rachel.green%40example.com","status":"304","responseTime":"5.325"}[39m
+[2025-02-02 08:44:29.944 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/archive/data?email=rachel.green%40example.com","status":"304","responseTime":"3.942"}[39m
+[2025-02-02 08:44:29.960 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/archive/data?email=rachel.green%40example.com","status":"304","responseTime":"10.053"}[39m
+[2025-02-02 08:44:32.691 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=100","status":"200","responseTime":"6.925"}[39m
+[2025-02-02 08:44:32.706 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=100","status":"304","responseTime":"8.481"}[39m
+[2025-02-02 08:45:28.847 AM] [32minfo[39m: 	[32mNote has been created[39m
+[2025-02-02 08:45:28.848 AM] [32minfo[39m: 	[32m{"method":"POST","url":"/api/v1/notes","status":"201","responseTime":"928.737"}[39m
+[2025-02-02 08:48:59.961 AM] [32minfo[39m: 	[32m{"method":"PUT","url":"/api/v1/notes/NOTE8095/color","status":"200","responseTime":"556.460"}[39m
+[2025-02-02 08:49:04.310 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=100","status":"200","responseTime":"4.789"}[39m
+[2025-02-02 08:49:04.320 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=100","status":"304","responseTime":"6.447"}[39m
+[2025-02-02 08:49:14.457 AM] [32minfo[39m: 	[32mNote has been trashed[39m
+[2025-02-02 08:49:14.459 AM] [32minfo[39m: 	[32m{"method":"PUT","url":"/api/v1/notes/note004/trash","status":"200","responseTime":"107.387"}[39m
+[2025-02-02 08:49:21.790 AM] [32minfo[39m: 	[32m{"method":"PUT","url":"/api/v1/notes/NOTE7138/color","status":"200","responseTime":"68.134"}[39m
+[2025-02-02 08:49:36.893 AM] [32minfo[39m: 	[32m{"method":"PUT","url":"/api/v1/notes/NOTE1066/archive","status":"200","responseTime":"1029.142"}[39m

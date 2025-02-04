@@ -5,6 +5,7 @@ import redisClient from "../config/redis.config";
 import mongoose from "mongoose";
 import { logger } from "../logger";
 import * as NoteHelper from "../helper/note.helper";
+import { any } from "joi";
 
 
 export const createNote = async function (notes: {
@@ -162,12 +163,6 @@ export const getAllNotes = async function (
             totalDocument = parseInt(totalDocument, 10);
         }
 
-        const listExists = await redisClient.exists(redisUserNotesKey);
-
-        if (!listExists) {
-            logger.info("Redis key does not exist; skipping update.");
-        }
-
         let notes;
         try {
             notes = await redisClient.lRange(redisUserNotesKey, 0, -1);
@@ -181,7 +176,7 @@ export const getAllNotes = async function (
 
             if (slicedNotes.length > 0) {
 
-                const parsedNotes = slicedNotes.map(note => JSON.parse(note));
+                const parsedNotes: JSON[] = slicedNotes.map(note => JSON.parse(note));
 
                 return { status: httpStatus.OK, data: parsedNotes, totalDocument };
 
@@ -195,9 +190,10 @@ export const getAllNotes = async function (
         )
             .sort({ noteId: -1 });
 
+        await redisClient.del(redisUserNotesKey);
+
         if (result.length > 0) {
 
-            await redisClient.del(redisUserNotesKey);
 
             const pipeline = redisClient.multi();
 
@@ -233,6 +229,8 @@ export const trashNotesById = async function (
 }> {
     const session = await mongoose.startSession();
     session.startTransaction();
+
+    const indivisualNoteKey = `notes:${userEmail}:${noteId}`;
 
     try {
 
@@ -452,6 +450,7 @@ export const searchNote = async function (searchString: string, email: string, s
 export const getAllFromArchive = async function (email: string):
     Promise<{ status: number, message: string, data: any }> {
     try {
+
         const response = await Note.find({
             userEmail: email, isArchive: true, isTrash: false
         },
@@ -529,6 +528,8 @@ export const restoreNote = async function (noteId: string, email: string): Promi
             return { status: httpStatus.NOT_FOUND, message: `Note with id ${noteId} does not exist` };
         }
 
+        await NoteHelper.updateRedisUnarchiveOrRestore(email, result);
+
         await session.commitTransaction();
         session.endSession();
 
@@ -542,7 +543,10 @@ export const restoreNote = async function (noteId: string, email: string): Promi
     }
 }
 
-export const unarchiveNote = async function (noteId: string) {
+export const unarchiveNote = async function (noteId: string, email: string) {
+
+    const indivisualNote = `notes:${email}:${noteId}`
+
     try {
         const response = await Note.findOneAndUpdate({
             noteId: noteId,
@@ -556,6 +560,13 @@ export const unarchiveNote = async function (noteId: string) {
         if (!response) {
             return { status: httpStatus.NOT_FOUND, message: "Note Not found", data: null };
         }
+
+        await redisClient.del(indivisualNote);
+
+        await redisClient.set(indivisualNote, JSON.stringify(response), { "EX": 3600 });
+
+        await NoteHelper.updateRedisUnarchiveOrRestore(email, response);
+
         return { status: httpStatus.OK, message: "Note has Unarchived", data: null }
 
     } catch (error: any) {
@@ -564,12 +575,14 @@ export const unarchiveNote = async function (noteId: string) {
 }
 
 
-export const updateNoteColor = async function (noteId: string, color: string):
-Promise<{
-    status: number, 
-    message: string, 
-    data: any
-}>{
+export const updateNoteColor = async function (noteId: string, color: string, email: string):
+    Promise<{
+        status: number,
+        message: string,
+        data: any
+    }> {
+    const redisNoteKey = `notes:${email}:${noteId}`;
+    const redisNoteListKey = `${email}:notes`;
     try {
         const response = await Note.findOneAndUpdate(
             { noteId: noteId },
@@ -579,6 +592,30 @@ Promise<{
 
         if (!response) {
             return { status: httpStatus.NOT_FOUND, message: "Note not found", data: null };
+        }
+
+        await redisClient.del(redisNoteKey);
+
+        await redisClient.set(redisNoteKey, JSON.stringify(response), { "EX": 3600 });
+
+        let noteList = await redisClient.lRange(redisNoteListKey, 0, -1);
+
+        await redisClient.del(redisNoteListKey);
+
+        if (noteList && noteList.length > 0) {
+
+            noteList = noteList.filter((value) => JSON.parse(value).noteId !== noteId);
+
+            noteList.push(JSON.stringify(response));
+
+            const pipeline = redisClient.multi();
+
+            noteList.forEach((note: string) => pipeline.rPush(redisNoteListKey, note));
+
+            pipeline.expire(redisNoteListKey, 3600);
+
+            await pipeline.exec();
+
         }
 
         return { status: httpStatus.OK, message: "Note color has been updated", data: response }

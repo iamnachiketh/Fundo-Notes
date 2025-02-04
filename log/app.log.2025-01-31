@@ -89,3 +89,7 @@
 [2025-01-31 03:08:46.019 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=15","status":"200","responseTime":"9.673"}[39m
 [2025-01-31 03:08:46.033 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=15","status":"304","responseTime":"9.936"}[39m
 [2025-01-31 03:08:50.595 PM] [32minfo[39m: 	[32m{"method":"PUT","url":"/api/v1/notes/note004","status":"200","responseTime":"51.400"}[39m
+[2025-01-31 03:15:36.583 PM] [32minfo[39m: 	[32mServer is running on port http://localhost:4000[39m
+[2025-01-31 03:15:36.593 PM] [31merror[39m: 	[31mError has been occured: Error: Connection timeout[39m
+[2025-01-31 03:15:36.640 PM] [32minfo[39m: 	[32mConnected to Redis[39m
+[2025-01-31 03:15:36.812 PM] [32minfo[39m: 	[32mConnected to the database[39m

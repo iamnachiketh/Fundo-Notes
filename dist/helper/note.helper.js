@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateRedisArchiveOrTrash = exports.updateRedisCache = exports.getNotesOfARange = void 0;
+exports.updateRedisUnarchiveOrRestore = exports.updateRedisArchiveOrTrash = exports.updateRedisCache = exports.getNotesOfARange = void 0;
 const redis_config_1 = __importDefault(require("../config/redis.config"));
 const logger_1 = require("../logger");
 const getNotesOfARange = function (notes, skip, limit) {
@@ -51,9 +51,7 @@ exports.updateRedisCache = updateRedisCache;
 const updateRedisArchiveOrTrash = function (noteId, userEmail) {
     return __awaiter(this, void 0, void 0, function* () {
         const redisKey = `${userEmail}:notes`;
-        const individualNoteKey = `notes:${userEmail}:${noteId}`;
         try {
-            yield redis_config_1.default.del(individualNoteKey);
             const listExists = yield redis_config_1.default.exists(redisKey);
             if (!listExists) {
                 logger_1.logger.error("Redis key does not exist; skipping update.");
@@ -61,15 +59,12 @@ const updateRedisArchiveOrTrash = function (noteId, userEmail) {
             }
             const notes = yield redis_config_1.default.lRange(redisKey, 0, -1);
             const filteredNotes = notes.filter(note => JSON.parse(note).noteId !== noteId);
+            yield redis_config_1.default.del(redisKey);
             if (filteredNotes.length > 0) {
                 const pipeline = redis_config_1.default.multi();
-                yield redis_config_1.default.del(redisKey);
                 filteredNotes.forEach(note => pipeline.rPush(redisKey, note));
                 pipeline.expire(redisKey, 3600);
                 yield pipeline.exec();
-            }
-            else {
-                yield redis_config_1.default.del(redisKey);
             }
         }
         catch (error) {
@@ -78,3 +73,29 @@ const updateRedisArchiveOrTrash = function (noteId, userEmail) {
     });
 };
 exports.updateRedisArchiveOrTrash = updateRedisArchiveOrTrash;
+const updateRedisUnarchiveOrRestore = function (userEmail, data) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const redisNoteListKey = `${userEmail}:notes`;
+        try {
+            const keyExists = yield redis_config_1.default.exists(redisNoteListKey);
+            if (!keyExists) {
+                logger_1.logger.info("Note list Key dosent exists");
+                return;
+            }
+            const noteList = yield redis_config_1.default.lRange(redisNoteListKey, 0, -1);
+            if (noteList && noteList.length > 0) {
+                yield redis_config_1.default.del(redisNoteListKey);
+                noteList.push(JSON.stringify(data));
+                const pipline = redis_config_1.default.multi();
+                noteList.forEach((value) => pipline.rPush(redisNoteListKey, value));
+                pipline.expire(redisNoteListKey, 3600);
+                yield pipline.exec();
+                logger_1.logger.info("Redis for unarchive/restore has been updated");
+            }
+        }
+        catch (error) {
+            logger_1.logger.error(error.message);
+        }
+    });
+};
+exports.updateRedisUnarchiveOrRestore = updateRedisUnarchiveOrRestore;

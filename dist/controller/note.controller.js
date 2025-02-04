@@ -506,7 +506,7 @@ const handleUnarchiveNote = function (req, res) {
                 });
                 return;
             }
-            const response = yield NoteService.unarchiveNote(noteId);
+            const response = yield NoteService.unarchiveNote(noteId, data.email);
             res
                 .status(response.status)
                 .json({
@@ -543,7 +543,7 @@ const handleNoteColor = function (req, res) {
                 });
                 return;
             }
-            const response = yield NoteService.updateNoteColor(noteId, color);
+            const response = yield NoteService.updateNoteColor(noteId, color, data.email);
             res
                 .status(response.status)
                 .json({

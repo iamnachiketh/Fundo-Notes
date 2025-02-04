@@ -531,7 +531,7 @@ export const handleUnarchiveNote = async function (req: Request, res: Response) 
             return;
         }
 
-        const response = await NoteService.unarchiveNote(noteId);
+        const response = await NoteService.unarchiveNote(noteId, data.email);
 
         res
             .status(response.status)
@@ -572,7 +572,7 @@ export const handleNoteColor = async function (req: Request, res: Response) {
             return;
         }
 
-        const response = await NoteService.updateNoteColor(noteId, color);
+        const response = await NoteService.updateNoteColor(noteId, color, data.email);
 
         res
             .status(response.status)

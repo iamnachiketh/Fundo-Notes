@@ -1,0 +1,37 @@
+[2025-02-04 11:17:00.792 AM] [32minfo[39m: 	[32mServer is running on port http://localhost:4000[39m
+[2025-02-04 11:17:02.253 AM] [31merror[39m: 	[31mError has been occured: Error: Connection timeout[39m
+[2025-02-04 11:17:02.917 AM] [32minfo[39m: 	[32mConnected to Redis[39m
+[2025-02-04 11:17:03.516 AM] [32minfo[39m: 	[32mConnected to the database[39m
+[2025-02-04 11:21:36.951 AM] [31merror[39m: 	[31mjwt expired[39m
+[2025-02-04 11:21:37.063 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=100","status":"500","responseTime":"1908.134"}[39m
+[2025-02-04 11:21:37.264 AM] [31merror[39m: 	[31mjwt expired[39m
+[2025-02-04 11:21:37.267 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=100","status":"500","responseTime":"9.058"}[39m
+[2025-02-04 11:27:42.890 AM] [32minfo[39m: 	[32m{"method":"POST","url":"/api/v1/users/login","status":"200","responseTime":"11239.559"}[39m
+[2025-02-04 11:28:05.281 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=100","status":"200","responseTime":"20395.510"}[39m
+[2025-02-04 11:28:05.293 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=100","status":"200","responseTime":"227.370"}[39m
+[2025-02-04 11:28:37.584 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/archive/data?email=rachel.green%40example.com","status":"304","responseTime":"16.163"}[39m
+[2025-02-04 11:28:37.593 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/archive/data?email=rachel.green%40example.com","status":"304","responseTime":"5.755"}[39m
+[2025-02-04 11:28:44.939 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/archive/data?email=rachel.green%40example.com","status":"304","responseTime":"4.938"}[39m
+[2025-02-04 11:28:44.978 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/archive/data?email=rachel.green%40example.com","status":"304","responseTime":"5.980"}[39m
+[2025-02-04 11:28:47.031 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=100","status":"304","responseTime":"5.975"}[39m
+[2025-02-04 11:28:47.038 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=100","status":"304","responseTime":"4.117"}[39m
+[2025-02-04 11:29:05.859 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=100","status":"304","responseTime":"14.826"}[39m
+[2025-02-04 11:29:05.879 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=100","status":"304","responseTime":"14.214"}[39m
+[2025-02-04 11:29:10.061 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=100","status":"304","responseTime":"5.969"}[39m
+[2025-02-04 11:29:10.193 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=100","status":"304","responseTime":"4.826"}[39m
+[2025-02-04 11:29:13.899 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/archive/data?email=rachel.green%40example.com","status":"304","responseTime":"4.366"}[39m
+[2025-02-04 11:29:13.905 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/archive/data?email=rachel.green%40example.com","status":"304","responseTime":"3.713"}[39m
+[2025-02-04 11:29:16.615 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=100","status":"304","responseTime":"5.393"}[39m
+[2025-02-04 11:29:16.621 AM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=100","status":"304","responseTime":"3.995"}[39m
+[2025-02-04 12:40:45.714 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=100","status":"304","responseTime":"4287.801"}[39m
+[2025-02-04 12:40:46.533 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=100","status":"304","responseTime":"65.970"}[39m
+[2025-02-04 12:42:26.360 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/archive/data?email=rachel.green%40example.com","status":"304","responseTime":"4.276"}[39m
+[2025-02-04 12:42:26.367 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/archive/data?email=rachel.green%40example.com","status":"304","responseTime":"4.155"}[39m
+[2025-02-04 12:42:30.312 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=100","status":"304","responseTime":"254.360"}[39m
+[2025-02-04 12:42:30.357 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=100","status":"304","responseTime":"13.411"}[39m
+[2025-02-04 12:42:40.584 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/archive/data?email=rachel.green%40example.com","status":"304","responseTime":"76.247"}[39m
+[2025-02-04 12:42:40.596 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes/archive/data?email=rachel.green%40example.com","status":"304","responseTime":"7.171"}[39m
+[2025-02-04 12:42:43.371 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=100","status":"304","responseTime":"4.596"}[39m
+[2025-02-04 12:42:43.377 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=100","status":"304","responseTime":"3.780"}[39m
+[2025-02-04 01:15:02.851 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=100","status":"304","responseTime":"6.269"}[39m
+[2025-02-04 01:15:47.914 PM] [32minfo[39m: 	[32m{"method":"GET","url":"/api/v1/notes?userEmail=rachel.green%40example.com&page=1&limit=100","status":"304","responseTime":"65.428"}[39m

@@ -64,12 +64,8 @@ export const updateRedisCache = async function (data: {
 
 export const updateRedisArchiveOrTrash = async function (noteId: string, userEmail: string) {
     const redisKey = `${userEmail}:notes`;
-    const individualNoteKey = `notes:${userEmail}:${noteId}`;
 
     try {
-
-        await redisClient.del(individualNoteKey);
-
 
         const listExists = await redisClient.exists(redisKey);
 
@@ -82,12 +78,11 @@ export const updateRedisArchiveOrTrash = async function (noteId: string, userEma
         const notes = await redisClient.lRange(redisKey, 0, -1);
         const filteredNotes = notes.filter(note => JSON.parse(note).noteId !== noteId);
 
+        await redisClient.del(redisKey);
 
         if (filteredNotes.length > 0) {
 
             const pipeline = redisClient.multi();
-
-            await redisClient.del(redisKey);
 
             filteredNotes.forEach(note => pipeline.rPush(redisKey, note));
 
@@ -95,13 +90,46 @@ export const updateRedisArchiveOrTrash = async function (noteId: string, userEma
 
             await pipeline.exec();
 
-        } else {
-
-            await redisClient.del(redisKey);
-
         }
     } catch (error: any) {
         logger.error(error.message);
     }
 };
+
+
+export const updateRedisUnarchiveOrRestore = async function (userEmail: string, data: any) {
+
+    const redisNoteListKey = `${userEmail}:notes`;
+
+    try {
+        const keyExists = await redisClient.exists(redisNoteListKey);
+
+        if (!keyExists) {
+            logger.info("Note list Key dosent exists");
+            return;
+        }
+
+        const noteList = await redisClient.lRange(redisNoteListKey, 0, -1);
+
+        if (noteList && noteList.length > 0) {
+
+            await redisClient.del(redisNoteListKey);
+
+            noteList.push(JSON.stringify(data));
+
+            const pipline = redisClient.multi();
+
+            noteList.forEach((value) => pipline.rPush(redisNoteListKey, value));
+
+            pipline.expire(redisNoteListKey, 3600);
+
+            await pipline.exec();
+
+            logger.info("Redis for unarchive/restore has been updated");
+        }
+
+    } catch (error: any) {
+        logger.error(error.message);
+    }
+}
 

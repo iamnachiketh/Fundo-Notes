@@ -331,10 +331,20 @@ export const handleAddToArchive = async function (req: Request, res: Response) {
 
 export const handleSearchNotes = async function (req: Request, res: Response) {
     try {
-        const { payload, ...data } = req.body;
+        const { payload } = req.body;
 
-        if (data.userEmail !== payload.email) {
-            res.status(httpStatus.FORBIDDEN).json({ status: httpStatus.FORBIDDEN, message: "Invalid User", data: null });
+        const email = (req.query.email) as string;
+
+        const searchQuery = (req.query.search) as string; 
+
+        if (email !== payload.email) {
+            res
+            .status(httpStatus.FORBIDDEN)
+            .json({ 
+                status: httpStatus.FORBIDDEN, 
+                message: "Invalid User", 
+                data: null 
+            });
             return;
         }
 
@@ -343,13 +353,19 @@ export const handleSearchNotes = async function (req: Request, res: Response) {
         const limit = Number(req.query.limit as string) || 5;
 
         if (page <= 0 || limit <= 0) {
-            res.status(httpStatus.BAD_REQUEST).json({ status: httpStatus.BAD_REQUEST, message: "Page and limit must be positive integer", data: null });
+            res
+            .status(httpStatus.BAD_REQUEST)
+            .json({ 
+                status: httpStatus.BAD_REQUEST, 
+                message: "Page and limit must be positive integer", 
+                data: null 
+            });
             return;
         }
 
         const skip = (page - 1) * limit;
 
-        const response = await NoteService.searchNote(data.query, data.userEmail, skip, limit);
+        const response = await NoteService.searchNote(searchQuery, email, skip, limit);
 
         const docCount = response.totalDocument === undefined ? 0 : response.totalDocument;
 

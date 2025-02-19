@@ -1,0 +1,4 @@
+[2025-02-09 12:56:47.079 PM] [32minfo[39m: 	[32mServer is running on port http://localhost:4000[39m
+[2025-02-09 12:56:47.201 PM] [31merror[39m: 	[31mError has been occured: Error: Connection timeout[39m
+[2025-02-09 12:56:47.328 PM] [32minfo[39m: 	[32mConnected to Redis[39m
+[2025-02-09 12:56:47.411 PM] [32minfo[39m: 	[32mConnected to the database[39m

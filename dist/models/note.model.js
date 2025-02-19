@@ -13,4 +13,4 @@ const NoteSchema = new mongoose_1.default.Schema({
     isArchive: { type: Boolean, default: false },
     color: { type: String, default: "white" }
 });
-exports.default = mongoose_1.default.model("Note", NoteSchema);
+exports.default = mongoose_1.default.model("notes", NoteSchema);

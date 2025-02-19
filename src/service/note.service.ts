@@ -5,7 +5,7 @@ import redisClient from "../config/redis.config";
 import mongoose from "mongoose";
 import { logger } from "../logger";
 import * as NoteHelper from "../helper/note.helper";
-import { any } from "joi";
+import { any, options } from "joi";
 
 
 export const createNote = async function (notes: {
@@ -401,7 +401,7 @@ export const searchNote = async function (searchString: string, email: string, s
         const redisUserNoteKey = `${email}:notes:search`;
 
         const notes = await redisClient.lRange(redisUserNoteKey, 0, -1);
-
+        
         if (notes.length > 0) {
             const parsedNotes = notes.map(note => JSON.parse(note));
             const searchResult = parsedNotes.filter(note => {
@@ -418,12 +418,13 @@ export const searchNote = async function (searchString: string, email: string, s
             $or: [
                 { title: { $regex: searchString, $options: "i" } },
                 { desc: { $regex: searchString, $options: "i" } }
-            ]
+            ],
+            isTrash: false,
+            isArchive: false
         }, { _id: 0, __v: 0 })
             .sort({ noteId: -1 });
 
         let totalDocument = result.length;
-
         if (result.length > 0) {
             await redisClient.del(redisUserNoteKey);
 

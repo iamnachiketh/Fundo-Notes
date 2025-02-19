@@ -312,7 +312,9 @@ const searchNote = function (searchString, email, skip, limit) {
                 $or: [
                     { title: { $regex: searchString, $options: "i" } },
                     { desc: { $regex: searchString, $options: "i" } }
-                ]
+                ],
+                isTrash: false,
+                isArchive: false
             }, { _id: 0, __v: 0 })
                 .sort({ noteId: -1 });
             let totalDocument = result.length;

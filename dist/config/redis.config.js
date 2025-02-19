@@ -2,7 +2,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const redis_1 = require("redis");
 const logger_1 = require("../logger");
-const redisClient = (0, redis_1.createClient)();
+const redisClient = (0, redis_1.createClient)({
+    url: process.env.REDIS_URI
+});
+console.log(process.env.REDIS_URI);
 redisClient.on("connect", () => {
     logger_1.logger.info("Connected to Redis");
 });
